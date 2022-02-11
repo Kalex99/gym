@@ -16,11 +16,11 @@ public class FelhasznaloResource {
     @Autowired
     private FelhasznaloService felhasznaloService;
 
-//    @GetMapping("lista")
-//    public ResponseEntity<List<Felhasznalo>> FelhasznaloOlvasas() {
-//        List<Felhasznalo> lista = felhasznaloService.FelhasznaloOlvasas();
-//        return new ResponseEntity(lista, HttpStatus.OK);
-//    }
+    @GetMapping("lista")
+    public ResponseEntity<List<Felhasznalo>> FelhasznaloOlvasas() {
+        List<Felhasznalo> lista = felhasznaloService.FelhasznaloOlvasas();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
 
     @PostMapping("felh_letre")
     public ResponseEntity<?> FelhasznaloLetrehoz(@RequestBody Felhasznalo felhasznalo) {
@@ -42,18 +42,11 @@ public class FelhasznaloResource {
 
 
 
-    //TEST 1234
-
-
-
 //    @PutMapping("/update")
 //    public ResponseEntity<Felhasznalo> updateFelhasznalo(@RequestBody Felhasznalo felhasznalo){
 //        Felhasznalo updateFelhasznalo= felhasznaloService.updateFelhasznalo(felhasznalo);
 //        return new ResponseEntity<>(updateFelhasznalo, HttpStatus.OK);
 //    }
-
-
-
 
 
 //    @PostMapping("/add")
