@@ -29,18 +29,21 @@ public class Tartozkodasihely implements Serializable {
     private String Kozterulet_neve;
     @Column
     private String Kozterulet_jellege;
+    @Column
+    private int Haz_szam;
 
     //@OneToOne (mappedBy = "Tartozkodasihely",cascade = CascadeType.ALL)
     //private Felhasznalo felhasznalo;
 
     public Tartozkodasihely(){}
     @Autowired
-    public Tartozkodasihely(Long tartozkodasihelyID, int iranyitoszam, String varos, String kozterulet_neve, String kozterulet_jellege) {
+    public Tartozkodasihely(Long tartozkodasihelyID, int iranyitoszam, String varos, String kozterulet_neve, String kozterulet_jellege, int haz_szam) {
         this.tartozkodasihelyID = tartozkodasihelyID;
         this.Iranyitoszam = iranyitoszam;
         this.Varos = varos;
         this.Kozterulet_neve = kozterulet_neve;
         this.Kozterulet_jellege = kozterulet_jellege;
+        this.Haz_szam=haz_szam;
     }
 
     public Long getTartozkodasihelyID() {
@@ -56,7 +59,7 @@ public class Tartozkodasihely implements Serializable {
     }
 
     public void setIranyitoszam(int iranyitoszam) {
-        Iranyitoszam = iranyitoszam;
+        this.Iranyitoszam = iranyitoszam;
     }
 
     public String getVaros() {
@@ -64,7 +67,7 @@ public class Tartozkodasihely implements Serializable {
     }
 
     public void setVaros(String varos) {
-        Varos = varos;
+        this.Varos = varos;
     }
 
     public String getKozterulet_neve() {
@@ -72,7 +75,7 @@ public class Tartozkodasihely implements Serializable {
     }
 
     public void setKozterulet_neve(String kozterulet_neve) {
-        Kozterulet_neve = kozterulet_neve;
+        this.Kozterulet_neve = kozterulet_neve;
     }
 
     public String getKozterulet_jellege() {
@@ -80,7 +83,15 @@ public class Tartozkodasihely implements Serializable {
     }
 
     public void setKozterulet_jellege(String kozterulet_jellege) {
-        Kozterulet_jellege = kozterulet_jellege;
+        this.Kozterulet_jellege = kozterulet_jellege;
+    }
+
+    public int getHaz_szam() {
+        return Haz_szam;
+    }
+
+    public void setHaz_szam(int haz_szam) {
+        this.Haz_szam = haz_szam;
     }
 
     @Override
@@ -91,6 +102,7 @@ public class Tartozkodasihely implements Serializable {
                 ", Varos='" + Varos + '\'' +
                 ", Kozterulet_neve='" + Kozterulet_neve + '\'' +
                 ", Kozterulet_jellege='" + Kozterulet_jellege + '\'' +
+                ", Haz_szam='" + Haz_szam + '\''+
                 '}';
     }
 }

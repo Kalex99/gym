@@ -17,14 +17,14 @@ public class TartozkodasihelyService {
     }
 
     public void TartozkodasihelyLetrehoz(Tartozkodasihely tartozkodasihely){
-        tartozkodasihelyRep.TartozkodasihelyLetrehoz(tartozkodasihely.getIranyitoszam(),tartozkodasihely.getVaros(),tartozkodasihely.getKozterulet_neve(),tartozkodasihely.getKozterulet_jellege());
+        tartozkodasihelyRep.TartozkodasihelyLetrehoz(tartozkodasihely.getIranyitoszam(),tartozkodasihely.getVaros(),tartozkodasihely.getKozterulet_neve(),tartozkodasihely.getKozterulet_jellege(), tartozkodasihely.getHaz_szam());
     }
     public void TartozkodasihelyTorles(Long tartozkodasihelyID){
         tartozkodasihelyRep.TartozkodasihelyTorles(tartozkodasihelyID);
     }
 
     public void TartozkodasihelyModosit(Tartozkodasihely tartozkodasihely){
-        tartozkodasihelyRep.TartozkodasihelyModosit(tartozkodasihely.getTartozkodasihelyID(), tartozkodasihely.getIranyitoszam(),tartozkodasihely.getVaros(),tartozkodasihely.getKozterulet_neve(),tartozkodasihely.getKozterulet_jellege());
+        tartozkodasihelyRep.TartozkodasihelyModosit(tartozkodasihely.getTartozkodasihelyID(), tartozkodasihely.getIranyitoszam(),tartozkodasihely.getVaros(),tartozkodasihely.getKozterulet_neve(),tartozkodasihely.getKozterulet_jellege(), tartozkodasihely.getHaz_szam());
     }
 
 }
