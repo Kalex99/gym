@@ -44,7 +44,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"iranyitoszam\":9874,\r\n    \"varos\":\"siklós\",\r\n    \"kozterulet_neve\":\"sallai\",\r\n    \"kozterulet_jellege\":\"utca\"\r\n}",
+					"raw": "{\r\n    \"iranyitoszam\":9874,\r\n    \"varos\":\"siklós\",\r\n    \"kozterulet_neve\":\"sallai\",\r\n    \"kozterulet_jellege\":\"utca\",\r\n    \"haz_szam\":420\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -94,7 +94,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"tartozkodasihelyID\":50,\r\n    \"iranyitoszam\":7800,\r\n    \"varos\":\"Beremend\",\r\n    \"kozterulet_neve\":\"helixlab\",\r\n    \"kozterulet_jellege\":\"ithub\"\r\n}",
+					"raw": "{\r\n    \"tartozkodasihelyID\":50,\r\n    \"iranyitoszam\":7800,\r\n    \"varos\":\"Beremend\",\r\n    \"kozterulet_neve\":\"helixlab\",\r\n    \"kozterulet_jellege\":\"ithub\",\r\n    \"haz_szam\":69\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
