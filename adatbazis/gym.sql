@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Feb 11. 10:21
+-- Létrehozás ideje: 2022. Feb 12. 15:24
 -- Kiszolgáló verziója: 10.4.18-MariaDB
 -- PHP verzió: 8.0.3
 
@@ -31,7 +31,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesRendeles` (IN `felhasz
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesSzemelyiEdzo` (IN `felhasznaloID` INT, OUT `szemelyi_edzoID` INT, OUT `szemedz_vezeteknev` VARCHAR(50), OUT `szemedz_keresztnev` VARCHAR(50), OUT `portre` BLOB)  SELECT felhasznaloszemelyiedzo.Szemelyi_edzoID, szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Portre FROM felhasznaloszemelyiedzo INNER JOIN szemelyi_edzo ON felhasznaloszemelyiedzo.Szemelyi_edzoID=szemelyi_edzo.Szemelyi_edzoID WHERE felhasznaloszemelyiedzo.FelhasznaloID=felhasznaloID$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesTartozkodasihely` (IN `felhasznaloID` INT, OUT `tartozkodasihelyID` INT, OUT `iranyitoszam` INT, OUT `varos` VARCHAR(100), OUT `kozterulet_neve` VARCHAR(100), OUT `kozterulet_jellege` VARCHAR(20))  SELECT tartozkodasihely.TartozkodasihelyID, tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege FROM tartozkodasihely INNER JOIN felhasznalo ON tartozkodasihely.TartozkodasihelyID = felhasznalo.TartozkodasihelyID WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesTartozkodasihely` (IN `felhasznaloID` INT, OUT `tartozkodasihelyID` INT, OUT `iranyitoszam` INT, OUT `varos` VARCHAR(100), OUT `kozterulet_neve` VARCHAR(100), OUT `kozterulet_jellege` VARCHAR(20), OUT `haz_szam` INT)  SELECT tartozkodasihely.TartozkodasihelyID, tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege, tartozkodasihely.Haz_szam FROM tartozkodasihely INNER JOIN felhasznalo ON tartozkodasihely.TartozkodasihelyID = felhasznalo.TartozkodasihelyID WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasLetrehoz` (IN `berlet_tipus` VARCHAR(100), IN `berlet_ar` INT)  INSERT INTO berlet_vasarlas (berlet_vasarlas.Berlet_tipus, berlet_vasarlas.Berlet_ar) VALUES (berlet_tipus,berlet_ar)$$
 
@@ -50,7 +50,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CegModosit` (IN `cegID` INT, IN `ce
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CegOlvasas` (IN `cegID` INT, OUT `ceg_nev` VARCHAR(100), OUT `ceg_email` VARCHAR(200), OUT `ceg_telefon` VARCHAR(20), OUT `tartozkodasihelyID` INT)  SELECT ceg.Ceg_nev, ceg.Ceg_email, ceg.Ceg_telefon, ceg.TartozkodasihelyID FROM ceg WHERE ceg.CegID=cegID$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CegOlvasasTartozkodasihely` (IN `cegID` INT, OUT `tartozkodasihelyID` INT, OUT `iranyitoszam` INT, OUT `varos` VARCHAR(100), OUT `kozterulet_neve` VARCHAR(100), OUT `kozterulet_jellege` VARCHAR(20))  SELECT tartozkodasihely.TartozkodasihelyID, tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege FROM tartozkodasihely INNER JOIN ceg ON tartozkodasihely.TartozkodasihelyID= ceg.TartozkodasihelyID WHERE ceg.CegID=cegID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CegOlvasasTartozkodasihely` (IN `cegID` INT, OUT `tartozkodasihelyID` INT, OUT `iranyitoszam` INT, OUT `varos` VARCHAR(100), OUT `kozterulet_neve` VARCHAR(100), OUT `kozterulet_jellege` VARCHAR(20), OUT `haz_szam` INT)  SELECT tartozkodasihely.TartozkodasihelyID, tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege, tartozkodasihely.Haz_szam FROM tartozkodasihely INNER JOIN ceg ON tartozkodasihely.TartozkodasihelyID= ceg.TartozkodasihelyID WHERE ceg.CegID=cegID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CegTorles` (IN `cegID` INT)  BEGIN
 DELETE FROM tartozkodasihely WHERE tartozkodasihely.TartozkodasihelyID=(SELECT ceg.TartozkodasihelyID FROM ceg WHERE ceg.CegID=cegID);
@@ -92,18 +92,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvasas` (IN `szemelyi
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvasasFelhasznalo` (IN `szemelyi_edzoID` INT, OUT `felhasznaloID` INT, OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50))  SELECT felhasznaloszemelyiedzo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev FROM felhasznaloszemelyiedzo INNER JOIN felhasznalo ON felhasznaloszemelyiedzo.FelhasznaloID=felhasznalo.FelhasznaloID WHERE felhasznaloszemelyiedzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvasasTartozkodasihely` (IN `szemelyi_edzoID` INT, OUT `tartozkodasihelyID` INT, OUT `iranyitoszam` INT, OUT `varos` VARCHAR(100), OUT `kozterulet_neve` VARCHAR(100), OUT `kozterulet_jellege` VARCHAR(20))  SELECT tartozkodasihely.TartozkodasihelyID, tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege FROM tartozkodasihely INNER JOIN szemelyi_edzo ON tartozkodasihely.TartozkodasihelyID = szemelyi_edzo.TartozkodasihelyID WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvasasTartozkodasihely` (IN `szemelyi_edzoID` INT, OUT `tartozkodasihelyID` INT, OUT `iranyitoszam` INT, OUT `varos` VARCHAR(100), OUT `kozterulet_neve` VARCHAR(100), OUT `kozterulet_jellege` VARCHAR(20), OUT `haz_szam` INT)  SELECT tartozkodasihely.TartozkodasihelyID, tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege,  tartozkodasihely.Haz_szam FROM tartozkodasihely INNER JOIN szemelyi_edzo ON tartozkodasihely.TartozkodasihelyID = szemelyi_edzo.TartozkodasihelyID WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoTorles` (IN `szemelyi_edzoID` INT)  BEGIN 
 DELETE FROM tartozkodasihely WHERE tartozkodasihely.TartozkodasihelyID=(SELECT szemelyi_edzo.TartozkodasihelyID FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID);
 DELETE FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TartozkodasihelyLetrehoz` (IN `iranyitoszam` INT, IN `varos` VARCHAR(100), IN `kozterulet_neve` VARCHAR(100), IN `kozterulet_jellege` VARCHAR(20))  INSERT INTO tartozkodasihely( tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege) VALUES (iranyitoszam, varos, kozterulet_neve, kozterulet_jellege)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TartozkodasihelyLetrehoz` (IN `iranyitoszam` INT, IN `varos` VARCHAR(100), IN `kozterulet_neve` VARCHAR(100), IN `kozterulet_jellege` VARCHAR(20), IN `haz_szam` INT)  INSERT INTO tartozkodasihely( tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege, tartozkodasihely.Haz_szam) VALUES (iranyitoszam, varos, kozterulet_neve, kozterulet_jellege, haz_szam)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TartozkodasihelyModosit` (IN `tartozkodasihelyID` INT, IN `iranyitoszam` INT, IN `varos` VARCHAR(100), IN `kozterulet_neve` VARCHAR(100), IN `kozterulet_jelleg` VARCHAR(20))  UPDATE tartozkodasihely SET tartozkodasihely.Iranyitoszam=iranyitoszam, tartozkodasihely.Varos=varos, tartozkodasihely.Kozterulet_neve=kozterulet_neve, tartozkodasihely.Kozterulet_jellege=kozterulet_jelleg WHERE tartozkodasihely.TartozkodasihelyID=tartozkodasihelyID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TartozkodasihelyModosit` (IN `tartozkodasihelyID` INT, IN `iranyitoszam` INT, IN `varos` VARCHAR(100), IN `kozterulet_neve` VARCHAR(100), IN `kozterulet_jelleg` VARCHAR(20), IN `haz_szam` INT)  UPDATE tartozkodasihely SET tartozkodasihely.Iranyitoszam=iranyitoszam, tartozkodasihely.Varos=varos, tartozkodasihely.Kozterulet_neve=kozterulet_neve, tartozkodasihely.Kozterulet_jellege=kozterulet_jelleg, tartozkodasihely.Haz_szam=haz_szam WHERE tartozkodasihely.TartozkodasihelyID=tartozkodasihelyID$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TartozkodasihelyOlvasas` (IN `tartozkodasihelyID` INT, OUT `iranyitoszam` INT, OUT `varos` VARCHAR(100), OUT `kozterulet_neve` VARCHAR(100), OUT `kozterulet_jellege` VARCHAR(20))  SELECT tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege FROM tartozkodasihely WHERE tartozkodasihely.TartozkodasihelyID=tartozkodasihelyID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TartozkodasihelyOlvasas` (IN `tartozkodasihelyID` INT, OUT `iranyitoszam` INT, OUT `varos` VARCHAR(100), OUT `kozterulet_neve` VARCHAR(100), OUT `kozterulet_jellege` VARCHAR(20), OUT `haz_szam` INT)  SELECT tartozkodasihely.Iranyitoszam, tartozkodasihely.Varos, tartozkodasihely.Kozterulet_neve, tartozkodasihely.Kozterulet_jellege, tartozkodasihely.Haz_szam FROM tartozkodasihely WHERE tartozkodasihely.TartozkodasihelyID=tartozkodasihelyID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TartozkodasihelyTorles` (IN `tartozkodasihelyID` INT)  DELETE FROM tartozkodasihely WHERE tartozkodasihely.TartozkodasihelyID=tartozkodasihelyID$$
 
@@ -220,8 +220,6 @@ INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_ve
 (25, 'quis', 'sed', 'Goodwin', 'Chanelle', 'antonetta13@example.org', '1987-05-06', '199-630-283', 25),
 (26, 'a', 'in', 'Ward', 'Camden', 'deon94@example.net', '1991-04-29', '257-154-191', 26),
 (27, 'repellendus', 'modi', 'Lebsack', 'Chanel', 'bayer.scarlett@example.org', '2002-06-24', '09446491286', 27),
-(28, 'voluptate', 'et', 'Lesch', 'Santina', 'anibal.strosin@example.net', '2009-12-01', '(719)447-48', 28),
-(29, 'soluta', 'molestiae', 'Osinski', 'Donny', 'susan69@example.net', '1990-08-24', '1-130-575-6', 29),
 (31, 'beatae', 'id', 'Quigley', 'Willy', 'dbartell@example.com', '2006-02-27', '136.161.965', 31),
 (32, 'tempora', 'ut', 'Lebsack', 'Lemuel', 'schroeder.trenton@example.org', '1975-06-02', '(143)815-59', 32),
 (33, 'illum', 'quam', 'Spinka', 'Maymie', 'lhowell@example.org', '2010-12-12', '1-876-891-3', 33),
@@ -231,7 +229,7 @@ INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_ve
 (37, 'delectus', 'cupiditate', 'Gerhold', 'Lucious', 'reichel.cassandra@example.org', '2014-01-22', '932-459-244', 37),
 (38, 'minima', 'inventore', 'Hegmann', 'Shaina', 'blanca.vandervort@example.com', '1999-09-12', '(801)023-33', 38),
 (39, 'quidem', 'fugiat', 'Dooley', 'Bertrand', 'fkreiger@example.org', '2012-04-02', '029.773.771', 39),
-(40, 'reiciendis', 'maxime', 'Miller', 'Karen', 'verlie56@example.net', '2000-04-11', '02137941012', 40),
+(40, 'Qélkani', 'soigj489z9843h', 'Sanya', 'Macska', 'helth@hello.com', '2000-04-11', '06205879168', 1),
 (41, 'ullam', 'reiciendis', 'Waelchi', 'Jadon', 'swift.janiya@example.net', '1991-11-04', '851.646.096', 41),
 (42, 'voluptatem', 'aut', 'Muller', 'Vilma', 'zcummerata@example.org', '1979-06-18', '(367)763-02', 42),
 (43, 'inventore', 'rerum', 'Brekke', 'Enrico', 'ethyl33@example.com', '1983-12-25', '1-311-981-5', 43),
@@ -241,7 +239,7 @@ INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_ve
 (47, 'sapiente', 'exercitationem', 'Heidenreich', 'Oscar', 'gabe.gorczany@example.net', '1979-06-19', '136.889.507', 47),
 (48, 'unde', 'et', 'Murphy', 'Kaci', 'zkirlin@example.org', '2009-09-02', '920.441.568', 48),
 (49, 'accusantium', 'provident', 'Jenkins', 'Jeremy', 'johnston.howard@example.com', '1989-12-05', '989-593-316', 49),
-(50, 'Qani', 'soigj489z9843h', 'Sanya', 'Macska', 'helabith@hello.com', '2001-07-09', '06205879168', 29);
+(79, 'idk', 'soigj489z9843h', 'Sanya', 'Macska', 'idk@idk.com', '1999-08-14', '06205879168', 1);
 
 -- --------------------------------------------------------
 
@@ -278,25 +276,7 @@ INSERT INTO `felhasznaloszemelyiedzo` (`FelhasznaloID`, `Szemelyi_edzoID`) VALUE
 (23, 3),
 (24, 4),
 (26, 6),
-(27, 7),
-(28, 8);
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `hibernate_sequence`
---
-
-CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- A tábla adatainak kiíratása `hibernate_sequence`
---
-
-INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(1);
+(27, 7);
 
 -- --------------------------------------------------------
 
@@ -338,7 +318,6 @@ INSERT INTO `rendeles` (`RendelesID`, `Rendeles_idopont`, `Megjegyzes`, `TermekI
 (24, '1982-05-01 12:27:35', 'Neque perferendis.', 24, 4, 24),
 (26, '1999-08-11 06:42:09', 'Corporis omnis.', 26, 1, 26),
 (27, '1994-10-15 10:17:31', 'Consequatur quis.', 27, 2, 27),
-(28, '1993-09-20 14:59:01', 'Doloremque harum.', 28, 3, 28),
 (31, '2002-05-12 23:05:33', 'Eum est ipsam.', 31, 1, 31),
 (32, '2004-07-25 09:45:45', 'Ea soluta ex quo.', 32, 2, 32),
 (33, '2007-03-29 01:17:37', 'Aut hic asperiores.', 33, 3, 33),
@@ -395,61 +374,61 @@ CREATE TABLE `tartozkodasihely` (
   `Iranyitoszam` int(11) UNSIGNED NOT NULL,
   `Varos` varchar(100) NOT NULL,
   `Kozterulet_neve` varchar(100) NOT NULL,
-  `Kozterulet_jellege` varchar(20) NOT NULL
+  `Kozterulet_jellege` varchar(20) NOT NULL,
+  `Haz_szam` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- A tábla adatainak kiíratása `tartozkodasihely`
 --
 
-INSERT INTO `tartozkodasihely` (`TartozkodasihelyID`, `Iranyitoszam`, `Varos`, `Kozterulet_neve`, `Kozterulet_jellege`) VALUES
-(1, 55932, 'Hettingerland', 'Stanton Field', 'Lane'),
-(2, 73488, 'Mosciskiport', 'Dagmar Rue', 'Inlet'),
-(3, 30388, 'Wymanbury', 'Quigley Fall', 'Wells'),
-(4, 51963, 'Lake Rosemaryfurt', 'Rau Fields', 'Circle'),
-(6, 74493, 'East Saigeton', 'Johnston Pines', 'Club'),
-(7, 39731, 'East Lelia', 'Joanie Well', 'Meadow'),
-(8, 80688, 'Bashiriantown', 'Schmitt Rest', 'Lock'),
-(11, 54118, 'East Joan', 'Rau Crest', 'Glen'),
-(12, 939, 'North Claudview', 'Anastacio Freeway', 'Mountains'),
-(13, 97671, 'Ottilieberg', 'Gaylord Crest', 'Crossroad'),
-(14, 37906, 'Lake Alexandreview', 'Fay Centers', 'Radial'),
-(15, 83731, 'New Giuseppe', 'Hillary Isle', 'Vista'),
-(16, 22963, 'Joyceview', 'Adams Islands', 'Rest'),
-(17, 15556, 'East Benjamin', 'Thora Ville', 'Square'),
-(18, 93839, 'Streichmouth', 'Edythe Path', 'Trafficway'),
-(19, 37309, 'West Elijahport', 'Alysha Lodge', 'Ramp'),
-(20, 33511, 'McClurebury', 'Jerod Prairie', 'Throughway'),
-(21, 36109, 'East Hermanmouth', 'Elsa Burgs', 'Roads'),
-(22, 96385, 'New Dinafurt', 'Prosacco Crossing', 'Island'),
-(23, 39871, 'Nehamouth', 'Funk Neck', 'Throughway'),
-(24, 33102, 'South Georgettechester', 'Claude Shore', 'Mount'),
-(25, 58760, 'New Jeremie', 'Pagac Plaza', 'Glens'),
-(26, 60482, 'New Cleta', 'Lubowitz Branch', 'Junction'),
-(27, 66121, 'Moisestown', 'Ullrich Turnpike', 'Ranch'),
-(28, 96660, 'South Modestofurt', 'Shaina Green', 'Gardens'),
-(29, 77092, 'West Ferne', 'Mozell Prairie', 'Skyway'),
-(30, 75273, 'Port Isaac', 'Smith Locks', 'Squares'),
-(31, 18820, 'South Maynardchester', 'Johnson Squares', 'Plains'),
-(32, 54116, 'Gleasonmouth', 'Desmond Dam', 'Station'),
-(33, 25656, 'Edwinville', 'Caesar Wall', 'Walks'),
-(34, 79152, 'Port Deontown', 'Conn Divide', 'Keys'),
-(35, 2085, 'New Enidville', 'Langworth Ramp', 'Radial'),
-(36, 1776, 'New Maximusburgh', 'Bartell Bypass', 'Freeway'),
-(37, 1196, 'West Prudence', 'Schroeder Path', 'Summit'),
-(38, 19676, 'West Ashlynn', 'Marks Coves', 'Roads'),
-(39, 54064, 'North Alda', 'Leannon Mission', 'Forge'),
-(40, 49821, 'New Marietta', 'Lebsack Mountains', 'River'),
-(41, 44203, 'Harberton', 'Madeline Prairie', 'Trace'),
-(42, 91762, 'Roobland', 'Green Throughway', 'Valleys'),
-(43, 40296, 'Port Ian', 'Roxane Mall', 'Plains'),
-(44, 80107, 'Providenciport', 'Gerlach Shore', 'Harbor'),
-(45, 98356, 'Brendaberg', 'Deckow Haven', 'Stream'),
-(46, 84659, 'Predovicchester', 'Lavinia Roads', 'Alley'),
-(47, 75099, 'Lake Lonie', 'Satterfield Knolls', 'Trafficway'),
-(48, 13045, 'Zboncakfort', 'Bennett Pike', 'Harbors'),
-(49, 53204, 'South Nikitaview', 'Roob Place', 'Junctions'),
-(50, 11834, 'Tylermouth', 'Boyer Parkways', 'Terrace');
+INSERT INTO `tartozkodasihely` (`TartozkodasihelyID`, `Iranyitoszam`, `Varos`, `Kozterulet_neve`, `Kozterulet_jellege`, `Haz_szam`) VALUES
+(1, 55932, 'Hettingerland', 'Stanton Field', 'Lane', 6),
+(2, 73488, 'Mosciskiport', 'Dagmar Rue', 'Inlet', 6),
+(3, 30388, 'Wymanbury', 'Quigley Fall', 'Wells', 6),
+(4, 51963, 'Lake Rosemaryfurt', 'Rau Fields', 'Circle', 6),
+(6, 74493, 'East Saigeton', 'Johnston Pines', 'Club', 6),
+(7, 39731, 'East Lelia', 'Joanie Well', 'Meadow', 6),
+(8, 80688, 'Bashiriantown', 'Schmitt Rest', 'Lock', 6),
+(11, 54118, 'East Joan', 'Rau Crest', 'Glen', 6),
+(12, 939, 'North Claudview', 'Anastacio Freeway', 'Mountains', 6),
+(13, 97671, 'Ottilieberg', 'Gaylord Crest', 'Crossroad', 6),
+(14, 37906, 'Lake Alexandreview', 'Fay Centers', 'Radial', 6),
+(15, 83731, 'New Giuseppe', 'Hillary Isle', 'Vista', 6),
+(16, 22963, 'Joyceview', 'Adams Islands', 'Rest', 6),
+(17, 15556, 'East Benjamin', 'Thora Ville', 'Square', 6),
+(18, 93839, 'Streichmouth', 'Edythe Path', 'Trafficway', 6),
+(19, 37309, 'West Elijahport', 'Alysha Lodge', 'Ramp', 6),
+(20, 33511, 'McClurebury', 'Jerod Prairie', 'Throughway', 6),
+(21, 36109, 'East Hermanmouth', 'Elsa Burgs', 'Roads', 6),
+(22, 96385, 'New Dinafurt', 'Prosacco Crossing', 'Island', 6),
+(23, 39871, 'Nehamouth', 'Funk Neck', 'Throughway', 6),
+(24, 33102, 'South Georgettechester', 'Claude Shore', 'Mount', 6),
+(25, 58760, 'New Jeremie', 'Pagac Plaza', 'Glens', 6),
+(26, 60482, 'New Cleta', 'Lubowitz Branch', 'Junction', 6),
+(27, 66121, 'Moisestown', 'Ullrich Turnpike', 'Ranch', 6),
+(30, 75273, 'Port Isaac', 'Smith Locks', 'Squares', 6),
+(31, 18820, 'South Maynardchester', 'Johnson Squares', 'Plains', 6),
+(32, 54116, 'Gleasonmouth', 'Desmond Dam', 'Station', 6),
+(33, 25656, 'Edwinville', 'Caesar Wall', 'Walks', 6),
+(34, 79152, 'Port Deontown', 'Conn Divide', 'Keys', 6),
+(35, 2085, 'New Enidville', 'Langworth Ramp', 'Radial', 6),
+(36, 1776, 'New Maximusburgh', 'Bartell Bypass', 'Freeway', 6),
+(37, 1196, 'West Prudence', 'Schroeder Path', 'Summit', 6),
+(38, 19676, 'West Ashlynn', 'Marks Coves', 'Roads', 6),
+(39, 54064, 'North Alda', 'Leannon Mission', 'Forge', 6),
+(40, 49821, 'New Marietta', 'Lebsack Mountains', 'River', 6),
+(41, 44203, 'Harberton', 'Madeline Prairie', 'Trace', 6),
+(42, 91762, 'Roobland', 'Green Throughway', 'Valleys', 6),
+(43, 40296, 'Port Ian', 'Roxane Mall', 'Plains', 6),
+(44, 80107, 'Providenciport', 'Gerlach Shore', 'Harbor', 6),
+(45, 98356, 'Brendaberg', 'Deckow Haven', 'Stream', 6),
+(46, 84659, 'Predovicchester', 'Lavinia Roads', 'Alley', 6),
+(47, 75099, 'Lake Lonie', 'Satterfield Knolls', 'Trafficway', 6),
+(48, 13045, 'Zboncakfort', 'Bennett Pike', 'Harbors', 6),
+(49, 53204, 'South Nikitaview', 'Roob Place', 'Junctions', 6),
+(50, 7800, 'Beremend', 'helixlab', 'ithub', 6),
+(51, 7800, 'Beremend', 'helixlab', '', 6);
 
 -- --------------------------------------------------------
 
@@ -593,7 +572,7 @@ ALTER TABLE `ceg`
 -- AUTO_INCREMENT a táblához `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `FelhasznaloID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `FelhasznaloID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT a táblához `rendeles`
@@ -611,7 +590,7 @@ ALTER TABLE `szemelyi_edzo`
 -- AUTO_INCREMENT a táblához `tartozkodasihely`
 --
 ALTER TABLE `tartozkodasihely`
-  MODIFY `TartozkodasihelyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `TartozkodasihelyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT a táblához `termek`
