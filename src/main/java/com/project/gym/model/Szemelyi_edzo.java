@@ -30,6 +30,8 @@ public class Szemelyi_edzo implements Serializable {
     @Column (name = "tartozkodasihelyID", insertable=false, updatable =false)
     private Integer tartozkodasihelyID;
 
+    public Szemelyi_edzo(){}
+
     public Szemelyi_edzo(Long szemelyi_edzoID, String szemedz_vezeteknev, String szemedz_keresztnev, byte[] portre, String szemedz_email, String szemedz_telefon, Integer tartozkodasihelyID) {
         this.szemelyi_edzoID = szemelyi_edzoID;
         this.szemedz_vezeteknev = szemedz_vezeteknev;

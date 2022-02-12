@@ -18,6 +18,7 @@ public class Berlet_vasarlas implements Serializable {
     private Integer berlet_ar;
 
 
+    public Berlet_vasarlas(){}
     public Berlet_vasarlas(Long berlet_vasarlasID, String berlet_tipus, Integer berlet_ar) {
         this.berlet_vasarlasID = berlet_vasarlasID;
         this.berlet_tipus = berlet_tipus;

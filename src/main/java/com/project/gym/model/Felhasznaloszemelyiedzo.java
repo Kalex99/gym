@@ -14,6 +14,7 @@ public class Felhasznaloszemelyiedzo {
     @Column(name = "szemelyi_edzoID", nullable = false, updatable = false)
     private Long szemelyi_edzoID;
 
+    public Felhasznaloszemelyiedzo(){}
     public Felhasznaloszemelyiedzo(Long felhasznaloID, Long szemelyi_edzoID) {
         this.felhasznaloID = felhasznaloID;
         this.szemelyi_edzoID = szemelyi_edzoID;
