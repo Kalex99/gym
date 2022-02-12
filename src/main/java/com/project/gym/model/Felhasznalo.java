@@ -1,5 +1,7 @@
 package com.project.gym.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 
 
@@ -28,13 +30,14 @@ public class Felhasznalo implements Serializable {
     @Column
     private String felh_telefon;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "tartozkodasihelyID",referencedColumnName = "tartozkodasihelyID")
-    private Tartozkodasihely tartozkodasihely;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "tartozkodasihelyID",referencedColumnName = "tartozkodasihelyID")
+//    private Tartozkodasihely tartozkodasihely;
     @Column (name = "tartozkodasihelyID", insertable=false, updatable =false)
     private Long tartozkodasihelyID;
 
     public Felhasznalo(){}
+    @Autowired
     public Felhasznalo(Long felhasznaloID, String felhasznalonev, String jelszo, String felh_vezeteknev, String felh_keresztnev, Date szuletesi_datum, String felh_email, String felh_telefon, Long tartozkodasihelyID) {
         this.felhasznaloID = felhasznaloID;
         this.felhasznalonev = felhasznalonev;

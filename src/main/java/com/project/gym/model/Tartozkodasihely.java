@@ -1,10 +1,21 @@
 package com.project.gym.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tartozkodasihely")
+@NamedStoredProcedureQuery(name = "TartozkodasihelyOlvasas", procedureName = "TartozkodasihelyOlvasas",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "tartozkodasihelyID", type = Long.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "iranyitoszam", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "varos", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_neve", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_jellege", type = String.class)
+        })
 public class Tartozkodasihely implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +30,11 @@ public class Tartozkodasihely implements Serializable {
     @Column
     private String Kozterulet_jellege;
 
-    //@OneToOne//(mappedBy = "Tartozkodasihely",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Felhasznalo felhasznalo;
+    //@OneToOne (mappedBy = "Tartozkodasihely",cascade = CascadeType.ALL)
+    //private Felhasznalo felhasznalo;
 
     public Tartozkodasihely(){}
+    @Autowired
     public Tartozkodasihely(Long tartozkodasihelyID, int iranyitoszam, String varos, String kozterulet_neve, String kozterulet_jellege) {
         this.tartozkodasihelyID = tartozkodasihelyID;
         this.Iranyitoszam = iranyitoszam;
