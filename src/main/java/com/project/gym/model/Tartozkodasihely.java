@@ -22,15 +22,15 @@ public class Tartozkodasihely implements Serializable {
     @Column(name = "tartozkodasihelyID", nullable = false, updatable = false)
     private Long tartozkodasihelyID;
     @Column
-    private int Iranyitoszam;
+    private Integer iranyitoszam;
     @Column
-    private String Varos;
+    private String varos;
     @Column
-    private String Kozterulet_neve;
+    private String kozterulet_neve;
     @Column
-    private String Kozterulet_jellege;
+    private String kozterulet_jellege;
     @Column
-    private int Haz_szam;
+    private Integer haz_szam;
 
     //@OneToOne (mappedBy = "Tartozkodasihely",cascade = CascadeType.ALL)
     //private Felhasznalo felhasznalo;
@@ -39,11 +39,11 @@ public class Tartozkodasihely implements Serializable {
     @Autowired
     public Tartozkodasihely(Long tartozkodasihelyID, int iranyitoszam, String varos, String kozterulet_neve, String kozterulet_jellege, int haz_szam) {
         this.tartozkodasihelyID = tartozkodasihelyID;
-        this.Iranyitoszam = iranyitoszam;
-        this.Varos = varos;
-        this.Kozterulet_neve = kozterulet_neve;
-        this.Kozterulet_jellege = kozterulet_jellege;
-        this.Haz_szam=haz_szam;
+        this.iranyitoszam = iranyitoszam;
+        this.varos = varos;
+        this.kozterulet_neve = kozterulet_neve;
+        this.kozterulet_jellege = kozterulet_jellege;
+        this.haz_szam=haz_szam;
     }
 
     public Long getTartozkodasihelyID() {
@@ -55,54 +55,54 @@ public class Tartozkodasihely implements Serializable {
     }
 
     public int getIranyitoszam() {
-        return Iranyitoszam;
+        return iranyitoszam;
     }
 
     public void setIranyitoszam(int iranyitoszam) {
-        this.Iranyitoszam = iranyitoszam;
+        this.iranyitoszam = iranyitoszam;
     }
 
     public String getVaros() {
-        return Varos;
+        return varos;
     }
 
     public void setVaros(String varos) {
-        this.Varos = varos;
+        this.varos = varos;
     }
 
     public String getKozterulet_neve() {
-        return Kozterulet_neve;
+        return kozterulet_neve;
     }
 
     public void setKozterulet_neve(String kozterulet_neve) {
-        this.Kozterulet_neve = kozterulet_neve;
+        this.kozterulet_neve = kozterulet_neve;
     }
 
     public String getKozterulet_jellege() {
-        return Kozterulet_jellege;
+        return kozterulet_jellege;
     }
 
     public void setKozterulet_jellege(String kozterulet_jellege) {
-        this.Kozterulet_jellege = kozterulet_jellege;
+        this.kozterulet_jellege = kozterulet_jellege;
     }
 
     public int getHaz_szam() {
-        return Haz_szam;
+        return haz_szam;
     }
 
     public void setHaz_szam(int haz_szam) {
-        this.Haz_szam = haz_szam;
+        this.haz_szam = haz_szam;
     }
 
     @Override
     public String toString() {
         return "Tartozkodasihely{" +
                 "tartozkodasihelyID=" + tartozkodasihelyID +
-                ", Iranyitoszam=" + Iranyitoszam +
-                ", Varos='" + Varos + '\'' +
-                ", Kozterulet_neve='" + Kozterulet_neve + '\'' +
-                ", Kozterulet_jellege='" + Kozterulet_jellege + '\'' +
-                ", Haz_szam='" + Haz_szam + '\''+
+                ", Iranyitoszam=" + iranyitoszam +
+                ", Varos='" + varos + '\'' +
+                ", Kozterulet_neve='" + kozterulet_neve + '\'' +
+                ", Kozterulet_jellege='" + kozterulet_jellege + '\'' +
+                ", Haz_szam='" + haz_szam + '\''+
                 '}';
     }
 }
