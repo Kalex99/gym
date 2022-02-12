@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "fd169274-a539-468a-859f-025ddf7b6baa",
+		"name": "Felhasznalo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FelhasznaloLetrehoz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"felhasznalonev\":\"dfdfdf\",\r\n    \"jelszo\":\"soigj489z9843h\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"hjxlabith@hello.com\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"tartozkodasihelyID\":28\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/felhasznalo/felh_letre",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"felhasznalo",
+						"felh_letre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FelhasznaloOlvasas(Test)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/felhasznalo/felh_olvas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"felhasznalo",
+						"felh_olvas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FelhasznaloTorles",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/felhasznalo/felh_torles/50",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"felhasznalo",
+						"felh_torles",
+						"50"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FelhasznaloModosit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"felhasznaloID\": 40,\r\n    \"felhasznalonev\":\"Qélkani\",\r\n    \"jelszo\":\"soigj489z9843h\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"helth@hello.com\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"tartozkodasihelyID\":1\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/felhasznalo/felh_modosit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"felhasznalo",
+						"felh_modosit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
