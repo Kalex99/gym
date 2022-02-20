@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 
 @Repository
-public interface TartozkodasihelyRep extends JpaRepository<Tartozkodasihely, Integer> {
+public interface TartozkodasihelyRep extends JpaRepository<Tartozkodasihely, Long> {
 
     @Procedure(name = "TartozkodasihelyOlvasas")
     String TartozkodasihelyOlvasas(@Param("tartozkodasihelyID") Long tartozkodasihelyID);

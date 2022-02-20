@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface FelhasznaloRep extends JpaRepository<Felhasznalo,Integer>{
+public interface FelhasznaloRep extends JpaRepository<Felhasznalo,Long>{
 
     @Query(value = "{call FelhasznaloOlvasas()}", nativeQuery = true)
     List<Felhasznalo> FelhasznaloOlvasas();

@@ -1,10 +1,11 @@
 package com.project.gym.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "felhasznaloszemelyiedzo")
-public class Felhasznaloszemelyiedzo {
+public class Felhasznaloszemelyiedzo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "felhasznaloID", nullable = false, updatable = false)
