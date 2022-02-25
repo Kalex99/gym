@@ -15,8 +15,8 @@ public class GymService {
     @Autowired
     private FelhasznaloRep felhasznaloRep;
 
-    public List<Felhasznalo> FelhasznaloOlvasas(){
-        return felhasznaloRep.FelhasznaloOlvasas();
+    public List<Felhasznalo> FelhasznaloOlvas(){
+        return felhasznaloRep.FelhasznaloOlvas();
     }
 
     public void  FelhasznaloLetrehoz(Felhasznalo felhasznalo){
@@ -36,7 +36,9 @@ public class GymService {
     public String TartozkodasihelyOlvasas(Long tartozkodasihelyID) {
         return tartozkodasihelyRep.TartozkodasihelyOlvasas(tartozkodasihelyID);
     }
-
+    //    public Felhasznalo findFelhasznaloById(Long id){
+//        return felhasznaloRepo.findFelhasznaloByID(id).orElseThrow(()->new FelhasznaloNemTalalhatoException("User by id "+ id +" was not found"));
+//    }
     public void TartozkodasihelyLetrehoz(Tartozkodasihely tartozkodasihely){
         tartozkodasihelyRep.TartozkodasihelyLetrehoz(tartozkodasihely.getIranyitoszam(),tartozkodasihely.getVaros(),tartozkodasihely.getKozterulet_neve(),tartozkodasihely.getKozterulet_jellege(), tartozkodasihely.getHaz_szam());
     }
@@ -54,11 +56,6 @@ public class GymService {
 //        this.felhasznaloRepo = felhasznaloRepo;
 //    }
 //
-//    public Felhasznalo findFelhasznaloById(Long id){
-//        return felhasznaloRepo.findFelhasznaloByID(id).orElseThrow(()->new FelhasznaloNemTalalhatoException("User by id "+ id +" was not found"));
-//    }
-//
-//    public Felhasznalo findFelhasznaloById(Long id){
-//        return felhasznaloRepo.findFelhasznaloByID(id).orElseThrow(()->new FelhasznaloNemTalalhatoException("User by id "+ id +" was not found"));
+
 //    }
 }

@@ -20,8 +20,8 @@ public class GymController {
     private GymService gymService;
 
     @GetMapping("felhasznalo/felh_olvas")
-    public ResponseEntity<List<Felhasznalo>> FelhasznaloOlvasas() {
-        List<Felhasznalo> lista = gymService.FelhasznaloOlvasas();
+    public ResponseEntity<List<Felhasznalo>> FelhasznaloOlvas() {
+        List<Felhasznalo> lista = gymService.FelhasznaloOlvas();
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
