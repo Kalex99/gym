@@ -6,6 +6,37 @@ import java.util.Arrays;
 
 @Entity
 @Table(name = "szemelyi_edzo")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasas", procedureName = "Szemelyi_edzoOlvasas",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_vezeteknev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_keresztnev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "portre", type = byte[].class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_email", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_telefon", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class)
+                }),
+        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasasFelhasznalo", procedureName = "Szemelyi_edzoOlvasasFelhasznalo",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznaloID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_vezeteknev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_keresztnev", type = String.class)
+                }),
+        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasasTartozkodasihely", procedureName = "Szemelyi_edzoOlvasasTartozkodasihely",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "iranyitoszam", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "varos", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_neve", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_jellege", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "haz_szam", type = Integer.class)
+                })
+
+})
+
 public class Szemelyi_edzo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +58,13 @@ public class Szemelyi_edzo implements Serializable {
     @Column
     private String szemedz_telefon;
 
-    @Column (name = "tartozkodasihelyID", insertable=false, updatable =false)
-    private Integer tartozkodasihelyID;
+    @Column(name = "tartozkodasihelyID", insertable = false, updatable = false)
+    private Long tartozkodasihelyID;
 
-    public Szemelyi_edzo(){}
+    public Szemelyi_edzo() {
+    }
 
-    public Szemelyi_edzo(Long szemelyi_edzoID, String szemedz_vezeteknev, String szemedz_keresztnev, byte[] portre, String szemedz_email, String szemedz_telefon, Integer tartozkodasihelyID) {
+    public Szemelyi_edzo(Long szemelyi_edzoID, String szemedz_vezeteknev, String szemedz_keresztnev, byte[] portre, String szemedz_email, String szemedz_telefon, Long tartozkodasihelyID) {
         this.szemelyi_edzoID = szemelyi_edzoID;
         this.szemedz_vezeteknev = szemedz_vezeteknev;
         this.szemedz_keresztnev = szemedz_keresztnev;
@@ -90,11 +122,11 @@ public class Szemelyi_edzo implements Serializable {
         this.szemedz_telefon = szemedz_telefon;
     }
 
-    public Integer getTartozkodasihelyID() {
+    public Long getTartozkodasihelyID() {
         return tartozkodasihelyID;
     }
 
-    public void setTartozkodasihelyID(Integer tartozkodasihelyID) {
+    public void setTartozkodasihelyID(Long tartozkodasihelyID) {
         this.tartozkodasihelyID = tartozkodasihelyID;
     }
 

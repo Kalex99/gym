@@ -3,9 +3,31 @@ package com.project.gym.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "ceg")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(name = "CegOlvasas", procedureName = "CegOlvasas",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "cegID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_nev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_email", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_telefon", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
+                }),
+        @NamedStoredProcedureQuery(name = "CegOlvasasTartozkodasihely", procedureName = "CegOlvasasTartozkodasihely",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "cegID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "iranyitoszam", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "varos", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_neve", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_jellege", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "haz_szam", type = Integer.class)
+                })
+})
+
 public class Ceg implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +43,11 @@ public class Ceg implements Serializable {
     @Column
     private String ceg_telefon;
 
-    @Column(name = "tartozkodasihelyID", insertable=false, updatable =false)
+    @Column(name = "tartozkodasihelyID", insertable = false, updatable = false)
     private Long tartozkodasihelyID;
 
-    private Ceg(){}
+    private Ceg() {
+    }
 
     public Ceg(Long cegID, String ceg_nev, String ceg_email, String ceg_telefon, Long tartozkodasihelyID) {
         this.cegID = cegID;

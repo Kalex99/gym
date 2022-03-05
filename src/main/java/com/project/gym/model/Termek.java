@@ -8,6 +8,29 @@ import java.util.Arrays;
 
 @Entity
 @Table(name = "Termek")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(name = "TermekOlvasas", procedureName = "TermekOlvasas",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "termekID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termek_nev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kategoria", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ar", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kep", type = byte[].class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "keszlet", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kaphato", type = Boolean.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "leiras", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "cegID", type = Long.class),
+                }),
+        @NamedStoredProcedureQuery(name = "TermekOlvasasCeg", procedureName = "TermekOlvasasCeg",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "termekID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "cegID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_nev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_email", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_telefon", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
+                })
+})
 public class Termek implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +58,11 @@ public class Termek implements Serializable {
     @Column
     private String leiras;
 
-    @Column(name = "cegID", insertable=false, updatable =false)
+    @Column(name = "cegID", insertable = false, updatable = false)
     private Long cegID;
 
-    public Termek(){}
+    public Termek() {
+    }
 
     public Termek(Long termekID, String termek_nev, String kategoria, Integer ar, byte[] kep, Integer keszlet, Boolean kaphato, String leiras, Long cegID) {
         this.termekID = termekID;

@@ -19,7 +19,7 @@ public interface TartozkodasihelyRep extends JpaRepository<Tartozkodasihely, Lon
 
     @Transactional
     @Modifying
-    @Query (value = "{call TartozkodasihelyLetrehoz(:iranyitoszam, :varos, :kozterulet_neve, :kozterulet_jellege, :haz_szam)}", nativeQuery = true)
+    @Query(value = "{call TartozkodasihelyLetrehoz(:iranyitoszam, :varos, :kozterulet_neve, :kozterulet_jellege, :haz_szam)}", nativeQuery = true)
     void TartozkodasihelyLetrehoz(
             @Param("iranyitoszam") Integer iranyitoszam,
             @Param("varos") String varos,
@@ -30,12 +30,12 @@ public interface TartozkodasihelyRep extends JpaRepository<Tartozkodasihely, Lon
 
     @Transactional
     @Modifying
-    @Query (value = "{call TartozkodasihelyTorles(:tartozkodasihelyID)}",nativeQuery = true)
+    @Query(value = "{call TartozkodasihelyTorles(:tartozkodasihelyID)}", nativeQuery = true)
     void TartozkodasihelyTorles(@Param("tartozkodasihelyID") Long tartozkodasihelyID);
 
     @Transactional
     @Modifying
-    @Query (value = "{call TartozkodasihelyModosit(:tartozkodasihelyID,:iranyitoszam, :varos, :kozterulet_neve, :kozterulet_jellege, :haz_szam)}",nativeQuery = true)
+    @Query(value = "{call TartozkodasihelyModosit(:tartozkodasihelyID,:iranyitoszam, :varos, :kozterulet_neve, :kozterulet_jellege, :haz_szam)}", nativeQuery = true)
     void TartozkodasihelyModosit(
             @Param("tartozkodasihelyID") Long tartozkodasihelyID,
             @Param("iranyitoszam") Integer iranyitoszam,

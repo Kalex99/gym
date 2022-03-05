@@ -4,6 +4,7 @@ import com.project.gym.model.Felhasznalo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -12,15 +13,24 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface FelhasznaloRep extends JpaRepository<Felhasznalo,Long>{
+public interface FelhasznaloRep extends JpaRepository<Felhasznalo, Long> {
 
-    @Query(value = "{call FelhasznaloOlvas()}", nativeQuery = true)
-    List<Felhasznalo> FelhasznaloOlvas();
+    @Query(value = "{call FelhasznaloOlvasas()}", nativeQuery = true)
+    List<Felhasznalo> FelhasznaloOlvasas();
+
+    @Procedure(name = "BejelentkezesRendeles")
+    String BejelentkezesRendeles(@Param("felhasznaloID") Long felhasznaloID);
+
+    @Procedure(name = "BejelentkezesSzemelyiEdzo")
+    String BejelentkezesSzemelyiEdzo(@Param("felhasznaloID") Long felhasznaloID);
+
+    @Procedure(name = "BejelentkezesTartozkodasihely")
+    String BejelentkezesTartozkodasihely(@Param("felhasznaloID") Long felhasznaloID);
 
 
     @Transactional
     @Modifying
-    @Query (value = "{call FelhasznaloLetrehoz(:felhasznalonev, :jelszo, :felh_vezeteknev, :felh_keresztnev, :felh_email, :szuletesi_datum, :felh_telefon, :tartozkodasihelyID)}", nativeQuery = true)
+    @Query(value = "{call FelhasznaloLetrehoz(:felhasznalonev, :jelszo, :felh_vezeteknev, :felh_keresztnev, :felh_email, :szuletesi_datum, :felh_telefon, :tartozkodasihelyID)}", nativeQuery = true)
     void FelhasznaloLetrehoz(
             @Param("felhasznalonev") String felhasznalonev,
             @Param("jelszo") String jelszo,
@@ -32,14 +42,15 @@ public interface FelhasznaloRep extends JpaRepository<Felhasznalo,Long>{
             @Param("tartozkodasihelyID") Long tartozkodasihelyID
     );
 
+
     @Transactional
     @Modifying
-    @Query (value = "{call FelhasznaloTorles(:felhasznaloID)}",nativeQuery = true)
+    @Query(value = "{call FelhasznaloTorles(:felhasznaloID)}", nativeQuery = true)
     void FelhasznaloTorles(@Param("felhasznaloID") Long felhasznaloID);
 
     @Transactional
     @Modifying
-    @Query (value = "{call FelhasznaloModosit(:felhasznaloID,:felhasznalonev, :jelszo, :felh_vezeteknev, :felh_keresztnev, :felh_email, :felh_telefon, :tartozkodasihelyID)}",nativeQuery = true)
+    @Query(value = "{call FelhasznaloModosit(:felhasznaloID,:felhasznalonev, :jelszo, :felh_vezeteknev, :felh_keresztnev, :felh_email, :felh_telefon, :tartozkodasihelyID)}", nativeQuery = true)
     void FelhasznaloModosit(
             @Param("felhasznaloID") Long felhasznaloID,
             @Param("felhasznalonev") String felhasznalonev,
@@ -50,40 +61,4 @@ public interface FelhasznaloRep extends JpaRepository<Felhasznalo,Long>{
             @Param("felh_telefon") String felh_telefon,
             @Param("tartozkodasihelyID") Long tartozkodasihelyID
     );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    void deleteFelhasznaloByID(Long id);
-//
-//    Optional<Felhasznalo> findFelhasznaloByID(Long id);
-
-
 }

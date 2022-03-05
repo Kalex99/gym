@@ -7,10 +7,51 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Rendeles")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(name = "RendelesOlvasas", procedureName = "RendelesOlvasas",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "rendelesID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "rendeles_idopont", type = Date.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "megjegyzes", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termekID", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_vasarlasID", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznaloID", type = Integer.class)
+                }),
+        @NamedStoredProcedureQuery(name = "RendelesOlvasasBerlet", procedureName = "RendelesOlvasasBerlet",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "rendelesID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_vasarlasID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_tipus", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_ar", type = Long.class)
+                }),
+        @NamedStoredProcedureQuery(name = "RendelesOlvasasFelhasznalo", procedureName = "RendelesOlvasasFelhasznalo",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "rendelesID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznaloID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_vezeteknev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_keresztnev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_email", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_telefon", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class)
+                }),
+        @NamedStoredProcedureQuery(name = "RendelesOlvasasTermek", procedureName = "RendelesOlvasasTermek",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "rendelesID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termekID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termek_nev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kategoria", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ar", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kep", type = byte[].class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "leiras", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "cegID", type = Long.class),
+                })
+
+})
+
 public class Rendeles implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="rendelesID",nullable = false, updatable = false)
+    @Column(name = "rendelesID", nullable = false, updatable = false)
     private Long rendelesID;
 
     @Column
@@ -19,13 +60,13 @@ public class Rendeles implements Serializable {
     @Column
     private String megjegyzes;
 
-    @Column(name = "termekID", insertable=false, updatable =false)
+    @Column(name = "termekID", insertable = false, updatable = false)
     private Long termekID;
 
-    @Column(name = "berlet_vasarlasID", insertable=false, updatable =false)
+    @Column(name = "berlet_vasarlasID", insertable = false, updatable = false)
     private Long berlet_vasarlasID;
 
-    @Column(name = "felhasznaloID", insertable=false, updatable =false)
+    @Column(name = "felhasznaloID", insertable = false, updatable = false)
     private Long felhasznaloID;
 
 

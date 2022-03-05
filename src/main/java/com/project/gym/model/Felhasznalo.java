@@ -10,10 +10,41 @@ import java.util.Date;
 
 @Entity
 @Table(name = "felhasznalo")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(name = "BejelentkezesRendeles", procedureName = "BejelentkezesRendeles",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "felhasznaloID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "rendelesID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "rendeles_idopont", type = Date.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "megjegyzes", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termekID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_vasarlasID", type = Long.class)
+                }),
+        @NamedStoredProcedureQuery(name = "BejelentkezesSzemelyiEdzo", procedureName = "BejelentkezesSzemelyiEdzo",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "felhasznaloID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemelyi_edzoID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_vezeteknev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_keresztnev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "portre", type = byte[].class)
+                }),
+        @NamedStoredProcedureQuery(name = "BejelentkezesTartozkodasihely", procedureName = "BejelentkezesTartozkodasihely",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "felhasznaloID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "iranyitoszam", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "varos", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_neve", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_jellege", type = byte[].class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "haz_szam", type = String.class)
+                })
+
+})
+
 public class Felhasznalo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="felhasznaloID",nullable = false, updatable = false)
+    @Column(name = "felhasznaloID", nullable = false, updatable = false)
     private Long felhasznaloID;
     @Column
     private String felhasznalonev;
@@ -30,13 +61,12 @@ public class Felhasznalo implements Serializable {
     @Column
     private String felh_telefon;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "tartozkodasihelyID",referencedColumnName = "tartozkodasihelyID")
-//    private Tartozkodasihely tartozkodasihely;
-    @Column (name = "tartozkodasihelyID", insertable=false, updatable =false)
+    @Column(name = "tartozkodasihelyID", insertable = false, updatable = false)
     private Long tartozkodasihelyID;
 
-    public Felhasznalo(){}
+    public Felhasznalo() {
+    }
+
     @Autowired
     public Felhasznalo(Long felhasznaloID, String felhasznalonev, String jelszo, String felh_vezeteknev, String felh_keresztnev, Date szuletesi_datum, String felh_email, String felh_telefon, Long tartozkodasihelyID) {
         this.felhasznaloID = felhasznaloID;
@@ -47,7 +77,7 @@ public class Felhasznalo implements Serializable {
         this.szuletesi_datum = szuletesi_datum;
         this.felh_email = felh_email;
         this.felh_telefon = felh_telefon;
-        this.tartozkodasihelyID=tartozkodasihelyID;
+        this.tartozkodasihelyID = tartozkodasihelyID;
     }
 
 
@@ -115,11 +145,12 @@ public class Felhasznalo implements Serializable {
         this.felh_telefon = felh_telefon;
     }
 
-    public Long getTartozkodasihelyID(){
+    public Long getTartozkodasihelyID() {
         return tartozkodasihelyID;
     }
-    public void setTartozkodasihelyID(Long tartozkodasihelyID){
-        this.tartozkodasihelyID=tartozkodasihelyID;
+
+    public void setTartozkodasihelyID(Long tartozkodasihelyID) {
+        this.tartozkodasihelyID = tartozkodasihelyID;
     }
 
     @Override
@@ -133,7 +164,7 @@ public class Felhasznalo implements Serializable {
                 ", szuletesi_datum=" + szuletesi_datum +
                 ", felh_email='" + felh_email + '\'' +
                 ", felh_telefon='" + felh_telefon + '\'' +
-                ", tartozkodasihelyID='" + tartozkodasihelyID + '\''+
+                ", tartozkodasihelyID='" + tartozkodasihelyID + '\'' +
                 '}';
     }
 

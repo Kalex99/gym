@@ -5,6 +5,12 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "berlet_vasarlas")
+@NamedStoredProcedureQuery(name = "Berlet_vasarlasOlvasas", procedureName = "Berlet_vasarlasOlvasas",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "berlet_vasarlasID", type = Long.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_tipus", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_ar", type = Integer.class),
+        })
 public class Berlet_vasarlas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +24,9 @@ public class Berlet_vasarlas implements Serializable {
     private Integer berlet_ar;
 
 
-    public Berlet_vasarlas(){}
+    public Berlet_vasarlas() {
+    }
+
     public Berlet_vasarlas(Long berlet_vasarlasID, String berlet_tipus, Integer berlet_ar) {
         this.berlet_vasarlasID = berlet_vasarlasID;
         this.berlet_tipus = berlet_tipus;

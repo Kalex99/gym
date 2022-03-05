@@ -14,7 +14,8 @@ import java.util.Objects;
                 @StoredProcedureParameter(mode = ParameterMode.OUT, name = "iranyitoszam", type = Integer.class),
                 @StoredProcedureParameter(mode = ParameterMode.OUT, name = "varos", type = String.class),
                 @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_neve", type = String.class),
-                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_jellege", type = String.class)
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_jellege", type = String.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "haz_szam", type = String.class)
         })
 public class Tartozkodasihely implements Serializable {
     @Id
@@ -32,10 +33,9 @@ public class Tartozkodasihely implements Serializable {
     @Column
     private Integer haz_szam;
 
-    //@OneToOne (mappedBy = "Tartozkodasihely",cascade = CascadeType.ALL)
-    //private Felhasznalo felhasznalo;
+    public Tartozkodasihely() {
+    }
 
-    public Tartozkodasihely(){}
     @Autowired
     public Tartozkodasihely(Long tartozkodasihelyID, int iranyitoszam, String varos, String kozterulet_neve, String kozterulet_jellege, int haz_szam) {
         this.tartozkodasihelyID = tartozkodasihelyID;
@@ -43,7 +43,7 @@ public class Tartozkodasihely implements Serializable {
         this.varos = varos;
         this.kozterulet_neve = kozterulet_neve;
         this.kozterulet_jellege = kozterulet_jellege;
-        this.haz_szam=haz_szam;
+        this.haz_szam = haz_szam;
     }
 
     public Long getTartozkodasihelyID() {
@@ -102,7 +102,7 @@ public class Tartozkodasihely implements Serializable {
                 ", Varos='" + varos + '\'' +
                 ", Kozterulet_neve='" + kozterulet_neve + '\'' +
                 ", Kozterulet_jellege='" + kozterulet_jellege + '\'' +
-                ", Haz_szam='" + haz_szam + '\''+
+                ", Haz_szam='" + haz_szam + '\'' +
                 '}';
     }
 }
