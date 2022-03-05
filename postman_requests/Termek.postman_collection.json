@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "7ddc9f4a-3dab-482b-8d36-9d52d7042cb3",
+		"name": "Termek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TermekOlvasas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/termek/termekOlvasas/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"termek",
+						"termekOlvasas",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TemekOlvasasCeg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/termek/termekOlvasasCeg/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"termek",
+						"termekOlvasasCeg",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TermekLetrehoz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"termek_nev\":\"Amogus\",\r\n    \"kategoria\":\"körte\",\r\n    \"ar\":\"69123\",\r\n    \"kep\":[47,45],\r\n    \"keszlet\":10,\r\n    \"leiras\":\"impostor\",\r\n    \"cegID\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/termek/termekLetrehoz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"termek",
+						"termekLetrehoz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TermekModosit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"termekID\":47,\r\n    \"termek_nev\":\"Amogus\",\r\n    \"kategoria\":\"körte\",\r\n    \"ar\":\"69123\",\r\n    \"kep\":[47,45],\r\n    \"keszlet\":10,\r\n    \"kaphato\":true,\r\n    \"leiras\":\"impostor\",\r\n    \"cegID\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/termek/termekModosit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"termek",
+						"termekModosit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TermekTorles",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/termek/termekTorles/53",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"termek",
+						"termekTorles",
+						"53"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

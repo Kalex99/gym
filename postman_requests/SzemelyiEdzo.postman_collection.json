@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "21116b20-b80d-4108-87a8-a78446a1492a",
+		"name": "SzemelyiEdzo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SzemelyiEdzoOlvasas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoOlvasas/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"szemelyiEdzo",
+						"szemelyiEdzoOlvasas",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SzemelyiEdzoOlvasasFelhasznalo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoOlvasasFelhasznalo/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"szemelyiEdzo",
+						"szemelyiEdzoOlvasasFelhasznalo",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SzemelyiEdzoOlvasasTartozkodasihely",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoOlvasasTartozkodasihely/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"szemelyiEdzo",
+						"szemelyiEdzoOlvasasTartozkodasihely",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SzemelyiEdzoLetrehoz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"szemedz_vezeteknev\":\"Arnold\",\r\n    \"szemedz_keresztnev\":\"Schwarzenegger\",\r\n    \"portre\":[55,56,78],\r\n    \"szemedz_email\":\"radnoti1@radnoti.com\",\r\n    \"szemedz_telefon\":\"06209806272\",\r\n    \"tartozkodasihelyID\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoLetrehoz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"szemelyiEdzo",
+						"szemelyiEdzoLetrehoz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SzemelyiEdzoTorles",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoTorles/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"szemelyiEdzo",
+						"szemelyiEdzoTorles",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SzemelyiEdzoModosit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"szemelyi_edzoID\":8,\r\n    \"szemedz_vezeteknev\":\"John\",\r\n    \"szemedz_keresztnev\":\"Cena\",\r\n    \"portre\":[55,56,78],\r\n    \"szemedz_email\":\"simonyi@radnoti.com\",\r\n    \"szemedz_telefon\":\"06209806272\",\r\n    \"tartozkodasihelyID\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoModosit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"szemelyiEdzo",
+						"szemelyiEdzoModosit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

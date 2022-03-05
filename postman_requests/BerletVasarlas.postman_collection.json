@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "c14b8e6f-2f26-43e3-9523-2d7ab5f202a0",
+		"name": "BerletVasarlas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BerletVasarlasOlvasas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/berletVasarlas/berletVasarlasOlvas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"berletVasarlas",
+						"berletVasarlasOlvas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BerletLetrehoz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"berlet_tipus\":\"Amogus\",\r\n    \"berlet_ar\":420\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/berletVasarlas/berletLetrehoz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"berletVasarlas",
+						"berletLetrehoz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BerletVasarlasTorles",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/berletVasarlas/berletTorles/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"berletVasarlas",
+						"berletTorles",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BerletVasarlasModosit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"berlet_vasarlasID\":2,\r\n    \"berlet_tipus\":\"Amogus\",\r\n    \"berlet_ar\":420\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/berletVasarlas/berletModosit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"berletVasarlas",
+						"berletModosit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

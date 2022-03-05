@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "b357078f-b1ae-4e07-b808-d9a2fb7b610e",
+		"name": "Ceg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CegOlvasas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ceg/cegOlvasas/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ceg",
+						"cegOlvasas",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CegOlvasasTartozkodasihely",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ceg/cegOlvasasTartozkodasihely/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ceg",
+						"cegOlvasasTartozkodasihely",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CegLetrehoz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ceg_nev\":\"Amogus\",\r\n    \"ceg_email\":\"alexkovacsfi@gmail.com\",\r\n    \"ceg_telefon\":\"+36205879168\",\r\n    \"tartozkodasihelyID\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ceg/cegLetrehoz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ceg",
+						"cegLetrehoz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CegTorles",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ceg/cegTorles/13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ceg",
+						"cegTorles",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CegModosit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cegID\":13,\r\n    \"ceg_nev\":\"Amogus\",\r\n    \"ceg_email\":\"alexkovacsfi@gmail.com\",\r\n    \"ceg_telefon\":\"+36205879168\",\r\n    \"tartozkodasihelyID\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ceg/cegModosit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ceg",
+						"cegModosit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
