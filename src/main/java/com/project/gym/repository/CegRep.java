@@ -6,10 +6,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
-public interface CegRep extends JpaRepository<Ceg,Long> {
+@Repository
+public interface CegRep extends JpaRepository<Ceg, Long> {
+
     @Procedure(name = "CegOlvasas")
     String CegOlvasas(@Param("cegID") Long cegID);
 

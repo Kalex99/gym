@@ -1,15 +1,16 @@
 package com.project.gym.repository;
 
 import com.project.gym.model.Berlet_vasarlas;
-import com.project.gym.model.Felhasznalo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
+@Repository
 public interface Berlet_vasarlasRep extends JpaRepository<Berlet_vasarlas, Long> {
 
     @Procedure(name = "Berlet_vasarlasOlvasas")

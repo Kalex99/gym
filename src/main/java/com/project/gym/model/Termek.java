@@ -3,7 +3,6 @@ package com.project.gym.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.Arrays;
 
 @Entity

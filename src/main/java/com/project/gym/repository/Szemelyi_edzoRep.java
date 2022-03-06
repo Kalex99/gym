@@ -6,10 +6,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
+@Repository
 public interface Szemelyi_edzoRep extends JpaRepository<Szemelyi_edzo, Long> {
+
     @Procedure(name = "Szemelyi_edzoOlvasas")
     String Szemelyi_edzoOlvasas(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
 

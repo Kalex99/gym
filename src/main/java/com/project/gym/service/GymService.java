@@ -1,6 +1,6 @@
 package com.project.gym.service;
 
-import com.project.gym.exception.FelhasznaloNemTalalhatoException;
+import com.project.gym.exception.BadRequestE.ApiBadRequestException;
 import com.project.gym.model.*;
 import com.project.gym.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +31,25 @@ public class GymService {
     }
 
     public void FelhasznaloLetrehoz(Felhasznalo felhasznalo) {
-        felhasznaloRep.FelhasznaloLetrehoz(felhasznalo.getFelhasznalonev(),
-                felhasznalo.getJelszo(),
-                felhasznalo.getFelh_vezeteknev(),
-                felhasznalo.getFelh_keresztnev(),
-                felhasznalo.getFelh_email(),
-                felhasznalo.getSzuletesi_datum(),
-                felhasznalo.getFelh_telefon(),
-                felhasznalo.getTartozkodasihelyID());
+        if (isNull(felhasznalo.getFelhasznalonev())
+                && isNull(felhasznalo.getJelszo())
+                && isNull(felhasznalo.getFelh_vezeteknev())
+                && isNull(felhasznalo.getFelh_keresztnev())
+                && isNull(felhasznalo.getFelh_email())
+                && isNull(felhasznalo.getSzuletesi_datum())
+                && isNull(felhasznalo.getFelh_telefon())) {
+            felhasznaloRep.FelhasznaloLetrehoz(
+                    felhasznalo.getFelhasznalonev(),
+                    felhasznalo.getJelszo(),
+                    felhasznalo.getFelh_vezeteknev(),
+                    felhasznalo.getFelh_keresztnev(),
+                    felhasznalo.getFelh_email(),
+                    felhasznalo.getSzuletesi_datum(),
+                    felhasznalo.getFelh_telefon(),
+                    felhasznalo.getTartozkodasihelyID());
+        } else {
+            throw new ApiBadRequestException("Nem tartalmazhat null-t!");
+        }
     }
 
     public void FelhasznaloTorles(Long felhasznaloID) {
@@ -46,14 +57,24 @@ public class GymService {
     }
 
     public void FelhasznaloModosit(Felhasznalo felhasznalo) {
-        felhasznaloRep.FelhasznaloModosit(felhasznalo.getFelhasznaloID(),
-                felhasznalo.getFelhasznalonev(),
-                felhasznalo.getJelszo(),
-                felhasznalo.getFelh_vezeteknev(),
-                felhasznalo.getFelh_keresztnev(),
-                felhasznalo.getFelh_email(),
-                felhasznalo.getFelh_telefon(),
-                felhasznalo.getTartozkodasihelyID());
+        if (isNull(felhasznalo.getFelhasznalonev())
+                && isNull(felhasznalo.getJelszo())
+                && isNull(felhasznalo.getFelh_vezeteknev())
+                && isNull(felhasznalo.getFelh_keresztnev())
+                && isNull(felhasznalo.getFelh_email())
+                && isNull(felhasznalo.getSzuletesi_datum())
+                && isNull(felhasznalo.getFelh_telefon())) {
+            felhasznaloRep.FelhasznaloModosit(felhasznalo.getFelhasznaloID(),
+                    felhasznalo.getFelhasznalonev(),
+                    felhasznalo.getJelszo(),
+                    felhasznalo.getFelh_vezeteknev(),
+                    felhasznalo.getFelh_keresztnev(),
+                    felhasznalo.getFelh_email(),
+                    felhasznalo.getFelh_telefon(),
+                    felhasznalo.getTartozkodasihelyID());
+        } else {
+            throw new ApiBadRequestException("Felhasználó módosításnál nem lehet null érték megadva!");
+        }
     }
 
     @Autowired
@@ -64,11 +85,20 @@ public class GymService {
     }
 
     public void TartozkodasihelyLetrehoz(Tartozkodasihely tartozkodasihely) {
-        tartozkodasihelyRep.TartozkodasihelyLetrehoz(tartozkodasihely.getIranyitoszam(),
-                tartozkodasihely.getVaros(),
-                tartozkodasihely.getKozterulet_neve(),
-                tartozkodasihely.getKozterulet_jellege(),
-                tartozkodasihely.getHaz_szam());
+        if (isNull(tartozkodasihely.getIranyitoszam())
+                && isNull(tartozkodasihely.getVaros())
+                && isNull(tartozkodasihely.getKozterulet_neve())
+                && isNull(tartozkodasihely.getKozterulet_jellege())
+                && isNull(tartozkodasihely.getHaz_szam())) {
+            tartozkodasihelyRep.TartozkodasihelyLetrehoz(
+                    tartozkodasihely.getIranyitoszam(),
+                    tartozkodasihely.getVaros(),
+                    tartozkodasihely.getKozterulet_neve(),
+                    tartozkodasihely.getKozterulet_jellege(),
+                    tartozkodasihely.getHaz_szam());
+        } else {
+            throw new ApiBadRequestException("Nem lehet üresen semmelyik bemenő érték!");
+        }
     }
 
     public void TartozkodasihelyTorles(Long tartozkodasihelyID) {
@@ -76,12 +106,21 @@ public class GymService {
     }
 
     public void TartozkodasihelyModosit(Tartozkodasihely tartozkodasihely) {
-        tartozkodasihelyRep.TartozkodasihelyModosit(tartozkodasihely.getTartozkodasihelyID(),
-                tartozkodasihely.getIranyitoszam(),
-                tartozkodasihely.getVaros(),
-                tartozkodasihely.getKozterulet_neve(),
-                tartozkodasihely.getKozterulet_jellege(),
-                tartozkodasihely.getHaz_szam());
+        if (isNull(tartozkodasihely.getIranyitoszam())
+                && isNull(tartozkodasihely.getVaros())
+                && isNull(tartozkodasihely.getKozterulet_neve())
+                && isNull(tartozkodasihely.getKozterulet_jellege())
+                && isNull(tartozkodasihely.getHaz_szam())) {
+            tartozkodasihelyRep.TartozkodasihelyModosit(
+                    tartozkodasihely.getTartozkodasihelyID(),
+                    tartozkodasihely.getIranyitoszam(),
+                    tartozkodasihely.getVaros(),
+                    tartozkodasihely.getKozterulet_neve(),
+                    tartozkodasihely.getKozterulet_jellege(),
+                    tartozkodasihely.getHaz_szam());
+        } else {
+            throw new ApiBadRequestException("Nem maradhat üresen semmi a tartozkodási hely módosításnál!");
+        }
     }
 
     @Autowired
@@ -92,9 +131,14 @@ public class GymService {
     }
 
     public void Berlet_vasarlasLetrehoz(Berlet_vasarlas berlet_vasarlas) {
-        berlet_vasarlasRep.Berlet_vasarlasLetrehoz(
-                berlet_vasarlas.getBerlet_tipus(),
-                berlet_vasarlas.getBerlet_ar());
+        if (isNull(berlet_vasarlas.getBerlet_tipus())
+                && isNull(berlet_vasarlas.getBerlet_ar())) {
+            berlet_vasarlasRep.Berlet_vasarlasLetrehoz(
+                    berlet_vasarlas.getBerlet_tipus(),
+                    berlet_vasarlas.getBerlet_ar());
+        } else {
+            throw new ApiBadRequestException("Valahol nem lett érték megadva!");
+        }
     }
 
     public void Berlet_vasarlasTorles(Long berlet_vasarlasID) {
@@ -102,10 +146,15 @@ public class GymService {
     }
 
     public void Berlet_vasarlasModosit(Berlet_vasarlas berlet_vasarlas) {
-        berlet_vasarlasRep.Berlet_vasarlasModosit(
-                berlet_vasarlas.getBerlet_vasarlasID(),
-                berlet_vasarlas.getBerlet_tipus(),
-                berlet_vasarlas.getBerlet_ar());
+        if (isNull(berlet_vasarlas.getBerlet_tipus())
+                && isNull(berlet_vasarlas.getBerlet_ar())) {
+            berlet_vasarlasRep.Berlet_vasarlasModosit(
+                    berlet_vasarlas.getBerlet_vasarlasID(),
+                    berlet_vasarlas.getBerlet_tipus(),
+                    berlet_vasarlas.getBerlet_ar());
+        } else {
+            throw new ApiBadRequestException("Null érték fellelhető valamely résznél!");
+        }
     }
 
     @Autowired
@@ -117,7 +166,6 @@ public class GymService {
 
     public String RendelesOlvasasBerlet(Long rendelesID) {
         return rendelesRep.RendelesOlvasasBerlet(rendelesID);
-
     }
 
     public String RendelesOlvasasFelhasznalo(Long rendelesID) {
@@ -133,8 +181,7 @@ public class GymService {
                 rendeles.getMegjegyzes(),
                 rendeles.getTermekID(),
                 rendeles.getBerlet_vasarlasID(),
-                rendeles.getFelhasznaloID()
-        );
+                rendeles.getFelhasznaloID());
     }
 
     public void RendelesTorles(Long rendelesID) {
@@ -153,11 +200,17 @@ public class GymService {
     }
 
     public void CegLetrehoz(Ceg ceg) {
-        cegRep.CegLetrehoz(
-                ceg.getCeg_nev(),
-                ceg.getCeg_email(),
-                ceg.getCeg_telefon(),
-                ceg.getTartozkodasihelyID());
+        if (isNull(ceg.getCeg_nev())
+                && isNull(ceg.getCeg_email())
+                && isNull(ceg.getCeg_telefon())) {
+            cegRep.CegLetrehoz(
+                    ceg.getCeg_nev(),
+                    ceg.getCeg_email(),
+                    ceg.getCeg_telefon(),
+                    ceg.getTartozkodasihelyID());
+        } else {
+            throw new ApiBadRequestException("Null érték található a létrehozásnál!");
+        }
     }
 
     public void CegTorles(Long cegID) {
@@ -165,12 +218,18 @@ public class GymService {
     }
 
     public void CegModosit(Ceg ceg) {
-        cegRep.CegModosit(
-                ceg.getCegID(),
-                ceg.getCeg_nev(),
-                ceg.getCeg_email(),
-                ceg.getCeg_telefon(),
-                ceg.getTartozkodasihelyID());
+        if (isNull(ceg.getCeg_nev())
+                && isNull(ceg.getCeg_email())
+                && isNull(ceg.getCeg_telefon())) {
+            cegRep.CegModosit(
+                    ceg.getCegID(),
+                    ceg.getCeg_nev(),
+                    ceg.getCeg_email(),
+                    ceg.getCeg_telefon(),
+                    ceg.getTartozkodasihelyID());
+        } else {
+            throw new ApiBadRequestException("Valamely értek üres adatot kapott!");
+        }
     }
 
     @Autowired
@@ -185,14 +244,24 @@ public class GymService {
     }
 
     public void TermekLetrehoz(Termek termek) {
-        termekRep.TermekLetrehoz(
-                termek.getTermek_nev(),
-                termek.getKategoria(),
-                termek.getAr(),
-                termek.getKep(),
-                termek.getKeszlet(),
-                termek.getLeiras(),
-                termek.getCegID());
+        if (isNull(termek.getTermek_nev())
+                && isNull(termek.getKategoria())
+                && isNull(termek.getAr())
+                && isNull(termek.getKep())
+                && isNull(termek.getKeszlet())
+                && isNull(termek.getKaphato())
+                && isNull(termek.getLeiras())) {
+            termekRep.TermekLetrehoz(
+                    termek.getTermek_nev(),
+                    termek.getKategoria(),
+                    termek.getAr(),
+                    termek.getKep(),
+                    termek.getKeszlet(),
+                    termek.getLeiras(),
+                    termek.getCegID());
+        } else {
+            throw new ApiBadRequestException("Nem lehet null érték semmelyik érték megadásnál!");
+        }
     }
 
     public void TermekTorles(Long termekID) {
@@ -200,16 +269,26 @@ public class GymService {
     }
 
     public void TermekModosit(Termek termek) {
-        termekRep.TermekModosit(
-                termek.getTermekID(),
-                termek.getTermek_nev(),
-                termek.getKategoria(),
-                termek.getAr(),
-                termek.getKep(),
-                termek.getKeszlet(),
-                termek.getKaphato(),
-                termek.getLeiras(),
-                termek.getCegID());
+        if (isNull(termek.getTermek_nev())
+                && isNull(termek.getKategoria())
+                && isNull(termek.getAr())
+                && isNull(termek.getKep())
+                && isNull(termek.getKeszlet())
+                && isNull(termek.getKaphato())
+                && isNull(termek.getLeiras())) {
+            termekRep.TermekModosit(
+                    termek.getTermekID(),
+                    termek.getTermek_nev(),
+                    termek.getKategoria(),
+                    termek.getAr(),
+                    termek.getKep(),
+                    termek.getKeszlet(),
+                    termek.getKaphato(),
+                    termek.getLeiras(),
+                    termek.getCegID());
+        } else {
+            throw new ApiBadRequestException("Néhány érték null értéket kapott!");
+        }
     }
 
     @Autowired
@@ -229,13 +308,22 @@ public class GymService {
 
 
     public void Szemelyi_edzoLetrehoz(Szemelyi_edzo szemelyiEdzo) {
-        szemelyi_edzoRep.Szemelyi_edzoLetrehoz(
-                szemelyiEdzo.getSzemedz_vezeteknev(),
-                szemelyiEdzo.getSzemedz_keresztnev(),
-                szemelyiEdzo.getPortre(),
-                szemelyiEdzo.getSzemedz_email(),
-                szemelyiEdzo.getSzemedz_telefon(),
-                szemelyiEdzo.getTartozkodasihelyID());
+        if (isNull(szemelyiEdzo.getSzemedz_vezeteknev())
+                && isNull(szemelyiEdzo.getSzemedz_keresztnev())
+                && isNull(szemelyiEdzo.getPortre())
+                && isNull(szemelyiEdzo.getSzemedz_email())
+                && isNull(szemelyiEdzo.getSzemedz_telefon())) {
+            szemelyi_edzoRep.Szemelyi_edzoLetrehoz(
+                    szemelyiEdzo.getSzemedz_vezeteknev(),
+                    szemelyiEdzo.getSzemedz_keresztnev(),
+                    szemelyiEdzo.getPortre(),
+                    szemelyiEdzo.getSzemedz_email(),
+                    szemelyiEdzo.getSzemedz_telefon(),
+                    szemelyiEdzo.getTartozkodasihelyID());
+        } else {
+            throw new ApiBadRequestException("Egy vagy több érték üresen a személyi edző létrehozásnál maradt!");
+        }
+
     }
 
     public void Szemelyi_edzoTorles(Long szemelyi_edzoID) {
@@ -243,16 +331,32 @@ public class GymService {
     }
 
     public void Szemelyi_edzoModosit(Szemelyi_edzo szemelyiEdzo) {
-        szemelyi_edzoRep.Szemelyi_edzoModosit(
-                szemelyiEdzo.getSzemelyi_edzoID(),
-                szemelyiEdzo.getSzemedz_vezeteknev(),
-                szemelyiEdzo.getSzemedz_keresztnev(),
-                szemelyiEdzo.getPortre(),
-                szemelyiEdzo.getSzemedz_email(),
-                szemelyiEdzo.getSzemedz_telefon(),
-                szemelyiEdzo.getTartozkodasihelyID());
+        if (isNull(szemelyiEdzo.getSzemedz_vezeteknev())
+                && isNull(szemelyiEdzo.getSzemedz_keresztnev())
+                && isNull(szemelyiEdzo.getPortre())
+                && isNull(szemelyiEdzo.getSzemedz_email())
+                && isNull(szemelyiEdzo.getSzemedz_telefon())) {
+            szemelyi_edzoRep.Szemelyi_edzoModosit(
+                    szemelyiEdzo.getSzemelyi_edzoID(),
+                    szemelyiEdzo.getSzemedz_vezeteknev(),
+                    szemelyiEdzo.getSzemedz_keresztnev(),
+                    szemelyiEdzo.getPortre(),
+                    szemelyiEdzo.getSzemedz_email(),
+                    szemelyiEdzo.getSzemedz_telefon(),
+                    szemelyiEdzo.getTartozkodasihelyID());
+        } else {
+            throw new ApiBadRequestException("Módosításnál minden érték legyen kitöltve!");
+        }
     }
 
 /*    @Autowired
     private FelhasznaloSzemelyiEdzoRep felhasznaloSzemelyiEdzoRep;*/
+
+    public static boolean isNull(Object obj) {
+        if (obj != null && !"".equals(obj)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
