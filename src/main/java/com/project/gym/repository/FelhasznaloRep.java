@@ -18,8 +18,12 @@ public interface FelhasznaloRep extends JpaRepository<Felhasznalo, Long> {
     @Query(value = "{call FelhasznaloOlvasas()}", nativeQuery = true)
     List<Felhasznalo> FelhasznaloOlvasas();
 
+
     @Procedure(name = "BejelentkezesRendeles")
     String BejelentkezesRendeles(@Param("felhasznaloID") Long felhasznaloID);
+
+    @Procedure(name = "FelhasznaloOlvasasID")
+    String FelhasznaloOlvasasID(@Param("felhasznaloID") Long felhasznaloID);
 
     @Procedure(name = "BejelentkezesSzemelyiEdzo")
     String BejelentkezesSzemelyiEdzo(@Param("felhasznaloID") Long felhasznaloID);

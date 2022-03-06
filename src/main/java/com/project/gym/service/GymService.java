@@ -25,6 +25,9 @@ public class GymService {
     public String BejelentkezesSzemelyiEdzo(Long felhasznaloID) {
         return felhasznaloRep.BejelentkezesSzemelyiEdzo(felhasznaloID);
     }
+    public String FelhasznaloOlvasasID(Long felhasznaloID) {
+        return felhasznaloRep.FelhasznaloOlvasasID(felhasznaloID);
+    }
 
     public String BejelentkezesTartozkodasihely(Long felhasznaloID) {
         return felhasznaloRep.BejelentkezesTartozkodasihely(felhasznaloID);
@@ -353,10 +356,6 @@ public class GymService {
     private FelhasznaloSzemelyiEdzoRep felhasznaloSzemelyiEdzoRep;*/
 
     public static boolean isNull(Object obj) {
-        if (obj != null && !"".equals(obj)) {
-            return true;
-        } else {
-            return false;
-        }
+        return obj != null && !"".equals(obj);
     }
 }

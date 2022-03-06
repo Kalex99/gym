@@ -20,6 +20,18 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termekID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_vasarlasID", type = Long.class)
                 }),
+        @NamedStoredProcedureQuery(name = "FelhasznaloOlvasasID", procedureName = "FelhasznaloOlvasasID",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "felhasznaloID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznalonev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "jelszo", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_vezeteknev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_keresztnev", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szuletesi_datum", type = Date.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_email", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_telefon", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class)
+                }),
         @NamedStoredProcedureQuery(name = "BejelentkezesSzemelyiEdzo", procedureName = "BejelentkezesSzemelyiEdzo",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "felhasznaloID", type = Long.class),

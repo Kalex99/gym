@@ -18,6 +18,11 @@ public class GymController {
     @Autowired
     private GymService gymService;
 
+
+//    @GetMapping(path = "felhasznaloID")
+//    public Felhasznalo getFelhasznalo(@PathVariable("felhasznaloID") Long felhasznaloID){
+//        return Felhasznalo.steam
+//    }
     @GetMapping("felhasznalo/felhOlvas")
     public ResponseEntity<List<Felhasznalo>> FelhasznaloOlvasas() {
         List<Felhasznalo> lista = gymService.FelhasznaloOlvasas();
@@ -29,6 +34,12 @@ public class GymController {
     @Transactional
     public ResponseEntity<?> BejelentkezesRendeles(@PathVariable("felhasznaloID") Long felhasznaloID) {
         String felhasznalo = gymService.BejelentkezesRendeles(felhasznaloID);
+        return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
+    }
+    @GetMapping("felhasznalo/FelhasznaloOlvasasID/{felhasznaloID}")
+    @Transactional
+    public ResponseEntity<?> FelhasznaloOlvasasID(@PathVariable("felhasznaloID") Long felhasznaloID) {
+        String felhasznalo = gymService.FelhasznaloOlvasasID(felhasznaloID);
         if (felhasznalo==null) throw new ApiNotFoundException("A felhasználó nem található!");
         return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
     }
