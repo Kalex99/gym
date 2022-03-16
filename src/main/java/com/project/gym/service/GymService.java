@@ -25,14 +25,14 @@ public class GymService {
     public Iterable<String> BejelentkezesSzemelyiEdzo(Long felhasznaloID) {
         return felhasznaloRep.BejelentkezesSzemelyiEdzo(felhasznaloID);
     }
-    public Iterable<String> FelhasznaloOlvasasByID(Long felhasznaloID) {
-        return felhasznaloRep.FelhasznaloOlvasasByID(felhasznaloID);
-    }
 
     public Iterable<String> BejelentkezesTartozkodasihely(Long felhasznaloID) {
         return felhasznaloRep.BejelentkezesTartozkodasihely(felhasznaloID);
     }
 
+    public Iterable<String> FelhasznaloOlvasasByID(Long felhasznaloID) {
+        return felhasznaloRep.FelhasznaloOlvasasByID(felhasznaloID);
+    }
     public void FelhasznaloLetrehoz(Felhasznalo felhasznalo) {
         if (isNull(felhasznalo.getFelhasznalonev())
                 && isNull(felhasznalo.getJelszo())

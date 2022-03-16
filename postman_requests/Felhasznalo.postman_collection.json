@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"felhasznalonev\":\"another\",\r\n    \"jelszo\":\"soigj489z9843h\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"another@anoth.com\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"tartozkodasihelyID\":28\r\n}",
+					"raw": "{\r\n    \"felhasznalonev\":\"alma\",\r\n    \"jelszo\":\"quia\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"anr@anoth.com\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"tartozkodasihelyID\":1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -60,7 +60,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/felhasznalo/felhTorles/43",
+					"raw": "http://localhost:8080/felhasznalo/felhTorles/0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,7 +69,7 @@
 					"path": [
 						"felhasznalo",
 						"felhTorles",
-						"43"
+						"0"
 					]
 				}
 			},
@@ -82,7 +82,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"felhasznaloID\": 79,\r\n    \"felhasznalonev\":\"igdk\",\r\n    \"jelszo\":\"soigj489z9843h\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"idkg@idk.com\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"tartozkodasihelyID\":1\r\n}\r\n",
+					"raw": "{\r\n    \"felhasznaloID\": 79,\r\n    \"felhasznalonev\":\"impostor\",\r\n    \"jelszo\":\"soigj489z9843h\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"ithub@idk.com\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"tartozkodasihelyID\":1\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -110,7 +110,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/felhasznalo/bejelentkezesRendeles/3",
+					"raw": "http://localhost:8080/felhasznalo/bejelentkezesRendeles/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -119,7 +119,7 @@
 					"path": [
 						"felhasznalo",
 						"bejelentkezesRendeles",
-						"3"
+						"1"
 					]
 				}
 			},
@@ -131,7 +131,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/felhasznalo/bejelentkezesSzemelyiEdzo/3",
+					"raw": "http://localhost:8080/felhasznalo/bejelentkezesSzemelyiEdzo/0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -140,7 +140,7 @@
 					"path": [
 						"felhasznalo",
 						"bejelentkezesSzemelyiEdzo",
-						"3"
+						"0"
 					]
 				}
 			},
@@ -152,7 +152,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/felhasznalo/bejelentkezesTartozkodasihely/3",
+					"raw": "http://localhost:8080/felhasznalo/bejelentkezesTartozkodasihely/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -161,7 +161,43 @@
 					"path": [
 						"felhasznalo",
 						"bejelentkezesTartozkodasihely",
-						"3"
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FelhasznaloGetByID",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "486525f4-c604-4e02-8e78-bbb3d3cacec3",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/felhasznalo/felhasznaloOlvasasByID/16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"felhasznalo",
+						"felhasznaloOlvasasByID",
+						"16"
 					]
 				}
 			},

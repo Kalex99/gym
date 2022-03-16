@@ -49,6 +49,14 @@ public class GymController {
         return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
     }
 
+    @GetMapping("felhasznalo/felhasznaloOlvasasByID/{felhasznaloID}")
+    @Transactional
+    public ResponseEntity<?> FelhasznaloOlvasasByID(@PathVariable("felhasznaloID") Long felhasznaloID) {
+        Iterable<String> felhasznalo = gymService.FelhasznaloOlvasasByID(felhasznaloID);
+        isEmpty(felhasznalo);
+        return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
+    }
+
     @PostMapping("felhasznalo/felhLetrehoz")
     public ResponseEntity<?> FelhasznaloLetrehoz(@RequestBody Felhasznalo felhasznalo) {
         gymService.FelhasznaloLetrehoz(felhasznalo);
