@@ -65,6 +65,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloModosit` (IN `felhasznal
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvasas` ()  SELECT * FROM felhasznalo$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvasasByID`(IN `felhasznaloID` INT, OUT `felhasznalonev` VARCHAR(20), OUT `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `szuletesi_datum` DATE, OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11), OUT `tartozkodasihelyID` INT) 
+SELECT felhasznalo.Felhasznalonev, felhasznalo.Jelszo, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon, felhasznalo.TartozkodasihelyID FROM felhasznalo WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloszemelyiedzoOlvasas` ()  SELECT * FROM felhasznaloszemelyiedzo$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloTorles` (IN `felhasznaloID` INT)  BEGIN
