@@ -14,10 +14,10 @@ import javax.transaction.Transactional;
 public interface CegRep extends JpaRepository<Ceg, Long> {
 
     @Procedure(name = "CegOlvasas")
-    String CegOlvasas(@Param("cegID") Long cegID);
+    Iterable<String> CegOlvasas(@Param("cegID") Long cegID);
 
     @Procedure(name = "CegOlvasasTartozkodasihely")
-    String CegOlvasasTartozkodasihely(@Param("cegID") Long cegID);
+    Iterable<String> CegOlvasasTartozkodasihely(@Param("cegID") Long cegID);
 
 
     @Transactional

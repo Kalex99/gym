@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 public interface Berlet_vasarlasRep extends JpaRepository<Berlet_vasarlas, Long> {
 
     @Procedure(name = "Berlet_vasarlasOlvasas")
-    String Berlet_vasarlasOlvasas(@Param("berlet_vasarlasID") Long berlet_vasarlasID);
+    Iterable<String> Berlet_vasarlasOlvasas(@Param("berlet_vasarlasID") Long berlet_vasarlasID);
 
 
     @Transactional

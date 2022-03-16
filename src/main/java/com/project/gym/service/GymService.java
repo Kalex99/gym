@@ -14,19 +14,19 @@ public class GymService {
     @Autowired
     private FelhasznaloRep felhasznaloRep;
 
-    public List<Felhasznalo> FelhasznaloOlvasas() {
-        return felhasznaloRep.FelhasznaloOlvasas();
+    public List<Felhasznalo> FelhasznaloOlvas() {
+        return felhasznaloRep.FelhasznaloOlvas();
     }
 
-    public String BejelentkezesRendeles(Long felhasznaloID) {
+    public Iterable<String> BejelentkezesRendeles(Long felhasznaloID) {
         return felhasznaloRep.BejelentkezesRendeles(felhasznaloID);
     }
 
-    public String BejelentkezesSzemelyiEdzo(Long felhasznaloID) {
+    public Iterable<String> BejelentkezesSzemelyiEdzo(Long felhasznaloID) {
         return felhasznaloRep.BejelentkezesSzemelyiEdzo(felhasznaloID);
     }
 
-    public String BejelentkezesTartozkodasihely(Long felhasznaloID) {
+    public Iterable<String> BejelentkezesTartozkodasihely(Long felhasznaloID) {
         return felhasznaloRep.BejelentkezesTartozkodasihely(felhasznaloID);
     }
 
@@ -57,7 +57,8 @@ public class GymService {
     }
 
     public void FelhasznaloModosit(Felhasznalo felhasznalo) {
-        if (isNull(felhasznalo.getFelhasznalonev())
+        if (isNull(felhasznalo.getFelhasznaloID())
+                && isNull(felhasznalo.getFelhasznalonev())
                 && isNull(felhasznalo.getJelszo())
                 && isNull(felhasznalo.getFelh_vezeteknev())
                 && isNull(felhasznalo.getFelh_keresztnev())
@@ -80,7 +81,7 @@ public class GymService {
     @Autowired
     private TartozkodasihelyRep tartozkodasihelyRep;
 
-    public String TartozkodasihelyOlvasas(Long tartozkodasihelyID) {
+    public Iterable<String> TartozkodasihelyOlvasas(Long tartozkodasihelyID) {
         return tartozkodasihelyRep.TartozkodasihelyOlvasas(tartozkodasihelyID);
     }
 
@@ -106,7 +107,8 @@ public class GymService {
     }
 
     public void TartozkodasihelyModosit(Tartozkodasihely tartozkodasihely) {
-        if (isNull(tartozkodasihely.getIranyitoszam())
+        if (isNull(tartozkodasihely.getTartozkodasihelyID())
+                && isNull(tartozkodasihely.getIranyitoszam())
                 && isNull(tartozkodasihely.getVaros())
                 && isNull(tartozkodasihely.getKozterulet_neve())
                 && isNull(tartozkodasihely.getKozterulet_jellege())
@@ -126,7 +128,7 @@ public class GymService {
     @Autowired
     private Berlet_vasarlasRep berlet_vasarlasRep;
 
-    public String Berlet_vasarlasOlvasas(Long berlet_vasarlasID) {
+    public Iterable<String> Berlet_vasarlasOlvasas(Long berlet_vasarlasID) {
         return berlet_vasarlasRep.Berlet_vasarlasOlvasas(berlet_vasarlasID);
     }
 
@@ -146,7 +148,8 @@ public class GymService {
     }
 
     public void Berlet_vasarlasModosit(Berlet_vasarlas berlet_vasarlas) {
-        if (isNull(berlet_vasarlas.getBerlet_tipus())
+        if (isNull(berlet_vasarlas.getBerlet_vasarlasID())
+                && isNull(berlet_vasarlas.getBerlet_tipus())
                 && isNull(berlet_vasarlas.getBerlet_ar())) {
             berlet_vasarlasRep.Berlet_vasarlasModosit(
                     berlet_vasarlas.getBerlet_vasarlasID(),
@@ -160,19 +163,19 @@ public class GymService {
     @Autowired
     private RendelesRep rendelesRep;
 
-    public String RendelesOlvasas(Long rendelesID) {
+    public Iterable<String> RendelesOlvasas(Long rendelesID) {
         return rendelesRep.RendelesOlvasas(rendelesID);
     }
 
-    public String RendelesOlvasasBerlet(Long rendelesID) {
+    public Iterable<String> RendelesOlvasasBerlet(Long rendelesID) {
         return rendelesRep.RendelesOlvasasBerlet(rendelesID);
     }
 
-    public String RendelesOlvasasFelhasznalo(Long rendelesID) {
+    public Iterable<String> RendelesOlvasasFelhasznalo(Long rendelesID) {
         return rendelesRep.RendelesOlvasasFelhasznalo(rendelesID);
     }
 
-    public String RendelesOlvasasTermek(Long rendelesID) {
+    public Iterable<String> RendelesOlvasasTermek(Long rendelesID) {
         return rendelesRep.RendelesOlvasasTermek(rendelesID);
     }
 
@@ -191,11 +194,11 @@ public class GymService {
     @Autowired
     private CegRep cegRep;
 
-    public String CegOlvasas(Long cegID) {
+    public Iterable<String> CegOlvasas(Long cegID) {
         return cegRep.CegOlvasas(cegID);
     }
 
-    public String CegOlvasasTartozkodasihely(Long cegID) {
+    public Iterable<String> CegOlvasasTartozkodasihely(Long cegID) {
         return cegRep.CegOlvasasTartozkodasihely(cegID);
     }
 
@@ -218,7 +221,8 @@ public class GymService {
     }
 
     public void CegModosit(Ceg ceg) {
-        if (isNull(ceg.getCeg_nev())
+        if (isNull(ceg.getCegID())
+                && isNull(ceg.getCeg_nev())
                 && isNull(ceg.getCeg_email())
                 && isNull(ceg.getCeg_telefon())) {
             cegRep.CegModosit(
@@ -235,11 +239,11 @@ public class GymService {
     @Autowired
     private TermekRep termekRep;
 
-    public String TermekOlvasas(Long termekID) {
+    public Iterable<String> TermekOlvasas(Long termekID) {
         return termekRep.TermekOlvasas(termekID);
     }
 
-    public String TermekOlvasasCeg(Long termekID) {
+    public Iterable<String> TermekOlvasasCeg(Long termekID) {
         return termekRep.TermekOlvasasCeg(termekID);
     }
 
@@ -269,7 +273,8 @@ public class GymService {
     }
 
     public void TermekModosit(Termek termek) {
-        if (isNull(termek.getTermek_nev())
+        if (isNull(termek.getTermekID())
+                && isNull(termek.getTermek_nev())
                 && isNull(termek.getKategoria())
                 && isNull(termek.getAr())
                 && isNull(termek.getKep())
@@ -294,15 +299,15 @@ public class GymService {
     @Autowired
     private Szemelyi_edzoRep szemelyi_edzoRep;
 
-    public String Szemelyi_edzoOlvasas(Long szemelyi_edzoID) {
+    public Iterable<String> Szemelyi_edzoOlvasas(Long szemelyi_edzoID) {
         return szemelyi_edzoRep.Szemelyi_edzoOlvasas(szemelyi_edzoID);
     }
 
-    public String Szemelyi_edzoOlvasasFelhasznalo(Long szemelyi_edzoID) {
+    public Iterable<String> Szemelyi_edzoOlvasasFelhasznalo(Long szemelyi_edzoID) {
         return szemelyi_edzoRep.Szemelyi_edzoOlvasasFelhasznalo(szemelyi_edzoID);
     }
 
-    public String Szemelyi_edzoOlvasasTartozkodasihely(Long szemelyi_edzoID) {
+    public Iterable<String> Szemelyi_edzoOlvasasTartozkodasihely(Long szemelyi_edzoID) {
         return szemelyi_edzoRep.Szemelyi_edzoOlvasasTartozkodasihely(szemelyi_edzoID);
     }
 
@@ -331,7 +336,8 @@ public class GymService {
     }
 
     public void Szemelyi_edzoModosit(Szemelyi_edzo szemelyiEdzo) {
-        if (isNull(szemelyiEdzo.getSzemedz_vezeteknev())
+        if (isNull(szemelyiEdzo.getSzemelyi_edzoID())
+                && isNull(szemelyiEdzo.getSzemedz_vezeteknev())
                 && isNull(szemelyiEdzo.getSzemedz_keresztnev())
                 && isNull(szemelyiEdzo.getPortre())
                 && isNull(szemelyiEdzo.getSzemedz_email())
@@ -349,14 +355,7 @@ public class GymService {
         }
     }
 
-/*    @Autowired
-    private FelhasznaloSzemelyiEdzoRep felhasznaloSzemelyiEdzoRep;*/
-
     public static boolean isNull(Object obj) {
-        if (obj != null && !"".equals(obj)) {
-            return true;
-        } else {
-            return false;
-        }
+        return obj != null && !"".equals(obj);
     }
 }

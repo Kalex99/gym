@@ -14,10 +14,10 @@ import javax.transaction.Transactional;
 public interface TermekRep extends JpaRepository<Termek, Long> {
 
     @Procedure(name = "TermekOlvasas")
-    String TermekOlvasas(@Param("termekID") Long termekID);
+    Iterable<String> TermekOlvasas(@Param("termekID") Long termekID);
 
     @Procedure(name = "TermekOlvasasCeg")
-    String TermekOlvasasCeg(@Param("termekID") Long termekID);
+    Iterable<String> TermekOlvasasCeg(@Param("termekID") Long termekID);
 
 
     @Transactional

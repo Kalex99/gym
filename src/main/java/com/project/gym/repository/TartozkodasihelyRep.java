@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 public interface TartozkodasihelyRep extends JpaRepository<Tartozkodasihely, Long> {
 
     @Procedure(name = "TartozkodasihelyOlvasas")
-    String TartozkodasihelyOlvasas(@Param("tartozkodasihelyID") Long tartozkodasihelyID);
+    Iterable<String> TartozkodasihelyOlvasas(@Param("tartozkodasihelyID") Long tartozkodasihelyID);
 
 
     @Transactional

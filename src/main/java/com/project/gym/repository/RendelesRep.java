@@ -14,16 +14,16 @@ import javax.transaction.Transactional;
 public interface RendelesRep extends JpaRepository<Rendeles, Long> {
 
     @Procedure(name = "RendelesOlvasas")
-    String RendelesOlvasas(@Param("rendelesID") Long rendelesID);
+    Iterable<String> RendelesOlvasas(@Param("rendelesID") Long rendelesID);
 
     @Procedure(name = "RendelesOlvasasBerlet")
-    String RendelesOlvasasBerlet(@Param("rendelesID") Long rendelesID);
+    Iterable<String> RendelesOlvasasBerlet(@Param("rendelesID") Long rendelesID);
 
     @Procedure(name = "RendelesOlvasasFelhasznalo")
-    String RendelesOlvasasFelhasznalo(@Param("rendelesID") Long rendelesID);
+    Iterable<String> RendelesOlvasasFelhasznalo(@Param("rendelesID") Long rendelesID);
 
     @Procedure(name = "RendelesOlvasasTermek")
-    String RendelesOlvasasTermek(@Param("rendelesID") Long rendelesID);
+    Iterable<String> RendelesOlvasasTermek(@Param("rendelesID") Long rendelesID);
 
 
     @Transactional

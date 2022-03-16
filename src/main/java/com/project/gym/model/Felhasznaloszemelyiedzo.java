@@ -6,13 +6,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "felhasznaloszemelyiedzo")
-/*@NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasasFelhasznalo", procedureName = "Szemelyi_edzoOlvasasFelhasznalo",
-        parameters = {
-                @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
-                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznaloID", type = Long.class),
-                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_vezeteknev", type = String.class),
-                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_keresztnev", type = String.class)
-        })*/
 public class Felhasznaloszemelyiedzo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

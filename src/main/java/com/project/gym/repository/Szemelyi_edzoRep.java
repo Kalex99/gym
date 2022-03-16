@@ -14,13 +14,13 @@ import javax.transaction.Transactional;
 public interface Szemelyi_edzoRep extends JpaRepository<Szemelyi_edzo, Long> {
 
     @Procedure(name = "Szemelyi_edzoOlvasas")
-    String Szemelyi_edzoOlvasas(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
+    Iterable<String> Szemelyi_edzoOlvasas(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
 
     @Procedure(name = "Szemelyi_edzoOlvasasFelhasznalo")
-    String Szemelyi_edzoOlvasasFelhasznalo(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
+    Iterable<String> Szemelyi_edzoOlvasasFelhasznalo(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
 
     @Procedure(name = "Szemelyi_edzoOlvasasTartozkodasihely")
-    String Szemelyi_edzoOlvasasTartozkodasihely(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
+    Iterable<String> Szemelyi_edzoOlvasasTartozkodasihely(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
 
 
     @Transactional
