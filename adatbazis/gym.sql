@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Feb 12. 15:24
--- Kiszolgáló verziója: 10.4.18-MariaDB
--- PHP verzió: 8.0.3
+-- Host: 127.0.0.1
+-- Generation Time: Apr 15, 2022 at 02:03 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,12 +18,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `gym`
+-- Database: `gym`
 --
 
 DELIMITER $$
 --
--- Eljárások
+-- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesAccount` (IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `felh_email` VARCHAR(200), OUT `szuletesi_datum` DATE, OUT `felh_telefon` VARCHAR(11), OUT `tartozkodasihelyID` INT)  SELECT felhasznalo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon, felhasznalo.TartozkodasihelyID from felhasznalo WHERE felhasznalo.Felhasznalonev=felhasznalonev AND felhasznalo.Jelszo=jelszo$$
 
@@ -65,8 +65,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloModosit` (IN `felhasznal
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvasas` ()  SELECT * FROM felhasznalo$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvasasByID`(IN `felhasznaloID` INT, OUT `felhasznalonev` VARCHAR(20), OUT `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `szuletesi_datum` DATE, OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11), OUT `tartozkodasihelyID` INT) 
-SELECT felhasznalo.Felhasznalonev, felhasznalo.Jelszo, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon, felhasznalo.TartozkodasihelyID FROM felhasznalo WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvasasByID` (IN `felhasznaloID` INT, OUT `felhasznalonev` VARCHAR(20), OUT `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `szuletesi_datum` DATE, OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11), OUT `tartozkodasihelyID` INT)  SELECT felhasznalo.Felhasznalonev, felhasznalo.Jelszo, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon, felhasznalo.TartozkodasihelyID FROM felhasznalo WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloTorles` (IN `felhasznaloID` INT)  BEGIN
 DELETE FROM tartozkodasihely WHERE tartozkodasihely.TartozkodasihelyID=(SELECT felhasznalo.TartozkodasihelyID FROM felhasznalo WHERE felhasznalo.FelhasznaloID=felhasznaloID);
@@ -81,7 +80,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasas` (IN `rendelesID` I
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasasBerlet` (IN `rendelesID` INT, OUT `berlet_vasarlasID` INT, OUT `berlet_tipus` VARCHAR(100), OUT `berlet_ar` INT)  SELECT berlet_vasarlas.Berlet_vasarlasID, berlet_vasarlas.Berlet_tipus, berlet_vasarlas.Berlet_ar FROM berlet_vasarlas INNER JOIN rendeles on berlet_vasarlas.Berlet_vasarlasID=rendeles.Berlet_vasarlasID WHERE rendeles.RendelesID=rendelesID$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasasFelhasznalo`(IN `rendelesID` INT, OUT `felhasznaloID` INT, OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11), OUT `tartozkodasihelyID` INT) SELECT felhasznalo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Felh_telefon, felhasznalo.TartozkodasihelyID FROM felhasznalo INNER JOIN rendeles on felhasznalo.FelhasznaloID=rendeles.FelhasznaloID WHERE rendeles.RendelesID=rendelesID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasasFelhasznalo` (IN `rendelesID` INT, OUT `felhasznaloID` INT, OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11), OUT `tartozkodasihelyID` INT)  SELECT felhasznalo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Felh_telefon, felhasznalo.TartozkodasihelyID FROM felhasznalo INNER JOIN rendeles on felhasznalo.FelhasznaloID=rendeles.FelhasznaloID WHERE rendeles.RendelesID=rendelesID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasasTermek` (IN `rendelesID` INT, OUT `termekID` INT, OUT `termek_nev` VARCHAR(100), OUT `kategoria` VARCHAR(50), OUT `ar` INT, OUT `kep` BLOB, OUT `leiras` TEXT, OUT `cegID` INT)  SELECT termek.TermekID, termek.Termek_nev, termek.Kategoria, termek.Ar, termek.Kep, termek.Leiras, termek.CegID FROM termek INNER JOIN rendeles ON termek.TermekID= rendeles.TermekID WHERE rendeles.RendelesID=rendelesID$$
 
@@ -128,7 +127,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `berlet_vasarlas`
+-- Table structure for table `berlet_vasarlas`
 --
 
 CREATE TABLE `berlet_vasarlas` (
@@ -138,7 +137,7 @@ CREATE TABLE `berlet_vasarlas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `berlet_vasarlas`
+-- Dumping data for table `berlet_vasarlas`
 --
 
 INSERT INTO `berlet_vasarlas` (`Berlet_vasarlasID`, `Berlet_tipus`, `Berlet_ar`) VALUES
@@ -151,7 +150,7 @@ INSERT INTO `berlet_vasarlas` (`Berlet_vasarlasID`, `Berlet_tipus`, `Berlet_ar`)
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `ceg`
+-- Table structure for table `ceg`
 --
 
 CREATE TABLE `ceg` (
@@ -163,11 +162,10 @@ CREATE TABLE `ceg` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `ceg`
+-- Dumping data for table `ceg`
 --
 
 INSERT INTO `ceg` (`CegID`, `Ceg_nev`, `Ceg_email`, `Ceg_telefon`, `TartozkodasihelyID`) VALUES
-(1, 'Maggio PLC', 'deanna79@example.net', '604.000.7844x136', 1),
 (2, 'Kshlerin, Connelly and Aufderhar', 'judge03@example.org', '+42(4)1604177595', 2),
 (3, 'Ledner-Mayert', 'monahan.sabrina@example.com', '125.798.2598x013', 3),
 (4, 'Walter-Rutherford', 'aheidenreich@example.net', '004.541.1722x54559', 4),
@@ -179,7 +177,7 @@ INSERT INTO `ceg` (`CegID`, `Ceg_nev`, `Ceg_email`, `Ceg_telefon`, `Tartozkodasi
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `felhasznalo`
+-- Table structure for table `felhasznalo`
 --
 
 CREATE TABLE `felhasznalo` (
@@ -195,11 +193,10 @@ CREATE TABLE `felhasznalo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `felhasznalo`
+-- Dumping data for table `felhasznalo`
 --
 
 INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_vezeteknev`, `Felh_keresztnev`, `Felh_email`, `Szuletesi_datum`, `Felh_telefon`, `TartozkodasihelyID`) VALUES
-(1, 'est', 'accusamus', 'Zboncak', 'Julian', 'emclaughlin@example.net', '1990-04-12', '325-160-753', 1),
 (2, 'perferendis', 'illum', 'Kessler', 'Adrian', 'art.stanton@example.com', '2010-12-28', '(659)634-22', 2),
 (3, 'maiores', 'quia', 'Beahan', 'Ignacio', 'ikozey@example.org', '1984-10-29', '01643508922', 3),
 (4, 'aspernatur', 'ea', 'Boyle', 'Kaia', 'qwilkinson@example.org', '2008-11-17', '1-771-513-2', 4),
@@ -228,11 +225,10 @@ INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_ve
 (33, 'illum', 'quam', 'Spinka', 'Maymie', 'lhowell@example.org', '2010-12-12', '1-876-891-3', 33),
 (34, 'saepe', 'quia', 'McDermott', 'Kailey', 'kilback.travon@example.com', '1985-09-18', '242-734-259', 34),
 (35, 'vitae', 'molestias', 'West', 'Augustus', 'xkertzmann@example.net', '1972-07-17', '1-934-773-7', 35),
-(36, 'itaque', 'ullam', 'Heidenreich', 'Frederick', 'torp.felix@example.net', '1971-06-07', '065-393-904', 36),
+(36, 'itaque', 'ullam', 'Heidenreich', 'döbrögi', 'torp.felix@example.net', '1971-06-07', '065-393-904', 36),
 (37, 'delectus', 'cupiditate', 'Gerhold', 'Lucious', 'reichel.cassandra@example.org', '2014-01-22', '932-459-244', 37),
 (38, 'minima', 'inventore', 'Hegmann', 'Shaina', 'blanca.vandervort@example.com', '1999-09-12', '(801)023-33', 38),
 (39, 'quidem', 'fugiat', 'Dooley', 'Bertrand', 'fkreiger@example.org', '2012-04-02', '029.773.771', 39),
-(40, 'Qélkani', 'soigj489z9843h', 'Sanya', 'Macska', 'helth@hello.com', '2000-04-11', '06205879168', 1),
 (41, 'ullam', 'reiciendis', 'Waelchi', 'Jadon', 'swift.janiya@example.net', '1991-11-04', '851.646.096', 41),
 (42, 'voluptatem', 'aut', 'Muller', 'Vilma', 'zcummerata@example.org', '1979-06-18', '(367)763-02', 42),
 (43, 'inventore', 'rerum', 'Brekke', 'Enrico', 'ethyl33@example.com', '1983-12-25', '1-311-981-5', 43),
@@ -242,12 +238,12 @@ INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_ve
 (47, 'sapiente', 'exercitationem', 'Heidenreich', 'Oscar', 'gabe.gorczany@example.net', '1979-06-19', '136.889.507', 47),
 (48, 'unde', 'et', 'Murphy', 'Kaci', 'zkirlin@example.org', '2009-09-02', '920.441.568', 48),
 (49, 'accusantium', 'provident', 'Jenkins', 'Jeremy', 'johnston.howard@example.com', '1989-12-05', '989-593-316', 49),
-(79, 'idk', 'soigj489z9843h', 'Sanya', 'Macska', 'idk@idk.com', '1999-08-14', '06205879168', 1);
+(88, 'Reddit', 'hh', 'bc', 'bcx', 'wqd', '2022-04-05', 'cxy', 2);
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `felhasznaloszemelyiedzo`
+-- Table structure for table `felhasznaloszemelyiedzo`
 --
 
 CREATE TABLE `felhasznaloszemelyiedzo` (
@@ -256,25 +252,22 @@ CREATE TABLE `felhasznaloszemelyiedzo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `felhasznaloszemelyiedzo`
+-- Dumping data for table `felhasznaloszemelyiedzo`
 --
 
 INSERT INTO `felhasznaloszemelyiedzo` (`FelhasznaloID`, `Szemelyi_edzoID`) VALUES
-(1, 1),
 (2, 2),
 (3, 3),
 (4, 4),
 (6, 6),
 (7, 7),
 (8, 8),
-(11, 1),
 (12, 2),
 (13, 3),
 (14, 4),
 (16, 6),
 (17, 7),
 (18, 8),
-(21, 1),
 (22, 2),
 (23, 3),
 (24, 4),
@@ -284,7 +277,7 @@ INSERT INTO `felhasznaloszemelyiedzo` (`FelhasznaloID`, `Szemelyi_edzoID`) VALUE
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `rendeles`
+-- Table structure for table `rendeles`
 --
 
 CREATE TABLE `rendeles` (
@@ -297,38 +290,33 @@ CREATE TABLE `rendeles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `rendeles`
+-- Dumping data for table `rendeles`
 --
 
 INSERT INTO `rendeles` (`RendelesID`, `Rendeles_idopont`, `Megjegyzes`, `TermekID`, `Berlet_vasarlasID`, `FelhasznaloID`) VALUES
-(1, '1991-12-12 17:43:40', 'Officiis occaecati.', 1, 1, 1),
 (2, '1975-07-06 22:46:59', 'Omnis dolorem quo.', 2, 2, 2),
 (3, '1997-04-04 06:24:45', 'Et aspernatur.', 3, 3, 3),
 (4, '1984-12-21 05:52:05', 'Inventore rerum qui.', 4, 4, 4),
 (6, '1982-07-26 05:14:29', 'Occaecati dolores.', 6, 1, 6),
 (7, '1977-01-03 15:18:40', 'Ut natus molestiae.', 7, 2, 7),
 (8, '1976-07-19 08:46:19', 'Repellat possimus.', 8, 3, 8),
-(11, '2003-12-22 16:22:41', 'Et quod deleniti.', 11, 1, 11),
 (12, '1995-05-27 21:50:17', 'Eos voluptate.', 12, 2, 12),
 (13, '1986-09-09 18:33:42', 'Ex suscipit quia.', 13, 3, 13),
 (14, '1991-01-29 19:23:58', 'Commodi architecto.', 14, 4, 14),
 (16, '1980-04-20 14:01:34', 'Nulla non pariatur.', 16, 1, 16),
 (17, '1986-12-15 22:49:23', 'Amet occaecati ipsa.', 17, 2, 17),
 (18, '2010-05-13 18:15:32', 'Et quod architecto.', 18, 3, 18),
-(21, '1999-07-10 14:25:48', 'Soluta ipsum ea.', 21, 1, 21),
 (22, '1984-05-24 04:38:03', 'Nobis et porro.', 22, 2, 22),
 (23, '2007-04-18 05:00:29', 'Aut aliquid non.', 23, 3, 23),
 (24, '1982-05-01 12:27:35', 'Neque perferendis.', 24, 4, 24),
 (26, '1999-08-11 06:42:09', 'Corporis omnis.', 26, 1, 26),
 (27, '1994-10-15 10:17:31', 'Consequatur quis.', 27, 2, 27),
-(31, '2002-05-12 23:05:33', 'Eum est ipsam.', 31, 1, 31),
 (32, '2004-07-25 09:45:45', 'Ea soluta ex quo.', 32, 2, 32),
 (33, '2007-03-29 01:17:37', 'Aut hic asperiores.', 33, 3, 33),
 (34, '1986-09-16 04:57:21', 'Neque iusto sequi.', 34, 4, 34),
 (36, '2010-02-11 04:24:32', 'Quasi voluptas.', 36, 1, 36),
 (37, '1991-01-29 13:44:41', 'Iure eligendi.', 37, 2, 37),
 (38, '1970-12-19 08:03:26', 'Ea veniam.', 38, 3, 38),
-(41, '1976-07-04 11:47:51', 'Doloremque animi.', 41, 1, 41),
 (42, '2015-01-22 23:26:09', 'Eligendi cumque sit.', 42, 2, 42),
 (43, '2016-02-07 00:53:52', 'Exercitationem.', 43, 3, 43),
 (44, '1992-12-28 14:15:35', 'Nam repellendus.', 44, 4, 44),
@@ -339,7 +327,7 @@ INSERT INTO `rendeles` (`RendelesID`, `Rendeles_idopont`, `Megjegyzes`, `TermekI
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `szemelyi_edzo`
+-- Table structure for table `szemelyi_edzo`
 --
 
 CREATE TABLE `szemelyi_edzo` (
@@ -353,11 +341,10 @@ CREATE TABLE `szemelyi_edzo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `szemelyi_edzo`
+-- Dumping data for table `szemelyi_edzo`
 --
 
 INSERT INTO `szemelyi_edzo` (`Szemelyi_edzoID`, `Szemedz_vezeteknev`, `Szemedz_keresztnev`, `Portre`, `Szemedz_email`, `Szemedz_telefon`, `TartozkodasihelyID`) VALUES
-(1, 'Schulist', 'Marta', 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 'wisozk.dolly@example.com', '(795)222-36', 1),
 (2, 'Grady', 'Anahi', 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 'matilda62@example.org', '028-844-782', 2),
 (3, 'Upton', 'Samir', 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 'solon.blick@example.org', '(976)124-39', 3),
 (4, 'Konopelski', 'Orland', 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 'ceasar.erdman@example.net', '837.326.349', 4),
@@ -369,7 +356,7 @@ INSERT INTO `szemelyi_edzo` (`Szemelyi_edzoID`, `Szemedz_vezeteknev`, `Szemedz_k
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `tartozkodasihely`
+-- Table structure for table `tartozkodasihely`
 --
 
 CREATE TABLE `tartozkodasihely` (
@@ -382,11 +369,10 @@ CREATE TABLE `tartozkodasihely` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `tartozkodasihely`
+-- Dumping data for table `tartozkodasihely`
 --
 
 INSERT INTO `tartozkodasihely` (`TartozkodasihelyID`, `Iranyitoszam`, `Varos`, `Kozterulet_neve`, `Kozterulet_jellege`, `Haz_szam`) VALUES
-(1, 55932, 'Hettingerland', 'Stanton Field', 'Lane', 6),
 (2, 73488, 'Mosciskiport', 'Dagmar Rue', 'Inlet', 6),
 (3, 30388, 'Wymanbury', 'Quigley Fall', 'Wells', 6),
 (4, 51963, 'Lake Rosemaryfurt', 'Rau Fields', 'Circle', 6),
@@ -436,7 +422,7 @@ INSERT INTO `tartozkodasihely` (`TartozkodasihelyID`, `Iranyitoszam`, `Varos`, `
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `termek`
+-- Table structure for table `termek`
 --
 
 CREATE TABLE `termek` (
@@ -452,39 +438,34 @@ CREATE TABLE `termek` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- A tábla adatainak kiíratása `termek`
+-- Dumping data for table `termek`
 --
 
 INSERT INTO `termek` (`TermekID`, `Termek_nev`, `Kategoria`, `Ar`, `Kep`, `Keszlet`, `Kaphato`, `Leiras`, `CegID`) VALUES
-(1, 'quo', 'repellat', 6643, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 12, 1, 'Veritatis quis id qui.', 1),
 (2, 'necessitatibus', 'sint', 6527, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 40, 1, 'Corporis sit voluptatem quasi ab non.', 2),
 (3, 'mollitia', 'aliquid', 9777, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 37, 1, 'Earum quia non consequuntur ullam aspernatur.', 3),
 (4, 'molestias', 'ex', 6613, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 21, 1, 'Neque laudantium fugit porro accusamus.', 4),
 (6, 'est', 'doloremque', 7178, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 0, 0, 'Delectus voluptatem nobis possimus enim.', 6),
 (7, 'non', 'distinctio', 3570, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 41, 1, 'Omnis sint sint nobis quia.', 7),
 (8, 'placeat', 'quia', 3240, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 17, 1, 'Dolores libero eum sit aut sed earum nulla.', 8),
-(11, 'doloribus', 'et', 9061, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 42, 0, 'Totam nisi eum assumenda rerum non est.', 1),
 (12, 'animi', 'omnis', 3963, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 46, 1, 'Aliquam quae voluptatem quia autem ea.', 2),
 (13, 'nam', 'sit', 6655, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 0, 1, 'Praesentium beatae voluptas ut ducimus explicabo.', 3),
 (14, 'quae', 'non', 5132, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 18, 1, 'Ipsam ad omnis sunt nam.', 4),
 (16, 'autem', 'maxime', 8914, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 3, 0, 'Dolorum qui eum aut non exercitationem iste iste.', 6),
 (17, 'dolor', 'quasi', 9051, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 14, 1, 'Ea eum unde et aperiam architecto.', 7),
 (18, 'eos', 'adipisci', 9172, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 36, 0, 'Sunt architecto neque architecto.', 8),
-(21, 'perspiciatis', 'porro', 4418, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 40, 1, 'Quasi ut laudantium in tempore rerum non.', 1),
 (22, 'similique', 'recusandae', 3350, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 7, 1, 'Sequi sit neque rem pariatur rerum consequatur.', 2),
 (23, 'officiis', 'quisquam', 8860, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 18, 1, 'At sint tenetur ex itaque earum odit.', 3),
 (24, 'maxime', 'perferendis', 5642, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 0, 1, 'Numquam aut corporis tenetur possimus voluptates.', 4),
 (26, 'expedita', 'unde', 3036, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 16, 0, 'Nisi et voluptatum aut.', 6),
 (27, 'quasi', 'impedit', 4786, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 15, 1, 'Accusamus aut repellendus alias nostrum.', 7),
 (28, 'consequuntur', 'aut', 3631, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 8, 0, 'Facere eum nobis qui dolorem enim quod sed.', 8),
-(31, 'provident', 'cumque', 4219, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 46, 0, 'Sapiente natus aut et aliquid ea eos.', 1),
 (32, 'quibusdam', 'deserunt', 3381, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 38, 0, 'Necessitatibus nihil cumque ipsa quos.', 2),
 (33, 'pariatur', 'aut', 3991, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 48, 1, 'Optio tempore sed in et.', 3),
 (34, 'neque', 'nostrum', 4483, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 7, 0, 'Et odit et sed consequatur et.', 4),
 (36, 'provident', 'autem', 7980, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 14, 1, 'Aut et deserunt cum vel quod.', 6),
 (37, 'sunt', 'expedita', 4523, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 9, 1, 'Occaecati nisi odit doloribus corporis.', 7),
 (38, 'dolor', 'consequatur', 3049, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 25, 0, 'Et ea repudiandae est et enim voluptatem odit.', 8),
-(41, 'qui', 'autem', 7315, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 44, 0, 'Voluptate optio ullam perferendis quasi.', 1),
 (42, 'architecto', 'recusandae', 2678, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 44, 1, 'Labore omnis sequi dolorem.', 2),
 (43, 'voluptatem', 'exercitationem', 6047, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 19, 0, 'Veritatis beatae sapiente aut voluptatum.', 3),
 (44, 'culpa', 'harum', 8142, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 33, 1, 'Itaque ratione laudantium incidunt aliquid.', 4),
@@ -493,24 +474,24 @@ INSERT INTO `termek` (`TermekID`, `Termek_nev`, `Kategoria`, `Ar`, `Kep`, `Keszl
 (48, 'id', 'totam', 7816, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 18, 0, 'Est tempore nobis aut ea sunt.', 8);
 
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for dumped tables
 --
 
 --
--- A tábla indexei `berlet_vasarlas`
+-- Indexes for table `berlet_vasarlas`
 --
 ALTER TABLE `berlet_vasarlas`
   ADD PRIMARY KEY (`Berlet_vasarlasID`);
 
 --
--- A tábla indexei `ceg`
+-- Indexes for table `ceg`
 --
 ALTER TABLE `ceg`
   ADD PRIMARY KEY (`CegID`),
   ADD KEY `TartozkodasihelyID` (`TartozkodasihelyID`);
 
 --
--- A tábla indexei `felhasznalo`
+-- Indexes for table `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
   ADD PRIMARY KEY (`FelhasznaloID`),
@@ -519,14 +500,14 @@ ALTER TABLE `felhasznalo`
   ADD KEY `TartozkodasihelyID` (`TartozkodasihelyID`);
 
 --
--- A tábla indexei `felhasznaloszemelyiedzo`
+-- Indexes for table `felhasznaloszemelyiedzo`
 --
 ALTER TABLE `felhasznaloszemelyiedzo`
   ADD KEY `FelhasznaloID` (`FelhasznaloID`),
   ADD KEY `Szemelyi_edzoID` (`Szemelyi_edzoID`);
 
 --
--- A tábla indexei `rendeles`
+-- Indexes for table `rendeles`
 --
 ALTER TABLE `rendeles`
   ADD PRIMARY KEY (`RendelesID`),
@@ -535,7 +516,7 @@ ALTER TABLE `rendeles`
   ADD KEY `FelhasznaloID` (`FelhasznaloID`);
 
 --
--- A tábla indexei `szemelyi_edzo`
+-- Indexes for table `szemelyi_edzo`
 --
 ALTER TABLE `szemelyi_edzo`
   ADD PRIMARY KEY (`Szemelyi_edzoID`),
@@ -543,89 +524,89 @@ ALTER TABLE `szemelyi_edzo`
   ADD KEY `TartozkodasihelyID` (`TartozkodasihelyID`);
 
 --
--- A tábla indexei `tartozkodasihely`
+-- Indexes for table `tartozkodasihely`
 --
 ALTER TABLE `tartozkodasihely`
   ADD PRIMARY KEY (`TartozkodasihelyID`);
 
 --
--- A tábla indexei `termek`
+-- Indexes for table `termek`
 --
 ALTER TABLE `termek`
   ADD PRIMARY KEY (`TermekID`),
   ADD KEY `CegID` (`CegID`);
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT a táblához `berlet_vasarlas`
+-- AUTO_INCREMENT for table `berlet_vasarlas`
 --
 ALTER TABLE `berlet_vasarlas`
   MODIFY `Berlet_vasarlasID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT a táblához `ceg`
+-- AUTO_INCREMENT for table `ceg`
 --
 ALTER TABLE `ceg`
   MODIFY `CegID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT a táblához `felhasznalo`
+-- AUTO_INCREMENT for table `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `FelhasznaloID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `FelhasznaloID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
--- AUTO_INCREMENT a táblához `rendeles`
+-- AUTO_INCREMENT for table `rendeles`
 --
 ALTER TABLE `rendeles`
   MODIFY `RendelesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT a táblához `szemelyi_edzo`
+-- AUTO_INCREMENT for table `szemelyi_edzo`
 --
 ALTER TABLE `szemelyi_edzo`
   MODIFY `Szemelyi_edzoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT a táblához `tartozkodasihely`
+-- AUTO_INCREMENT for table `tartozkodasihely`
 --
 ALTER TABLE `tartozkodasihely`
   MODIFY `TartozkodasihelyID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
--- AUTO_INCREMENT a táblához `termek`
+-- AUTO_INCREMENT for table `termek`
 --
 ALTER TABLE `termek`
   MODIFY `TermekID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- Megkötések a kiírt táblákhoz
+-- Constraints for dumped tables
 --
 
 --
--- Megkötések a táblához `ceg`
+-- Constraints for table `ceg`
 --
 ALTER TABLE `ceg`
   ADD CONSTRAINT `ceg_ibfk_1` FOREIGN KEY (`TartozkodasihelyID`) REFERENCES `tartozkodasihely` (`TartozkodasihelyID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Megkötések a táblához `felhasznalo`
+-- Constraints for table `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
   ADD CONSTRAINT `felhasznalo_ibfk_1` FOREIGN KEY (`TartozkodasihelyID`) REFERENCES `tartozkodasihely` (`TartozkodasihelyID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Megkötések a táblához `felhasznaloszemelyiedzo`
+-- Constraints for table `felhasznaloszemelyiedzo`
 --
 ALTER TABLE `felhasznaloszemelyiedzo`
   ADD CONSTRAINT `felhasznaloszemelyiedzo_ibfk_1` FOREIGN KEY (`Szemelyi_edzoID`) REFERENCES `szemelyi_edzo` (`Szemelyi_edzoID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `felhasznaloszemelyiedzo_ibfk_2` FOREIGN KEY (`FelhasznaloID`) REFERENCES `felhasznalo` (`FelhasznaloID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Megkötések a táblához `rendeles`
+-- Constraints for table `rendeles`
 --
 ALTER TABLE `rendeles`
   ADD CONSTRAINT `rendeles_ibfk_1` FOREIGN KEY (`Berlet_vasarlasID`) REFERENCES `berlet_vasarlas` (`Berlet_vasarlasID`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -633,13 +614,13 @@ ALTER TABLE `rendeles`
   ADD CONSTRAINT `rendeles_ibfk_3` FOREIGN KEY (`TermekID`) REFERENCES `termek` (`TermekID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Megkötések a táblához `szemelyi_edzo`
+-- Constraints for table `szemelyi_edzo`
 --
 ALTER TABLE `szemelyi_edzo`
   ADD CONSTRAINT `szemelyi_edzo_ibfk_1` FOREIGN KEY (`TartozkodasihelyID`) REFERENCES `tartozkodasihely` (`TartozkodasihelyID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Megkötések a táblához `termek`
+-- Constraints for table `termek`
 --
 ALTER TABLE `termek`
   ADD CONSTRAINT `termek_ibfk_1` FOREIGN KEY (`CegID`) REFERENCES `ceg` (`CegID`) ON DELETE CASCADE ON UPDATE CASCADE;
