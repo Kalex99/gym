@@ -14,8 +14,8 @@ public class GymService {
     @Autowired
     private FelhasznaloRep felhasznaloRep;
 
-    public List<Felhasznalo> FelhasznaloOlvas() {
-        return felhasznaloRep.FelhasznaloOlvas();
+    public List<Felhasznalo> FelhasznaloOlvasas() {
+        return felhasznaloRep.FelhasznaloOlvasas();
     }
 
     public Iterable<String> BejelentkezesRendeles(Long felhasznaloID) {

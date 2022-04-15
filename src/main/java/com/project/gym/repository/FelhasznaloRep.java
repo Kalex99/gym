@@ -17,8 +17,8 @@ import java.util.List;
 @Repository
 public interface FelhasznaloRep extends JpaRepository<Felhasznalo, Long> {
 
-    @Query(value = "{call FelhasznaloOlvas()}", nativeQuery = true)
-    List<Felhasznalo> FelhasznaloOlvas();
+    @Query(value = "{call FelhasznaloOlvasas()}", nativeQuery = true)
+    List<Felhasznalo> FelhasznaloOlvasas();
 
 
     @Procedure(name = "BejelentkezesRendeles")

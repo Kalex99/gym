@@ -19,8 +19,8 @@ public class GymController {
     private GymService gymService;
 
     @GetMapping("felhasznalo/felhOlvas")
-    public ResponseEntity<List<Felhasznalo>> FelhasznaloOlvas() {
-        List<Felhasznalo> lista = gymService.FelhasznaloOlvas();
+    public ResponseEntity<List<Felhasznalo>> FelhasznaloOlvasas() {
+        List<Felhasznalo> lista = gymService.FelhasznaloOlvasas();
         if(lista.isEmpty()) throw new ApiNotFoundException("A felhasználók nem találhatóak meg!");
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
