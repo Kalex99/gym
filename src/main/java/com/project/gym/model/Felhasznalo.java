@@ -20,7 +20,7 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termekID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_vasarlasID", type = Long.class)
                 }),
-        @NamedStoredProcedureQuery(name = "FelhasznaloOlvasasByID", procedureName = "FelhasznaloOlvasasByID",
+        @NamedStoredProcedureQuery(name = "FelhasznaloOlvasByID", procedureName = "FelhasznaloOlvasByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "felhasznaloID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznalonev", type = String.class),

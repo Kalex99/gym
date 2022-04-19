@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 @Table(name = "Rendeles")
 @NamedStoredProcedureQueries({
-        @NamedStoredProcedureQuery(name = "RendelesOlvasas", procedureName = "RendelesOlvasas",
+        @NamedStoredProcedureQuery(name = "RendelesOlvasByID", procedureName = "RendelesOlvasByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "rendelesID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "rendeles_idopont", type = Date.class),
@@ -17,14 +17,14 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_vasarlasID", type = Integer.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznaloID", type = Integer.class)
                 }),
-        @NamedStoredProcedureQuery(name = "RendelesOlvasasBerlet", procedureName = "RendelesOlvasasBerlet",
+        @NamedStoredProcedureQuery(name = "RendelesOlvasBerletByID", procedureName = "RendelesOlvasBerletByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "rendelesID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_vasarlasID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_tipus", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_ar", type = Long.class)
                 }),
-        @NamedStoredProcedureQuery(name = "RendelesOlvasasFelhasznalo", procedureName = "RendelesOlvasasFelhasznalo",
+        @NamedStoredProcedureQuery(name = "RendelesOlvasFelhasznaloByID", procedureName = "RendelesOlvasFelhasznaloByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "rendelesID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznaloID", type = Long.class),
@@ -34,7 +34,7 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_telefon", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class)
                 }),
-        @NamedStoredProcedureQuery(name = "RendelesOlvasasTermek", procedureName = "RendelesOlvasasTermek",
+        @NamedStoredProcedureQuery(name = "RendelesOlvasTermekByID", procedureName = "RendelesOlvasTermekByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "rendelesID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termekID", type = Long.class),

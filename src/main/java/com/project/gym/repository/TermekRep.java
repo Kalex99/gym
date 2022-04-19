@@ -9,15 +9,19 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface TermekRep extends JpaRepository<Termek, Long> {
 
-    @Procedure(name = "TermekOlvasas")
-    Iterable<String> TermekOlvasas(@Param("termekID") Long termekID);
+    @Query(value = "{call TermekOlvas()}", nativeQuery = true)
+    List<Termek> TermekOlvas();
 
-    @Procedure(name = "TermekOlvasasCeg")
-    Iterable<String> TermekOlvasasCeg(@Param("termekID") Long termekID);
+    @Procedure(name = "TermekOlvasByID")
+    Iterable<String> TermekOlvasByID(@Param("termekID") Long termekID);
+
+    @Procedure(name = "TermekOlvasCegByID")
+    Iterable<String> TermekOlvasCegByID(@Param("termekID") Long termekID);
 
 
     @Transactional

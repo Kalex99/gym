@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tartozkodasihely")
-@NamedStoredProcedureQuery(name = "TartozkodasihelyOlvasas", procedureName = "TartozkodasihelyOlvasas",
+@NamedStoredProcedureQuery(name = "TartozkodasihelyOlvasByID", procedureName = "TartozkodasihelyOlvasByID",
         parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "tartozkodasihelyID", type = Long.class),
                 @StoredProcedureParameter(mode = ParameterMode.OUT, name = "iranyitoszam", type = Integer.class),

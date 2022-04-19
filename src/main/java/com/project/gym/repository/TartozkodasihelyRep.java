@@ -9,13 +9,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface TartozkodasihelyRep extends JpaRepository<Tartozkodasihely, Long> {
 
-    @Procedure(name = "TartozkodasihelyOlvasas")
-    Iterable<String> TartozkodasihelyOlvasas(@Param("tartozkodasihelyID") Long tartozkodasihelyID);
+    @Query(value = "{call TartozkodasihelyOlvas()}", nativeQuery = true)
+    List<Tartozkodasihely> TartozkodasihelyOlvas();
 
+    @Procedure(name = "TartozkodasihelyOlvasByID")
+    Iterable<String> TartozkodasihelyOlvasByID(@Param("tartozkodasihelyID") Long tartozkodasihelyID);
 
     @Transactional
     @Modifying

@@ -9,18 +9,22 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface Szemelyi_edzoRep extends JpaRepository<Szemelyi_edzo, Long> {
 
-    @Procedure(name = "Szemelyi_edzoOlvasas")
-    Iterable<String> Szemelyi_edzoOlvasas(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
+    @Query(value = "{call Szemelyi_edzoOlvas()}", nativeQuery = true)
+    List<Szemelyi_edzo> Szemelyi_edzoOlvas();
 
-    @Procedure(name = "Szemelyi_edzoOlvasasFelhasznalo")
-    Iterable<String> Szemelyi_edzoOlvasasFelhasznalo(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
+    @Procedure(name = "Szemelyi_edzoOlvasByID")
+    Iterable<String> Szemelyi_edzoOlvasByID(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
 
-    @Procedure(name = "Szemelyi_edzoOlvasasTartozkodasihely")
-    Iterable<String> Szemelyi_edzoOlvasasTartozkodasihely(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
+    @Procedure(name = "Szemelyi_edzoOlvasFelhasznaloByID")
+    Iterable<String> Szemelyi_edzoOlvasFelhasznaloByID(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
+
+    @Procedure(name = "Szemelyi_edzoOlvasTartozkodasihelyByID")
+    Iterable<String> Szemelyi_edzoOlvasTartozkodasihelyByID(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
 
 
     @Transactional

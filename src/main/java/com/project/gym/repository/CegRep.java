@@ -9,15 +9,19 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface CegRep extends JpaRepository<Ceg, Long> {
 
-    @Procedure(name = "CegOlvasas")
-    Iterable<String> CegOlvasas(@Param("cegID") Long cegID);
+    @Query(value = "{call CegOlvas()}", nativeQuery = true)
+    List<Ceg> CegOlvas();
 
-    @Procedure(name = "CegOlvasasTartozkodasihely")
-    Iterable<String> CegOlvasasTartozkodasihely(@Param("cegID") Long cegID);
+    @Procedure(name = "CegOlvasByID")
+    Iterable<String> CegOlvasByID(@Param("cegID") Long cegID);
+
+    @Procedure(name = "CegOlvasTartozkodasihelyByID")
+    Iterable<String> CegOlvasTartozkodasihelyByID(@Param("cegID") Long cegID);
 
 
     @Transactional

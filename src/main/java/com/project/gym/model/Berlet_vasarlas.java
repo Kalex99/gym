@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "berlet_vasarlas")
-@NamedStoredProcedureQuery(name = "Berlet_vasarlasOlvasas", procedureName = "Berlet_vasarlasOlvasas",
+@NamedStoredProcedureQuery(name = "Berlet_vasarlasOlvasByID", procedureName = "Berlet_vasarlasOlvasByID",
         parameters = {
                 @StoredProcedureParameter(mode = ParameterMode.IN, name = "berlet_vasarlasID", type = Long.class),
                 @StoredProcedureParameter(mode = ParameterMode.OUT, name = "berlet_tipus", type = String.class),

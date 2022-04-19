@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 @Table(name = "ceg")
 @NamedStoredProcedureQueries({
-        @NamedStoredProcedureQuery(name = "CegOlvasas", procedureName = "CegOlvasas",
+        @NamedStoredProcedureQuery(name = "CegOlvasByID", procedureName = "CegOlvasByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "cegID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_nev", type = String.class),
@@ -16,7 +16,7 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_telefon", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
                 }),
-        @NamedStoredProcedureQuery(name = "CegOlvasasTartozkodasihely", procedureName = "CegOlvasasTartozkodasihely",
+        @NamedStoredProcedureQuery(name = "CegOlvasTartozkodasihelyByID", procedureName = "CegOlvasTartozkodasihelyByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "cegID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),

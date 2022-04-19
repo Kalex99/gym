@@ -9,21 +9,25 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface RendelesRep extends JpaRepository<Rendeles, Long> {
 
-    @Procedure(name = "RendelesOlvasas")
-    Iterable<String> RendelesOlvasas(@Param("rendelesID") Long rendelesID);
+    @Query(value = "{call RendelesOlvas()}", nativeQuery = true)
+    List<Rendeles> RendelesOlvas();
 
-    @Procedure(name = "RendelesOlvasasBerlet")
-    Iterable<String> RendelesOlvasasBerlet(@Param("rendelesID") Long rendelesID);
+    @Procedure(name = "RendelesOlvasByID")
+    Iterable<String> RendelesOlvasByID(@Param("rendelesID") Long rendelesID);
 
-    @Procedure(name = "RendelesOlvasasFelhasznalo")
-    Iterable<String> RendelesOlvasasFelhasznalo(@Param("rendelesID") Long rendelesID);
+    @Procedure(name = "RendelesOlvasBerletByID")
+    Iterable<String> RendelesOlvasBerletByID(@Param("rendelesID") Long rendelesID);
 
-    @Procedure(name = "RendelesOlvasasTermek")
-    Iterable<String> RendelesOlvasasTermek(@Param("rendelesID") Long rendelesID);
+    @Procedure(name = "RendelesOlvasFelhasznaloByID")
+    Iterable<String> RendelesOlvasFelhasznaloByID(@Param("rendelesID") Long rendelesID);
+
+    @Procedure(name = "RendelesOlvasTermekByID")
+    Iterable<String> RendelesOlvasTermekByID(@Param("rendelesID") Long rendelesID);
 
 
     @Transactional

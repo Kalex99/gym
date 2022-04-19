@@ -7,7 +7,7 @@ import java.util.Arrays;
 @Entity
 @Table(name = "szemelyi_edzo")
 @NamedStoredProcedureQueries({
-        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasas", procedureName = "Szemelyi_edzoOlvasas",
+        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasByID", procedureName = "Szemelyi_edzoOlvasByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_vezeteknev", type = String.class),
@@ -17,14 +17,14 @@ import java.util.Arrays;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_telefon", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class)
                 }),
-        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasasFelhasznalo", procedureName = "Szemelyi_edzoOlvasasFelhasznalo",
+        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasFelhasznaloByID", procedureName = "Szemelyi_edzoOlvasFelhasznaloByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznaloID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_vezeteknev", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_keresztnev", type = String.class)
                 }),
-        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasasTartozkodasihely", procedureName = "Szemelyi_edzoOlvasasTartozkodasihely",
+        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasTartozkodasihelyByID", procedureName = "Szemelyi_edzoOlvasTartozkodasihelyByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),

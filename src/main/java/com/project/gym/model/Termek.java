@@ -8,7 +8,7 @@ import java.util.Arrays;
 @Entity
 @Table(name = "Termek")
 @NamedStoredProcedureQueries({
-        @NamedStoredProcedureQuery(name = "TermekOlvasas", procedureName = "TermekOlvasas",
+        @NamedStoredProcedureQuery(name = "TermekOlvasByID", procedureName = "TermekOlvasByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "termekID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termek_nev", type = String.class),
@@ -20,7 +20,7 @@ import java.util.Arrays;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "leiras", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "cegID", type = Long.class),
                 }),
-        @NamedStoredProcedureQuery(name = "TermekOlvasasCeg", procedureName = "TermekOlvasasCeg",
+        @NamedStoredProcedureQuery(name = "TermekOlvasCegByID", procedureName = "TermekOlvasCegByID",
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "termekID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "cegID", type = Long.class),
