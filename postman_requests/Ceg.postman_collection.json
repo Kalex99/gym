@@ -6,12 +6,12 @@
 	},
 	"item": [
 		{
-			"name": "CegOlvasas",
+			"name": "CegOlvas",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ceg/cegOlvasas/3",
+					"raw": "http://localhost:8080/ceg/cegOlvas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -19,20 +19,19 @@
 					"port": "8080",
 					"path": [
 						"ceg",
-						"cegOlvasas",
-						"3"
+						"cegOlvas"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "CegOlvasasTartozkodasihely",
+			"name": "CegOlvasByID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/ceg/cegOlvasasTartozkodasihely/2",
+					"raw": "http://localhost:8080/ceg/cegOlvasByID/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -40,7 +39,28 @@
 					"port": "8080",
 					"path": [
 						"ceg",
-						"cegOlvasasTartozkodasihely",
+						"cegOlvasByID",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CegOlvasasTartozkodasihelyByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ceg/cegOlvasTartozkodasihelyByID/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ceg",
+						"cegOlvasTartozkodasihelyByID",
 						"2"
 					]
 				}
@@ -54,7 +74,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"ceg_nev\":\"Amogus\",\r\n    \"ceg_email\":\"alexkovacsfi@gmail.com\",\r\n    \"ceg_telefon\":\"+36205879168\",\r\n    \"tartozkodasihelyID\":2\r\n}",
+					"raw": "{\r\n    \"ceg_nev\":\"\",\r\n    \"ceg_email\":\"\",\r\n    \"ceg_telefon\":\"+36205879168\",\r\n    \"tartozkodasihelyID\":3\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,7 +124,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"cegID\":13,\r\n    \"ceg_nev\":\"Amogus\",\r\n    \"ceg_email\":\"alexkovacsfi@gmail.com\",\r\n    \"ceg_telefon\":\"+36205879168\",\r\n    \"tartozkodasihelyID\":2\r\n}",
+					"raw": "{\r\n    \"cegID\":7,\r\n    \"ceg_nev\":\"j\",\r\n    \"ceg_email\":\"lk\",\r\n    \"ceg_telefon\":\"+36205879168\",\r\n    \"tartozkodasihelyID\":3\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

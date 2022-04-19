@@ -6,12 +6,12 @@
 	},
 	"item": [
 		{
-			"name": "SzemelyiEdzoOlvasas",
+			"name": "SzemelyiEdzoOlvas",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoOlvasas/3",
+					"raw": "http://localhost:8080/szemelyiEdzo/szemEdzoOlvas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -19,20 +19,19 @@
 					"port": "8080",
 					"path": [
 						"szemelyiEdzo",
-						"szemelyiEdzoOlvasas",
-						"3"
+						"szemEdzoOlvas"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "SzemelyiEdzoOlvasasFelhasznalo",
+			"name": "SzemelyiEdzoOlvasByID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoOlvasasFelhasznalo/8",
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyi_edzoOlvasByID/8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -40,7 +39,7 @@
 					"port": "8080",
 					"path": [
 						"szemelyiEdzo",
-						"szemelyiEdzoOlvasasFelhasznalo",
+						"szemelyi_edzoOlvasByID",
 						"8"
 					]
 				}
@@ -48,12 +47,12 @@
 			"response": []
 		},
 		{
-			"name": "SzemelyiEdzoOlvasasTartozkodasihely",
+			"name": "SzemelyiEdzoOlvasasFelhasznaloByID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/szemelyiEdzo/szemelyiEdzoOlvasasTartozkodasihely/3",
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyi_edzoOlvasFelhasznaloByID/8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -61,7 +60,28 @@
 					"port": "8080",
 					"path": [
 						"szemelyiEdzo",
-						"szemelyiEdzoOlvasasTartozkodasihely",
+						"szemelyi_edzoOlvasFelhasznaloByID",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SzemelyiEdzoOlvasasTartozkodasihelyByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/szemelyiEdzo/szemelyi_edzoOlvasTartozkodasihelyByID/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"szemelyiEdzo",
+						"szemelyi_edzoOlvasTartozkodasihelyByID",
 						"3"
 					]
 				}
@@ -125,7 +145,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"szemelyi_edzoID\":8,\r\n    \"szemedz_vezeteknev\":\"John\",\r\n    \"szemedz_keresztnev\":\"Cena\",\r\n    \"portre\":[55,56,78],\r\n    \"szemedz_email\":\"simonyi@radnoti.com\",\r\n    \"szemedz_telefon\":\"06209806272\",\r\n    \"tartozkodasihelyID\":3\r\n}",
+					"raw": "{\r\n    \"szemelyi_edzoID\":8,\r\n    \"szemedz_vezeteknev\":\"John\",\r\n    \"szemedz_keresztnev\":\"Cena\",\r\n    \"portre\":[55,56,78],\r\n    \"szemedz_email\":\"gh\",\r\n    \"szemedz_telefon\":\"06209806272\",\r\n    \"tartozkodasihelyID\":3\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

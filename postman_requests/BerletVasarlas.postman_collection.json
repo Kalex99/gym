@@ -6,12 +6,12 @@
 	},
 	"item": [
 		{
-			"name": "BerletVasarlasOlvasas",
+			"name": "BerletVasarlasOlvas",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/berletVasarlas/berletVasarlasOlvas/1",
+					"raw": "http://localhost:8080/berletVasarlas/berletOlvas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -19,7 +19,27 @@
 					"port": "8080",
 					"path": [
 						"berletVasarlas",
-						"berletVasarlasOlvas",
+						"berletOlvas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BerletVasarlasOlvasByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/berletVasarlas/berlet_vasarlasOlvasByID/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"berletVasarlas",
+						"berlet_vasarlasOlvasByID",
 						"1"
 					]
 				}

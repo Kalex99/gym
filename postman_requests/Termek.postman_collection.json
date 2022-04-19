@@ -6,12 +6,12 @@
 	},
 	"item": [
 		{
-			"name": "TermekOlvasas",
+			"name": "TermekOlvas",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/termek/termekOlvasas/3",
+					"raw": "http://localhost:8080/termek/termekOlvas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -19,20 +19,19 @@
 					"port": "8080",
 					"path": [
 						"termek",
-						"termekOlvasas",
-						"3"
+						"termekOlvas"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "TemekOlvasasCeg",
+			"name": "TermekOlvasByID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/termek/termekOlvasasCeg/3",
+					"raw": "http://localhost:8080/termek/termekOlvasByID/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -40,8 +39,29 @@
 					"port": "8080",
 					"path": [
 						"termek",
-						"termekOlvasasCeg",
-						"3"
+						"termekOlvasByID",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TemekOlvasCegByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/termek/termekOlvasCegByID/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"termek",
+						"termekOlvasCegByID",
+						"4"
 					]
 				}
 			},
@@ -111,7 +131,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/termek/termekTorles/53",
+					"raw": "http://localhost:8080/termek/termekTorles/999",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -120,7 +140,7 @@
 					"path": [
 						"termek",
 						"termekTorles",
-						"53"
+						"999"
 					]
 				}
 			},

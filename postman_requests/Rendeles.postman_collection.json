@@ -6,12 +6,12 @@
 	},
 	"item": [
 		{
-			"name": "RendelesOlvasas",
+			"name": "RendelesOlvas",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/rendeles/rendelesOlvas/1",
+					"raw": "http://localhost:8080/rendeles/rendelesOlvas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -19,20 +19,19 @@
 					"port": "8080",
 					"path": [
 						"rendeles",
-						"rendelesOlvas",
-						"1"
+						"rendelesOlvas"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "RendelesOlvasasBerlet",
+			"name": "RendelesOlvasByID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/rendeles/rendelesOlvasBerlet/3",
+					"raw": "http://localhost:8080/rendeles/rendelesOlvasByID/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -40,7 +39,28 @@
 					"port": "8080",
 					"path": [
 						"rendeles",
-						"rendelesOlvasBerlet",
+						"rendelesOlvasByID",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RendelesOlvasasBerletByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/rendeles/rendelesOlvasBerletByID/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rendeles",
+						"rendelesOlvasBerletByID",
 						"3"
 					]
 				}
@@ -48,12 +68,12 @@
 			"response": []
 		},
 		{
-			"name": "RendelesOlvasasTermek",
+			"name": "RendelesOlvasasFelhasznaloByID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/rendeles/rendelesOlvasTermek/3",
+					"raw": "http://localhost:8080/rendeles/rendelesOlvasFelhasznaloByID/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -61,7 +81,28 @@
 					"port": "8080",
 					"path": [
 						"rendeles",
-						"rendelesOlvasTermek",
+						"rendelesOlvasFelhasznaloByID",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RendelesOlvasasTermekByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/rendeles/rendelesOlvasTermekByID/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rendeles",
+						"rendelesOlvasTermekByID",
 						"3"
 					]
 				}
@@ -75,7 +116,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"megjegyzes\":\"Amogus\",\r\n    \"termekID\":4,\r\n    \"berlet_vasarlasID\":1,\r\n    \"felhasznaloID\":1\r\n}",
+					"raw": "{\r\n    \"megjegyzes\":\"\",\r\n    \"termekID\":3,\r\n    \"berlet_vasarlasID\":1,\r\n    \"felhasznaloID\":0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -113,27 +154,6 @@
 						"rendeles",
 						"rendelesTorles",
 						"53"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "RendelesOlvasasFelhasznalo",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/rendeles/rendelesOlvasasFelhasznalo/3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"rendeles",
-						"rendelesOlvasasFelhasznalo",
-						"3"
 					]
 				}
 			},

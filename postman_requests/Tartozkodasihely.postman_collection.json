@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "TartozkodasihelyOlvasas",
+			"name": "TartozkodasihelyOlvas",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -23,7 +23,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/tartozkodasihely/tartozkodasihelyOlvas/1",
+					"raw": "http://localhost:8080/tartozkodasihely/tartHelyOlvas",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -31,8 +31,28 @@
 					"port": "8080",
 					"path": [
 						"tartozkodasihely",
-						"tartozkodasihelyOlvas",
-						"1"
+						"tartHelyOlvas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TartozkodasihelyOlvasByID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tartozkodasihely/tartozkodasihelyOlvasByID/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tartozkodasihely",
+						"tartozkodasihelyOlvasByID",
+						"2"
 					]
 				}
 			},

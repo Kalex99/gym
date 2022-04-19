@@ -35,26 +35,6 @@
 			"response": []
 		},
 		{
-			"name": "FelhasznaloOlvasas(Test)",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/felhasznalo/felhOlvas",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"felhasznalo",
-						"felhOlvas"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "FelhasznaloTorles",
 			"request": {
 				"method": "DELETE",
@@ -99,6 +79,26 @@
 					"path": [
 						"felhasznalo",
 						"felhModosit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FelhasznaloOlvas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/felhasznalo/felhOlvas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"felhasznalo",
+						"felhOlvas"
 					]
 				}
 			},
@@ -198,6 +198,35 @@
 						"felhasznalo",
 						"felhasznaloOlvasasByID",
 						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tartozkodasihely\":{\r\n        \"iranyitoszam\":3,\r\n        \"varos\":\"ksdfns\"\r\n    },\r\n    \"felhasznalo\":{\r\n        \"felhasznalonev\":\"iuzt\",\r\n        \"jelszo\":\"lkjhf\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/felhasznalo/Test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"felhasznalo",
+						"Test"
 					]
 				}
 			},
