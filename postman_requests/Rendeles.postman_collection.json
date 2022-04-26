@@ -110,13 +110,13 @@
 			"response": []
 		},
 		{
-			"name": "RendelesLetrehoz",
+			"name": "RendelesLetrehozTermek",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"megjegyzes\":\"\",\r\n    \"termekID\":3,\r\n    \"berlet_vasarlasID\":1,\r\n    \"felhasznaloID\":0\r\n}",
+					"raw": "{\r\n    \"termekID\":52,\r\n    \"felhasznaloID\":12\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,7 +124,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/rendeles/rendelesLetrehoz",
+					"raw": "http://localhost:8080/rendeles/rendelesLetrehozTermek",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -132,7 +132,7 @@
 					"port": "8080",
 					"path": [
 						"rendeles",
-						"rendelesLetrehoz"
+						"rendelesLetrehozTermek"
 					]
 				}
 			},
@@ -154,6 +154,35 @@
 						"rendeles",
 						"rendelesTorles",
 						"53"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RendelesLetrehozBerlet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"berlet_vasarlasID\":2,\r\n    \"megjegyzes\":\"alma\",\r\n    \"felhasznaloID\":12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rendeles/rendelesLetrehozBerlet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rendeles",
+						"rendelesLetrehozBerlet"
 					]
 				}
 			},

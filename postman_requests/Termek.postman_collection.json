@@ -47,34 +47,13 @@
 			"response": []
 		},
 		{
-			"name": "TemekOlvasCegByID",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/termek/termekOlvasCegByID/4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"termek",
-						"termekOlvasCegByID",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "TermekLetrehoz",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"termek_nev\":\"Amogus\",\r\n    \"kategoria\":\"körte\",\r\n    \"ar\":\"69123\",\r\n    \"kep\":[47,45],\r\n    \"keszlet\":10,\r\n    \"leiras\":\"impostor\",\r\n    \"cegID\":3\r\n}",
+					"raw": "{\r\n    \"termek_nev\":\"Amogus\",\r\n    \"kategoria\":\"körte\",\r\n    \"ar\":\"69123\",\r\n    \"kep\":[47,45],\r\n    \"keszlet\":10,\r\n    \"leiras\":\"impostor\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -103,7 +82,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"termekID\":47,\r\n    \"termek_nev\":\"Amogus\",\r\n    \"kategoria\":\"körte\",\r\n    \"ar\":\"69123\",\r\n    \"kep\":[47,45],\r\n    \"keszlet\":10,\r\n    \"kaphato\":true,\r\n    \"leiras\":\"impostor\",\r\n    \"cegID\":3\r\n}",
+					"raw": "{\r\n    \"termekID\":47,\r\n    \"termek_nev\":\"Amogus\",\r\n    \"kategoria\":\"körte\",\r\n    \"ar\":\"69123\",\r\n    \"kep\":[47,45],\r\n    \"keszlet\":10,\r\n    \"kaphato\":true,\r\n    \"leiras\":\"impostor\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

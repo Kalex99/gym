@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"felhasznalonev\":\"alma\",\r\n    \"jelszo\":\"quia\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"anr@anoth.com\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"tartozkodasihelyID\":1\r\n}",
+					"raw": "{\r\n    \"felhasznalonev\":\"alma\",\r\n    \"jelszo\":\"quia\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"anr@anoth.com\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"felh_telefon\":\"06205879168\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -62,7 +62,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"felhasznaloID\": 79,\r\n    \"felhasznalonev\":\"impostor\",\r\n    \"jelszo\":\"soigj489z9843h\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"ithub@idk.com\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"szuletesi_datum\":\"1999-07-12\",\r\n    \"tartozkodasihelyID\":1\r\n}\r\n",
+					"raw": "{\r\n    \"felhasznaloID\": 79,\r\n    \"felhasznalonev\":\"impostor\",\r\n    \"jelszo\":\"soigj489z9843h\",\r\n    \"felh_vezeteknev\":\"Sanya\",\r\n    \"felh_keresztnev\":\"Macska\",\r\n    \"felh_email\":\"ithub@idk.com\",\r\n    \"felh_telefon\":\"06205879168\",\r\n    \"szuletesi_datum\":\"1999-07-12\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -126,48 +126,6 @@
 			"response": []
 		},
 		{
-			"name": "BejelentkezesSzemelyiEdzo",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/felhasznalo/bejelentkezesSzemelyiEdzo/0",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"felhasznalo",
-						"bejelentkezesSzemelyiEdzo",
-						"0"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "BejelentkezesTartozkodasihely",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/felhasznalo/bejelentkezesTartozkodasihely/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"felhasznalo",
-						"bejelentkezesTartozkodasihely",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "FelhasznaloGetByID",
 			"request": {
 				"auth": {
@@ -188,7 +146,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/felhasznalo/felhasznaloOlvasasByID/16",
+					"raw": "http://localhost:8080/felhasznalo/felhasznaloOlvasasByID/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -197,36 +155,7 @@
 					"path": [
 						"felhasznalo",
 						"felhasznaloOlvasasByID",
-						"16"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Test",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"tartozkodasihely\":{\r\n        \"iranyitoszam\":3,\r\n        \"varos\":\"ksdfns\"\r\n    },\r\n    \"felhasznalo\":{\r\n        \"felhasznalonev\":\"iuzt\",\r\n        \"jelszo\":\"lkjhf\"\r\n    }\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/felhasznalo/Test",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"felhasznalo",
-						"Test"
+						"2"
 					]
 				}
 			},
