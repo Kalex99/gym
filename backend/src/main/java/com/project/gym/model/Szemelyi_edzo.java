@@ -14,27 +14,8 @@ import java.util.Arrays;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_keresztnev", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "portre", type = byte[].class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_email", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_telefon", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class)
-                }),
-        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasFelhasznaloByID", procedureName = "Szemelyi_edzoOlvasFelhasznaloByID",
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felhasznaloID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_vezeteknev", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_keresztnev", type = String.class)
-                }),
-        @NamedStoredProcedureQuery(name = "Szemelyi_edzoOlvasTartozkodasihelyByID", procedureName = "Szemelyi_edzoOlvasTartozkodasihelyByID",
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "iranyitoszam", type = Integer.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "varos", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_neve", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_jellege", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "haz_szam", type = Integer.class)
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_telefon", type = String.class)
                 })
-
 })
 
 public class Szemelyi_edzo implements Serializable {
@@ -58,9 +39,6 @@ public class Szemelyi_edzo implements Serializable {
     @Column
     private String szemedz_telefon;
 
-    @Column(name = "tartozkodasihelyID", insertable = false, updatable = false)
-    private Long tartozkodasihelyID;
-
     public Szemelyi_edzo() {
     }
 
@@ -71,7 +49,6 @@ public class Szemelyi_edzo implements Serializable {
         this.portre = portre;
         this.szemedz_email = szemedz_email;
         this.szemedz_telefon = szemedz_telefon;
-        this.tartozkodasihelyID = tartozkodasihelyID;
     }
 
     public Long getSzemelyi_edzoID() {
@@ -120,26 +97,5 @@ public class Szemelyi_edzo implements Serializable {
 
     public void setSzemedz_telefon(String szemedz_telefon) {
         this.szemedz_telefon = szemedz_telefon;
-    }
-
-    public Long getTartozkodasihelyID() {
-        return tartozkodasihelyID;
-    }
-
-    public void setTartozkodasihelyID(Long tartozkodasihelyID) {
-        this.tartozkodasihelyID = tartozkodasihelyID;
-    }
-
-    @Override
-    public String toString() {
-        return "szemelyi_edzo{" +
-                "szemelyi_edzoID=" + szemelyi_edzoID +
-                ", szemedz_vezeteknev='" + szemedz_vezeteknev + '\'' +
-                ", szemedz_keresztnev='" + szemedz_keresztnev + '\'' +
-                ", portre=" + Arrays.toString(portre) +
-                ", szemedz_email='" + szemedz_email + '\'' +
-                ", szemedz_telefon='" + szemedz_telefon + '\'' +
-                ", tartozkodasihelyID=" + tartozkodasihelyID +
-                '}';
     }
 }

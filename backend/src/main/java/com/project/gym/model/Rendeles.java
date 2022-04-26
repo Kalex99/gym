@@ -31,8 +31,7 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_vezeteknev", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_keresztnev", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_email", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_telefon", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class)
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_telefon", type = String.class)
                 }),
         @NamedStoredProcedureQuery(name = "RendelesOlvasTermekByID", procedureName = "RendelesOlvasTermekByID",
                 parameters = {
@@ -42,8 +41,7 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kategoria", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ar", type = Integer.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kep", type = byte[].class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "leiras", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "cegID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "leiras", type = String.class)
                 })
 
 })
@@ -128,17 +126,5 @@ public class Rendeles implements Serializable {
 
     public void setFelhasznaloID(Long felhasznaloID) {
         this.felhasznaloID = felhasznaloID;
-    }
-
-    @Override
-    public String toString() {
-        return "Rendeles{" +
-                "rendelesID=" + rendelesID +
-                ", rendeles_idopont=" + rendeles_idopont +
-                ", megjegyzes='" + megjegyzes + '\'' +
-                ", termekID=" + termekID +
-                ", berlet_vasarlasID=" + berlet_vasarlasID +
-                ", felhasznaloID=" + felhasznaloID +
-                '}';
     }
 }

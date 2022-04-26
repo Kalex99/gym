@@ -32,11 +32,18 @@ public interface RendelesRep extends JpaRepository<Rendeles, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "{call RendelesLetrehoz(:megjegyzes, :termekID, :berlet_vasarlasID, :felhasznaloID)}", nativeQuery = true)
-    void RendelesLetrehoz(
-            @Param("megjegyzes") String berlet_tipus,
-            @Param("termekID") Long termekID,
+    @Query(value = "{call RendelesLetrehozBerlet(:berlet_vasarlasID, :megjegyzes, :felhasznaloID)}", nativeQuery = true)
+    void RendelesLetrehozBerlet(
             @Param("berlet_vasarlasID") Long berlet_vasarlasID,
+            @Param("megjegyzes") String megjegyzes,
+            @Param("felhasznaloID") Long felhasznaloID
+    );
+    @Transactional
+    @Modifying
+    @Query(value = "{call RendelesLetrehozTermek(:termekID, :megjegyzes, :felhasznaloID)}", nativeQuery = true)
+    void RendelesLetrehozTermek(
+            @Param("termekID") Long termekID,
+            @Param("megjegyzes") String megjegyzes,
             @Param("felhasznaloID") Long felhasznaloID
     );
 

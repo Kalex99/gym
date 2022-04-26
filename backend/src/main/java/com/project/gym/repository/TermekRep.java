@@ -20,21 +20,16 @@ public interface TermekRep extends JpaRepository<Termek, Long> {
     @Procedure(name = "TermekOlvasByID")
     Iterable<String> TermekOlvasByID(@Param("termekID") Long termekID);
 
-    @Procedure(name = "TermekOlvasCegByID")
-    Iterable<String> TermekOlvasCegByID(@Param("termekID") Long termekID);
-
-
     @Transactional
     @Modifying
-    @Query(value = "{call TermekLetrehoz(:termek_nev, :kategoria, :ar, :kep, :keszlet, :leiras, :cegID)}", nativeQuery = true)
+    @Query(value = "{call TermekLetrehoz(:termek_nev, :kategoria, :ar, :kep, :keszlet, :leiras)}", nativeQuery = true)
     void TermekLetrehoz(
             @Param("termek_nev") String termek_nev,
             @Param("kategoria") String kategoria,
             @Param("ar") Integer ar,
             @Param("kep") byte[] kep,
             @Param("keszlet") Integer keszlet,
-            @Param("leiras") String leiras,
-            @Param("cegID") Long cegID
+            @Param("leiras") String leiras
     );
 
     @Transactional
@@ -44,7 +39,7 @@ public interface TermekRep extends JpaRepository<Termek, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "{call TermekModosit(:termekID,:termek_nev, :kategoria, :ar, :kep, :keszlet, :kaphato, :leiras, :cegID)}", nativeQuery = true)
+    @Query(value = "{call TermekModosit(:termekID,:termek_nev, :kategoria, :ar, :kep, :keszlet, :kaphato, :leiras)}", nativeQuery = true)
     void TermekModosit(
             @Param("termekID") Long termekID,
             @Param("termek_nev") String termek_nev,
@@ -53,7 +48,6 @@ public interface TermekRep extends JpaRepository<Termek, Long> {
             @Param("kep") byte[] kep,
             @Param("keszlet") Integer keszlet,
             @Param("kaphato") Boolean kaphato,
-            @Param("leiras") String leiras,
-            @Param("cegID") Long cegID
+            @Param("leiras") String leiras
     );
 }

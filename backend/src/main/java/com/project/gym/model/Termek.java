@@ -17,17 +17,7 @@ import java.util.Arrays;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kep", type = byte[].class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "keszlet", type = Integer.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kaphato", type = Boolean.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "leiras", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "cegID", type = Long.class),
-                }),
-        @NamedStoredProcedureQuery(name = "TermekOlvasCegByID", procedureName = "TermekOlvasCegByID",
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "termekID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "cegID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_nev", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_email", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ceg_telefon", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "leiras", type = String.class)
                 })
 })
 public class Termek implements Serializable {
@@ -57,13 +47,10 @@ public class Termek implements Serializable {
     @Column
     private String leiras;
 
-    @Column(name = "cegID", insertable = false, updatable = false)
-    private Long cegID;
-
     public Termek() {
     }
 
-    public Termek(Long termekID, String termek_nev, String kategoria, Integer ar, byte[] kep, Integer keszlet, Boolean kaphato, String leiras, Long cegID) {
+    public Termek(Long termekID, String termek_nev, String kategoria, Integer ar, byte[] kep, Integer keszlet, Boolean kaphato, String leiras) {
         this.termekID = termekID;
         this.termek_nev = termek_nev;
         this.kategoria = kategoria;
@@ -72,7 +59,6 @@ public class Termek implements Serializable {
         this.keszlet = keszlet;
         this.kaphato = kaphato;
         this.leiras = leiras;
-        this.cegID = cegID;
     }
 
     public Long getTermekID() {
@@ -139,26 +125,4 @@ public class Termek implements Serializable {
         this.leiras = leiras;
     }
 
-    public Long getCegID() {
-        return cegID;
-    }
-
-    public void setCegID(Long cegID) {
-        this.cegID = cegID;
-    }
-
-    @Override
-    public String toString() {
-        return "Termek{" +
-                "termekID=" + termekID +
-                ", termek_nev='" + termek_nev + '\'' +
-                ", kategoria='" + kategoria + '\'' +
-                ", ar=" + ar +
-                ", kep=" + Arrays.toString(kep) +
-                ", keszlet=" + keszlet +
-                ", kaphato=" + kaphato +
-                ", leiras='" + leiras + '\'' +
-                ", cegID=" + cegID +
-                '}';
-    }
 }

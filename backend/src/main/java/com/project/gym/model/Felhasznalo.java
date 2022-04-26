@@ -29,28 +29,8 @@ import java.util.Date;
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_keresztnev", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szuletesi_datum", type = Date.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_email", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_telefon", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class)
-                }),
-        @NamedStoredProcedureQuery(name = "BejelentkezesSzemelyiEdzo", procedureName = "BejelentkezesSzemelyiEdzo",
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "felhasznaloID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemelyi_edzoID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_vezeteknev", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_keresztnev", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "portre", type = byte[].class)
-                }),
-        @NamedStoredProcedureQuery(name = "BejelentkezesTartozkodasihely", procedureName = "BejelentkezesTartozkodasihely",
-                parameters = {
-                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "felhasznaloID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "tartozkodasihelyID", type = Long.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "iranyitoszam", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "varos", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_neve", type = Integer.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kozterulet_jellege", type = byte[].class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "haz_szam", type = String.class)
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "felh_telefon", type = String.class)
                 })
-
 })
 
 public class Felhasznalo implements Serializable {
@@ -73,14 +53,11 @@ public class Felhasznalo implements Serializable {
     @Column
     private String felh_telefon;
 
-    @Column(name = "tartozkodasihelyID", insertable = false, updatable = false)
-    private Long tartozkodasihelyID;
-
     public Felhasznalo() {
     }
 
     @Autowired
-    public Felhasznalo(Long felhasznaloID, String felhasznalonev, String jelszo, String felh_vezeteknev, String felh_keresztnev, Date szuletesi_datum, String felh_email, String felh_telefon, Long tartozkodasihelyID) {
+    public Felhasznalo(Long felhasznaloID, String felhasznalonev, String jelszo, String felh_vezeteknev, String felh_keresztnev, Date szuletesi_datum, String felh_email, String felh_telefon) {
         this.felhasznaloID = felhasznaloID;
         this.felhasznalonev = felhasznalonev;
         this.jelszo = jelszo;
@@ -89,7 +66,6 @@ public class Felhasznalo implements Serializable {
         this.szuletesi_datum = szuletesi_datum;
         this.felh_email = felh_email;
         this.felh_telefon = felh_telefon;
-        this.tartozkodasihelyID = tartozkodasihelyID;
     }
 
 
@@ -156,29 +132,5 @@ public class Felhasznalo implements Serializable {
     public void setFelh_telefon(String felh_telefon) {
         this.felh_telefon = felh_telefon;
     }
-
-    public Long getTartozkodasihelyID() {
-        return tartozkodasihelyID;
-    }
-
-    public void setTartozkodasihelyID(Long tartozkodasihelyID) {
-        this.tartozkodasihelyID = tartozkodasihelyID;
-    }
-
-    @Override
-    public String toString() {
-        return "Felhasznalo{" +
-                "felhasznaloID=" + felhasznaloID +
-                ", felhasznalonev='" + felhasznalonev + '\'' +
-                ", jelszo='" + jelszo + '\'' +
-                ", felh_vezeteknev='" + felh_vezeteknev + '\'' +
-                ", felh_keresztnev='" + felh_keresztnev + '\'' +
-                ", szuletesi_datum=" + szuletesi_datum +
-                ", felh_email='" + felh_email + '\'' +
-                ", felh_telefon='" + felh_telefon + '\'' +
-                ", tartozkodasihelyID='" + tartozkodasihelyID + '\'' +
-                '}';
-    }
-
 
 }

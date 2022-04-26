@@ -4,7 +4,7 @@ import com.project.gym.exception.NotFoundE.ApiNotFoundException;
 import com.project.gym.model.*;
 import com.project.gym.repository.Berlet_vasarlasRep;
 import com.project.gym.service.GymService;
-import com.project.gym.test.FelhasznaloTartozkodasihely;
+//import com.project.gym.test.FelhasznaloTartozkodasihely;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,22 +35,6 @@ public class GymController {
         return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
     }
 
-    @GetMapping("felhasznalo/bejelentkezesSzemelyiEdzo/{felhasznaloID}")
-    @Transactional
-    public ResponseEntity<?> BejelentkezesSzemelyiEdzo(@PathVariable("felhasznaloID") Long felhasznaloID) {
-        Iterable<String> felhasznalo = gymService.BejelentkezesSzemelyiEdzo(felhasznaloID);
-        isEmpty(felhasznalo);
-        return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
-    }
-
-    @GetMapping("felhasznalo/bejelentkezesTartozkodasihely/{felhasznaloID}")
-    @Transactional
-    public ResponseEntity<?> BejelentkezesTartozkodasihely(@PathVariable("felhasznaloID") Long felhasznaloID) {
-        Iterable<String> felhasznalo = gymService.BejelentkezesTartozkodasihely(felhasznaloID);
-        isEmpty(felhasznalo);
-        return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
-    }
-
     @GetMapping("felhasznalo/felhasznaloOlvasasByID/{felhasznaloID}")
     @Transactional
     public ResponseEntity<?> FelhasznaloOlvasByID(@PathVariable("felhasznaloID") Long felhasznaloID) {
@@ -65,12 +49,6 @@ public class GymController {
         return new ResponseEntity<>("Az új felhasználó létrejött!", HttpStatus.CREATED);
     }
 
-    @PostMapping("felhasznalo/Test")
-    public ResponseEntity<?> Test(@RequestBody FelhasznaloTartozkodasihely felhasznaloTartozkodasihely) {
-        gymService.Test(felhasznaloTartozkodasihely);
-        return new ResponseEntity<>("Az új felhasználó létrejött!", HttpStatus.CREATED);
-    }
-
     @DeleteMapping("felhasznalo/felhTorles/{felhasznaloID}")
     public ResponseEntity<?> FelhasznaloTorles(@PathVariable("felhasznaloID") Long felhasznaloID) {
         gymService.FelhasznaloTorles(felhasznaloID);
@@ -81,41 +59,6 @@ public class GymController {
     public ResponseEntity<?> FelhasznaloModosit(@RequestBody Felhasznalo felhasznalo) {
         gymService.FelhasznaloModosit(felhasznalo);
         return new ResponseEntity<>("A felhasználó módosításra került!", HttpStatus.OK);
-    }
-
-    //**********************************************************************************
-
-    @GetMapping("tartozkodasihely/tartHelyOlvas")
-    public ResponseEntity<List<Tartozkodasihely>> TartozkodasihelyOlvas() {
-        List<Tartozkodasihely> lista = gymService.TartozkodasihelyOlvas();
-        if(lista.isEmpty()) throw new ApiNotFoundException("A tartozkodási helyek nem találhatóak meg!");
-        return new ResponseEntity<>(lista, HttpStatus.OK);
-    }
-
-    @GetMapping("tartozkodasihely/tartozkodasihelyOlvasByID/{tartozkodasihelyID}")
-    @Transactional
-    public ResponseEntity<?> TartozkodasihelyOlvasByID(@PathVariable("tartozkodasihelyID") Long tartozkodasihelyID) {
-        Iterable<String> tartozkodasihely = gymService.TartozkodasihelyOlvasByID(tartozkodasihelyID);
-        isEmpty(tartozkodasihely);
-        return new ResponseEntity<>(tartozkodasihely, HttpStatus.OK);
-    }
-
-    @PostMapping("tartozkodasihely/tartLetrehoz")
-    public ResponseEntity<?> TartozkodasihelyLetrehoz(@RequestBody Tartozkodasihely tartozkodasihely) {
-        gymService.TartozkodasihelyLetrehoz(tartozkodasihely);
-        return new ResponseEntity<>("Az új tartózkodási hely létrejött!", HttpStatus.OK);
-    }
-
-    @DeleteMapping("tartozkodasihely/tartTorles/{tartozkodasihelyID}")
-    public ResponseEntity<?> TartozkodasihelyTorles(@PathVariable("tartozkodasihelyID") Long tartozkodasihelyID) {
-        gymService.TartozkodasihelyTorles(tartozkodasihelyID);
-        return new ResponseEntity<>("A tartózkodási hely törlésre került!", HttpStatus.OK);
-    }
-
-    @PutMapping("tartozkodasihely/tartModosit")
-    public ResponseEntity<?> TartozkodasihelyModosit(@RequestBody Tartozkodasihely tartozkodasihely) {
-        gymService.TartozkodasihelyModosit(tartozkodasihely);
-        return new ResponseEntity<>("A tartózkodási hely módosításra került!", HttpStatus.OK);
     }
 
     //**********************************************************************************
@@ -193,9 +136,14 @@ public class GymController {
         return new ResponseEntity<>(rendeles, HttpStatus.OK);
     }
 
-    @PostMapping("rendeles/rendelesLetrehoz")
-    public ResponseEntity<?> RendelesLetrehoz(@RequestBody Rendeles rendeles) {
-        gymService.RendelesLetrehoz(rendeles);
+    @PostMapping("rendeles/rendelesLetrehozBerlet")
+    public ResponseEntity<?> RendelesLetrehozBerlet(@RequestBody Rendeles rendeles) {
+        gymService.RendelesLetrehozBerlet(rendeles);
+        return new ResponseEntity<>("Az új rendelés létrejött!", HttpStatus.OK);
+    }
+    @PostMapping("rendeles/rendelesLetrehozTermek")
+    public ResponseEntity<?> RendelesLetrehozTermek(@RequestBody Rendeles rendeles) {
+        gymService.RendelesLetrehozTermek(rendeles);
         return new ResponseEntity<>("Az új rendelés létrejött!", HttpStatus.OK);
     }
 
@@ -203,48 +151,6 @@ public class GymController {
     public ResponseEntity<?> RendelesTorles(@PathVariable("rendelesID") Long rendelesID) {
         gymService.RendelesTorles(rendelesID);
         return new ResponseEntity<>("A rendelés törlésre került!", HttpStatus.OK);
-    }
-    //**********************************************************************************
-
-    @GetMapping("ceg/cegOlvas")
-    public ResponseEntity<List<Ceg>> CegOlvas() {
-        List<Ceg> lista = gymService.CegOlvas();
-        if(lista.isEmpty()) throw new ApiNotFoundException("A cégek nem találhatóak meg!");
-        return new ResponseEntity<>(lista, HttpStatus.OK);
-    }
-
-    @GetMapping("ceg/cegOlvasByID/{cegID}")
-    @Transactional
-    public ResponseEntity<?> CegOlvasByID(@PathVariable("cegID") Long cegID) {
-        Iterable<String> ceg = gymService.CegOlvasByID(cegID);
-        isEmpty(ceg);
-        return new ResponseEntity<>(ceg, HttpStatus.OK);
-    }
-
-    @GetMapping("ceg/cegOlvasTartozkodasihelyByID/{cegID}")
-    @Transactional
-    public ResponseEntity<?> CegOlvasTartozkodasihelyByID(@PathVariable("cegID") Long cegID) {
-        Iterable<String> ceg = gymService.CegOlvasTartozkodasihelyByID(cegID);
-        isEmpty(ceg);
-        return new ResponseEntity<>(ceg, HttpStatus.OK);
-    }
-
-    @PostMapping("ceg/cegLetrehoz")
-    public ResponseEntity<?> CegLetrehoz(@RequestBody Ceg ceg) {
-        gymService.CegLetrehoz(ceg);
-        return new ResponseEntity<>("Az új cég létrejött!", HttpStatus.OK);
-    }
-
-    @DeleteMapping("ceg/cegTorles/{cegID}")
-    public ResponseEntity<?> CegTorles(@PathVariable("cegID") Long cegID) {
-        gymService.CegTorles(cegID);
-        return new ResponseEntity<>("A cég törlésre került!", HttpStatus.OK);
-    }
-
-    @PutMapping("ceg/cegModosit")
-    public ResponseEntity<?> CegModosit(@RequestBody Ceg ceg) {
-        gymService.CegModosit(ceg);
-        return new ResponseEntity<>("A cég módosításra került!", HttpStatus.OK);
     }
     //**********************************************************************************
 
@@ -259,14 +165,6 @@ public class GymController {
     @Transactional
     public ResponseEntity<?> TermekOlvasByID(@PathVariable("termekID") Long termekID) {
         Iterable<String> termek = gymService.TermekOlvasByID(termekID);
-        isEmpty(termek);
-        return new ResponseEntity<>(termek, HttpStatus.OK);
-    }
-
-    @GetMapping("termek/termekOlvasCegByID/{termekID}")
-    @Transactional
-    public ResponseEntity<?> TermekOlvasCegByID(@PathVariable("termekID") Long termekID) {
-        Iterable<String> termek = gymService.TermekOlvasCegByID(termekID);
         isEmpty(termek);
         return new ResponseEntity<>(termek, HttpStatus.OK);
     }
@@ -301,22 +199,6 @@ public class GymController {
     @Transactional
     public ResponseEntity<?> Szemelyi_edzoOlvasByID(@PathVariable("szemelyi_edzoID") Long szemelyi_edzoID) {
         Iterable<String> szemelyiEdzo = gymService.Szemelyi_edzoOlvasByID(szemelyi_edzoID);
-        isEmpty(szemelyiEdzo);
-        return new ResponseEntity<>(szemelyiEdzo, HttpStatus.OK);
-    }
-
-    @GetMapping("szemelyiEdzo/szemelyi_edzoOlvasFelhasznaloByID/{szemelyi_edzoID}")
-    @Transactional
-    public ResponseEntity<?> Szemelyi_edzoOlvasFelhasznaloByID(@PathVariable("szemelyi_edzoID") Long szemelyi_edzoID) {
-        Iterable<String> szemelyiEdzo = gymService.Szemelyi_edzoOlvasFelhasznaloByID(szemelyi_edzoID);
-        isEmpty(szemelyiEdzo);
-        return new ResponseEntity<>(szemelyiEdzo, HttpStatus.OK);
-    }
-
-    @GetMapping("szemelyiEdzo/szemelyi_edzoOlvasTartozkodasihelyByID/{szemelyi_edzoID}")
-    @Transactional
-    public ResponseEntity<?> Szemelyi_edzoOlvasTartozkodasihelyByID(@PathVariable("szemelyi_edzoID") Long szemelyi_edzoID) {
-        Iterable<String> szemelyiEdzo = gymService.Szemelyi_edzoOlvasTartozkodasihelyByID(szemelyi_edzoID);
         isEmpty(szemelyiEdzo);
         return new ResponseEntity<>(szemelyiEdzo, HttpStatus.OK);
     }

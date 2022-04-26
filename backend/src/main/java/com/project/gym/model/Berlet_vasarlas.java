@@ -57,12 +57,4 @@ public class Berlet_vasarlas implements Serializable {
         this.berlet_ar = berlet_ar;
     }
 
-    @Override
-    public String toString() {
-        return "Berlet_vasarlas{" +
-                "berlet_vasarlasID=" + berlet_vasarlasID +
-                ", berlet_tipus='" + berlet_tipus + '\'' +
-                ", berlet_ar=" + berlet_ar +
-                '}';
-    }
 }
