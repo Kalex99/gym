@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+body {
+    font-family: 'Bebas Neue', sans-serif;
+    margin-top:50px ;
+}
+header{
+    height: 50px;
+    padding: 10px;
+    font-family: 'Bebas Neue',sans-serif;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    background-image:linear-gradient(to top ,#000000, #000000, rgba(255, 255, 255, 0));
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: rgb(255, 255, 255);
+    grid-area: header;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-areas: 
+    "logo h3";
+    place-content: center;
+    place-items: center;
+}
+h3{
+    grid-area: h3;
+}
+.bg {
+    background-image: linear-gradient(-60deg, rgb(10, 10, 10) 50%, rgb(66, 66, 66) 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+}
+.logo{
+    width: 70px;
+    bottom: 5px;
+    grid-area: logo;
+    place-content: center;
+}
+
+#container{
+    width:1000px;    
+    height: auto;  
+    margin: auto;  
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns:  1, auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 
+    "header"
+    "content"
+    "footer";
+        
+}
+#article {
+    background-color: #adadad;
+    color: black;
+    grid-area: content;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto ;
+    gap: 20px;
+    grid-template-areas: 
+    "nav middle";
+}
+.middle{
+    left: 20px;
+    padding-top: 15px;
+    grid-area: middle;
+    text-align: center;
+    place-content: center;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 
+    "middle-pic"
+    "middle-caption"
+    "table";
+}
+#table{
+    grid-area: table;
+    text-align: left;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+.tr2:hover {
+    background-color: rgba(255, 0, 0, 0.645);
+}
+.tr1{
+    background-color: #000;
+    font-style: normal;
+    color: #fefefe;
+    font-size: large;
+    letter-spacing: 0.5px;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+  
+  /* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+nav {
+    width: 150px;
+    background: #8d8d8d; 
+    grid-area: nav;
+}
+nav ul {
+    list-style-type: none;
+    padding: 10px;
+    
+    
+}
+nav ul li {    
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.btn.btn-secondary{
+    background-color: black;
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+}
+footer {
+    height: 50px;
+    background-color: #777;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    grid-area: footer;
+}
