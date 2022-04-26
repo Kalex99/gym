@@ -38,6 +38,7 @@ public interface RendelesRep extends JpaRepository<Rendeles, Long> {
             @Param("megjegyzes") String megjegyzes,
             @Param("felhasznaloID") Long felhasznaloID
     );
+
     @Transactional
     @Modifying
     @Query(value = "{call RendelesLetrehozTermek(:termekID, :megjegyzes, :felhasznaloID)}", nativeQuery = true)

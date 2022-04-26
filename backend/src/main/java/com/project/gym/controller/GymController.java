@@ -2,9 +2,7 @@ package com.project.gym.controller;
 
 import com.project.gym.exception.NotFoundE.ApiNotFoundException;
 import com.project.gym.model.*;
-import com.project.gym.repository.Berlet_vasarlasRep;
 import com.project.gym.service.GymService;
-//import com.project.gym.test.FelhasznaloTartozkodasihely;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +21,13 @@ public class GymController {
     @GetMapping("felhasznalo/felhOlvas")
     public ResponseEntity<List<Felhasznalo>> FelhasznaloOlvas() {
         List<Felhasznalo> lista = gymService.FelhasznaloOlvas();
-        if(lista.isEmpty()) throw new ApiNotFoundException("A felhasználók nem találhatóak meg!");
+        if (lista.isEmpty()) throw new ApiNotFoundException("A felhasználók nem találhatóak meg!");
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
     @GetMapping("felhasznalo/bejelentkezesRendeles/{felhasznaloID}")
     @Transactional
-    public ResponseEntity<?> BejelentkezesRendeles(@PathVariable("felhasznaloID") Long felhasznaloID){
+    public ResponseEntity<?> BejelentkezesRendeles(@PathVariable("felhasznaloID") Long felhasznaloID) {
         Iterable<String> felhasznalo = gymService.BejelentkezesRendeles(felhasznaloID);
         isEmpty(felhasznalo);
         return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
@@ -65,7 +63,7 @@ public class GymController {
     @GetMapping("berletVasarlas/berletOlvas")
     public ResponseEntity<List<Berlet_vasarlas>> Berlet_vasarlasOlvas() {
         List<Berlet_vasarlas> lista = gymService.Berlet_vasarlasOlvas();
-        if(lista.isEmpty()) throw new ApiNotFoundException("A bérletek nem találhatóak meg!");
+        if (lista.isEmpty()) throw new ApiNotFoundException("A bérletek nem találhatóak meg!");
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
@@ -100,7 +98,7 @@ public class GymController {
     @GetMapping("rendeles/rendelesOlvas")
     public ResponseEntity<List<Rendeles>> RendelesOlvas() {
         List<Rendeles> lista = gymService.RendelesOlvas();
-        if(lista.isEmpty()) throw new ApiNotFoundException("A rendelések nem találhatóak meg!");
+        if (lista.isEmpty()) throw new ApiNotFoundException("A rendelések nem találhatóak meg!");
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
@@ -141,6 +139,7 @@ public class GymController {
         gymService.RendelesLetrehozBerlet(rendeles);
         return new ResponseEntity<>("Az új rendelés létrejött!", HttpStatus.OK);
     }
+
     @PostMapping("rendeles/rendelesLetrehozTermek")
     public ResponseEntity<?> RendelesLetrehozTermek(@RequestBody Rendeles rendeles) {
         gymService.RendelesLetrehozTermek(rendeles);
@@ -157,7 +156,7 @@ public class GymController {
     @GetMapping("termek/termekOlvas")
     public ResponseEntity<List<Termek>> TermekOlvas() {
         List<Termek> lista = gymService.TermekOlvas();
-        if(lista.isEmpty()) throw new ApiNotFoundException("A termékek nem találhatóak meg!");
+        if (lista.isEmpty()) throw new ApiNotFoundException("A termékek nem találhatóak meg!");
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
 
@@ -192,9 +191,10 @@ public class GymController {
     @GetMapping("szemelyiEdzo/szemEdzoOlvas")
     public ResponseEntity<List<Szemelyi_edzo>> Szemelyi_edzoOlvas() {
         List<Szemelyi_edzo> lista = gymService.Szemelyi_edzoOlvas();
-        if(lista.isEmpty()) throw new ApiNotFoundException("A személyi edzők nem találhatóak meg!");
+        if (lista.isEmpty()) throw new ApiNotFoundException("A személyi edzők nem találhatóak meg!");
         return new ResponseEntity<>(lista, HttpStatus.OK);
     }
+
     @GetMapping("szemelyiEdzo/szemelyi_edzoOlvasByID/{szemelyi_edzoID}")
     @Transactional
     public ResponseEntity<?> Szemelyi_edzoOlvasByID(@PathVariable("szemelyi_edzoID") Long szemelyi_edzoID) {
@@ -223,9 +223,9 @@ public class GymController {
 
     public static void isEmpty(Iterable<?> iterable) {
         int counter = 0;
-        for (Object obj : iterable){
+        for (Object obj : iterable) {
             counter++;
         }
-        if(counter==0) throw new ApiNotFoundException("Nem található érték az adott ID-nál!");
+        if (counter == 0) throw new ApiNotFoundException("Nem található érték az adott ID-nál!");
     }
 }

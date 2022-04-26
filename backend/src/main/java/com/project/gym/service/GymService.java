@@ -3,7 +3,6 @@ package com.project.gym.service;
 import com.project.gym.exception.BadRequestE.ApiBadRequestException;
 import com.project.gym.model.*;
 import com.project.gym.repository.*;
-//import com.project.gym.test.FelhasznaloTartozkodasihely;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -148,6 +147,7 @@ public class GymService {
             throw new ApiBadRequestException("Nem lehet null érték semmelyik érték megadásnál!");
         }
     }
+
     public void RendelesLetrehozTermek(Rendeles rendeles) {
         if (isNull(rendeles.getTermekID())
                 && isNull(rendeles.getFelhasznaloID())) {

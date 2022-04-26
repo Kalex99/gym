@@ -1,7 +1,6 @@
 package com.project.gym.repository;
 
 import com.project.gym.model.Berlet_vasarlas;
-import com.project.gym.model.Felhasznalo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
