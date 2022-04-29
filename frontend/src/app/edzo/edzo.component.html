@@ -1,0 +1,65 @@
+<div id="container">
+    <header>
+        <h3>Land of Fitness Gym</h3>
+        <img class="logo" src="../../assets/images/final_logo.svg" alt="logo">
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+    </header>
+    <div id="article">
+        <nav>
+            <ul>
+                <li>
+                    <a routerLink="/fooldal-component" class="btn btn-secondary btn-lg btn-block" routerLinkActive="active">FŐMENÜ</a>
+                </li>
+                <li>
+                    <a href="regist_kuczi_daniel/regist.html" target="_blank" class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" href="login.html" target="_blank">BELÉPÉS</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="middle">
+            <a><img src="../../assets/images/2.jpg" alt="1. kép"></a>
+            <p>Személyi edzőink tapasztaltak és segítőkészek. Ha nálunk jársz, ne habozz kikérni véleményüket tanácsaikat!
+            </p>
+            <table id="table">
+                <tr class="tr1">
+                   <th>Vezetéknév</th>
+                   <th>Keresztnév</th>
+                   <th>Tel.:</th>
+                   <th>E-mail</th>
+                </tr>
+                <tr class="tr2">
+                   <td *ngFor="let edzo of edzok">{{edzo.edzo_vezeteknev}}</td>
+                   <td ></td>
+                   <td>ffi</td>
+                   <td>kokszjani@gmail.com</td>
+                </tr>
+                <tr class="tr1">
+                   <td>Kreatin pezsgőtab.</td>
+                   <td></td>
+                   <td>1200 Ft</td>
+                   <td>72 g/18 db</td>
+                </tr>
+                <tr class="tr2">
+                   <td>Kollagén italpor</td>
+                   <td></td>
+                   <td>7000 Ft</td>
+                   <td>500 g</td>
+                </tr>
+                <tr class="tr1">
+                   <td>Fehérjepor</td>
+                   <td></td>
+                   <td>4000 Ft</td>
+                   <td>300 g</td>
+                </tr>
+                
+            </table>
+        </div>
+    </div>
+    <footer>
+        <p>© Kuczi Dániel / Kovácsfi Alex / Kovács Richárd</p>
+    </footer>
+</div>
