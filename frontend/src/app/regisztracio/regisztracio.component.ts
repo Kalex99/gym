@@ -18,14 +18,14 @@ export class RegisztracioComponent implements OnInit {
   constructor(private GymService: GymService) { }
 
   ngOnInit(): void {
+    this.onAddFelhasznalo;
   }
   public onAddFelhasznalo(addForm: NgForm):void {
     document.getElementById('add-felhasznalo-form')?.click();
     this.GymService.addFelhasznalok(addForm.value).subscribe(
       (response: Felhasznalo) =>{
         console.log(response);
-        this.getFelhasznalok();
-        addForm.reset();
+        
       },
       (error: HttpErrorResponse) =>{
         alert(error.message);
@@ -33,7 +33,5 @@ export class RegisztracioComponent implements OnInit {
       }
     );
   }
-  getFelhasznalok() {
-    throw new Error('Method not implemented.');
-  }
+  
 }

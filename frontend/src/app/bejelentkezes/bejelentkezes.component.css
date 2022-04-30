@@ -107,3 +107,33 @@ footer {
     border-bottom-right-radius: 15px;
     grid-area: footer;
 }
+@media (max-width: 1000px){
+    #container{
+        width: 600px;
+    }
+}
+@media (max-width: 650px){
+    #container{
+        width: 300px;
+        align-self: center;
+    }
+    nav{
+        width: 110px;
+        font-weight: 200;
+    }
+    .btn.btn-secondary{
+        font-size: 15px;
+        font-weight: 200;
+    }
+    .form-group{
+        width: 150px;
+        align-self: left;
+        align-items: left;
+        margin-right: 15px;
+    }
+}
+@media (max-width:500){
+    #container{
+        width: 200;
+    }
+}
