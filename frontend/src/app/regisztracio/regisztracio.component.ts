@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Edzo } from './../edzo';
 import { Felhasznalo } from './../felhasznalo'
-import { GymService } from './../felhasznalo.service';
-import { EdzokService } from './../edzok.service';
+import { GymService } from '../gym.service';
+
 
 
 @Component({

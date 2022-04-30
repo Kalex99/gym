@@ -8,6 +8,5 @@ export interface Felhasznalo{
     felh_keresztnev:string,
     szuletesi_datum:Date,
     felh_email:string,
-    felh_telefon:string,
-    tartozkodasihelyID:number
+    felh_telefon:string
 }

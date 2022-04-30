@@ -11,17 +11,16 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="fo.html" class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
+                        <a routerLink="/fooldal-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
                     </li>
                     <li>
-                        <a href="regist_kuczi_daniel/regist.html" target="_blank"
-                            class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
+                        <a routerLink="/regisztracio-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
                     </li>
                     <li>
                         <a href="" target="_blank" class="btn btn-secondary btn-lg btn-block">ÁRTÁBLÁZAT</a>
                     </li>
                     <li>
-                        <a class="btn btn-secondary btn-lg btn-block" href="login.html" target="_blank">BELÉPÉS</a>
+                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active">BELÉPÉS</a>
                     </li>
                 </ul>
             </nav>
@@ -36,22 +35,23 @@
                         <th>Bérlettípus</th>
                         <th>Ár</th>
                     </tr>
-                    <tr class="tr tr2">
-                        <td>Diák Havi</td>
-                        <td>4000 Ft</td>
+                    <tr class="tr tr2" *ngFor="let berlet of berletek" >
+                        <td class="btn btn-rendel"  onclick="document.getElementById('myModal').style.display='block'" id="rendel">{{berlet.berlet_tipus}}</td>
+                        <td>{{berlet.berlet_ar}} Ft</td>
                     </tr>
-                    <tr class="tr tr2">
-                        <td>Felnőtt Havi</td>
-                        <td>5000 Ft</td>
-                    </tr>
-                    <tr class="tr tr2">
-                        <td>Nyugdíjas</td>
-                        <td>4500 Ft</td>
-                    </tr>
-                    <tr class="tr tr2">
-                        <td>Csecsemő</td>
-                        <td>500 Ft</td>
-                    </tr>
+                     <div class="modal" id="myModal">
+                    <div class="modal-content">
+                        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                        <div class="form-group">
+                            <label >Mennyiség</label>
+                            <input type="number" class="form-control" id="mennyiseg">
+                            <label >Szállítási cím</label>
+                            <input type="text" class="form-control" id="szall-cim">
+                        </div>
+                        <div class="btn btn-secondary btn-block" onclick="document.getElementById('myModal').style.display='none'">Megrendelem</div>
+                    </div>
+                    
+                </div>
                 </table>
             </div>
             

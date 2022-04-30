@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GymService } from '../gym.service';
+import { Berlet } from '../berlet';
 
 @Component({
   selector: 'app-berlet',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./berlet.component.css']
 })
 export class BerletComponent implements OnInit {
-
-  constructor() { }
+  public berletek!: Berlet[];
+  constructor(private GymService: GymService) { }
 
   ngOnInit(): void {
+    this.getBerletek();
   }
-
+  public getBerletek(): void{
+    this.GymService.getBerletek().subscribe(
+      (response: Berlet[]) => {
+        this.berletek = response;
+      }
+    );
+  }
 }

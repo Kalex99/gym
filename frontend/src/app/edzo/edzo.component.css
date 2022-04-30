@@ -85,6 +85,7 @@ h3{
     text-align: left;
     margin-right: 10px;
     margin-bottom: 20px;
+    font-size: large;
 }
 tr:hover {
     background-color: rgba(255, 0, 0, 0.645);
