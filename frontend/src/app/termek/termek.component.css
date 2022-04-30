@@ -84,12 +84,14 @@ p{
     margin: 20px, 20px;
 }
 #table{
+    width: 800px;
     grid-area: table;
     text-align: left;
     margin-right: 10px;
     margin-bottom: 20px;
-    height: 200px;
-    overflow: scroll;
+}
+.tr2{
+    background-color: #777;
 }
 .tr2:hover {
     background-color: rgba(255, 0, 0, 0.645);
@@ -143,7 +145,7 @@ footer {
 .modal {
     display: none;
     position: fixed;
-    z-index: 2;
+    z-index: 3;
     left: 0;
     top: 0;
     width: 100%;
@@ -171,34 +173,107 @@ footer {
     "rank"
     "notifications";
 }
-
-.profilepic{
-    top: 20px;
-    width: 150px;
-    border-radius: 50%;
-    grid-area: profile-picture;
-    margin-left: auto;
-    margin-right: auto;
+.tableContainer{
+    height: 200px;
+    overflow-y: scroll;
 }
+
 .close {
-    color: #ff5353;
+    color: red;
     text-align: right;
     font-size: 28px;
     font-weight: bold;
     grid-area: profile-cross;
 }
-.rank{
-    grid-area: rank;
-    text-align: center;
-}
 
-.email-adr{
-    grid-area: email-adress;
-    text-align: center;
-}
+
+
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+@media (max-width: 1000px){
+    #container{
+        width: 600px;
+
+    }
+    .middle{
+        align-items: center;
+        justify-items: top;
+    }
+    img{
+        margin-top: 5px;
+        width: 400px;
+    }
+    #table{
+        width: 400px;
+        font-size: 15px;
+    }
+    .tr2{
+        border-bottom: 1px solid #000;
+    }
+}
+@media (max-width: 650px){
+    #container{
+        width: 300px;
+        margin: 75px;
+        align-content: center;
+    }
+    nav{
+        width: 110px;
+        font-weight: 200;
+    }
+    img{
+        margin-right: 15px;
+        width: 300px;
+    }
+    .btn.btn-secondary{
+        font-size: 15px;
+        font-weight: 200;
+    }
+    
+    #table{
+        width: 280px;
+        font-size: 15px;
+    }
+}
+@media (max-width:500px){
+    #container{
+        width: 200px;
+        margin: 0px;
+        padding-right: 10px;
+    }
+    img{
+        width: 180px;
+    }
+    .tr1{
+        font-size: 16px;
+    }
+    
+    p{
+        width: 150px;
+        text-align: center;
+    }
+    #table{
+        width: 200px;
+        font-size: 12px;
+    }
+    .btn-rendel{
+        font-size: 12px;
+        width: 50px;
+    }
+    footer{
+        font-size: 12px;
+    }
+    .keszlet{
+        width: 50px;
+    }
+}
+@media (max-width:400px){
+    #container{
+        margin: 25px;
+    }
 }

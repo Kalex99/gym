@@ -42,39 +42,37 @@
             <p>Étrendkiegészítőink hatalmas választéka csak rád vár! Fogyáshoz, tömegnöveléshez, vagy akár csak a kiegyensúlyozott mindennapokhoz.
                 Nálunk mindent megtalálsz. Ne habozz! Csapj le rájuk azonnal!
             </p>
-            <table id="table">
-                <tr class="tr1">
-                   <th>Megnevezés</th>
-                   <th>Ár</th>
-                   <th>készlet</th>
-                   <th style="display: none;">id</th>
-                </tr>
-                <tr class="tr2" *ngFor="let termek of termekek">
-                
-                    <td class="btn btn-rendel" onclick="document.getElementById('myModal').style.display='block'" id="rendel">{{termek.termek_nev}}</td>
-                    <td id="ar">{{termek.ar}} Ft</td>
-                    <td>{{termek.keszlet}} cs</td>
-                    <td id="termekid" style="display: none;">{{termek.termekid}}</td>
-                
-                </tr>
-                
-                <div class="modal" id="myModal">
-                    <div class="modal-content">
-                        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Mennyiség</label>
-                            <input type="number" class="form-control" id="mennyiseg">
-                        </div>
-                        <div class="btn btn-secondary btn-block" onclick="document.getElementById('myModal').style.display='none';
-                        let ar = document.getElementById('ar');
-                        let termekid = document.getElementById('termekid');
-                        let input = document.getElementById('mennyiseg').value;
-                        alert(termekid);">Megrendelem</div>
+            <div class="tableContainer">
+                <table id="table">
+                    <tr class="tr1">
+                       <th>Megnevezés</th>
+                       <th>Ár</th>
+                       <th>készlet</th>
+                       <th style="display: none;">id</th>
+                    </tr>
+                    <tr class="tr2" *ngFor="let termek of termekek">
+                        <td class="btn btn-rendel" onclick="document.getElementById('myModal').style.display='block'" id="rendel">{{termek.termek_nev}}</td>
+                        <td id="ar">{{termek.ar}} Ft</td>
+                        <td class="keszlet">{{termek.keszlet}} cs</td>
+                        <td id="termekid" style="display: none;">{{termek.termekid}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal" id="myModal">
+                <div class="modal-content">
+                    <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Mennyiség</label>
+                        <input type="number" class="form-control" id="mennyiseg">
                     </div>
-                    
+                    <div class="btn btn-secondary btn-block" onclick="document.getElementById('myModal').style.display='none';
+                    let ar = document.getElementById('ar');
+                    let termekid = document.getElementById('termekid');
+                    let input = document.getElementById('mennyiseg').value;
+                    alert(termekid);">Megrendelem</div>
                 </div>
-            </table>
-            
+                
+            </div>
         </div>
         
     </div>
