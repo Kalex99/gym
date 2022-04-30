@@ -1,7 +1,9 @@
+import { StringMap } from "@angular/compiler/src/compiler_facade_interface";
+
 export interface Edzo{
-    edzoID:number,
-    edzo_vezeteknev:string,
-    edzo_keresztnev:string,
-    edzo_email:string,
-    edzo_telefon:string
+    szemelyi_edzoID:number,
+    szemedz_vezeteknev:string,
+    szemedz_keresztnev:string,
+    szemedz_email:string,
+    szemedz_telefon:string
 }

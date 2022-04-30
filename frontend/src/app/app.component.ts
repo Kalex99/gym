@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Edzo } from './edzo';
 import { Felhasznalo } from './felhasznalo';
-import { GymService } from './felhasznalo.service';
-import { EdzokService } from './edzok.service';
+import { GymService } from './gym.service';
+import { Termek } from './termek';
 
 @Component({
   selector: 'app-root',
@@ -17,20 +17,14 @@ export class AppComponent implements OnInit {
   public editFelhasznalo!: Felhasznalo;
   public deleteFelhasznalo!: Felhasznalo;
   public edzok!: Edzo[];
+  public termek!: Termek[];
 
-  constructor(private GymService: GymService, private EdzokService: EdzokService) { }
+  constructor(private GymService: GymService) { }
 
   ngOnInit() {
       this.getFelhasznalok();
-      this.getEdzok();
   }
-  public getEdzok(): void{
-    this.EdzokService.getEdzok().subscribe(
-      (response: Edzo[]) => {
-        this.edzok = response;
-      }
-    );
-  }
+  
   public getFelhasznalok(): void {
     this.GymService.getFelhasznalok().subscribe(
       (response: Felhasznalo[]) => {

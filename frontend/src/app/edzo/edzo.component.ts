@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EdzokService } from '../edzok.service';
+import { GymService } from '../gym.service';
 import { Edzo } from '../edzo';
+import { Felhasznalo } from '../felhasznalo';
 import { environment } from 'src/environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edzo',
@@ -9,16 +11,27 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./edzo.component.css']
 })
 export class EdzoComponent implements OnInit {
-  private apiServerUrl = environment.apiBaseUrl;
+  public felhasznalok!: Felhasznalo[];
   public edzok!: Edzo[];
-  constructor(private EdzokService: EdzokService) { }
+  constructor(private GymService: GymService) { }
 
   ngOnInit(): void {
+    this.getEdzok();
   }
   public getEdzok(): void{
-    this.EdzokService.getEdzok().subscribe(
+    this.GymService.getEdzok().subscribe(
       (response: Edzo[]) => {
         this.edzok = response;
+      }
+    );
+  }
+  public getFelhasznalok(): void {
+    this.GymService.getFelhasznalok().subscribe(
+      (response: Felhasznalo[]) => {
+        this.felhasznalok = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
       }
     );
   }

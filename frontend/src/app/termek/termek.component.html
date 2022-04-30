@@ -1,32 +1,4 @@
-<script>
-    var modal = document.getElementById("myModal");
-    var btn = document.getElementById("rendeles");
-    var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function () {
-        modal.style.display = "block";
-        modal.style.placeItems = "center";
-    }
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-        <!-- <img class="profilepic" src="img/profilkep.png" alt=""> -->
-        <h4>Liszt Franciska</h4>
-        <label class="email-adr" for="h4">E-mail cím: liszt@gmail.com</label>
-        <h3>Értesítések:</h3>
-        <div id="notifications" class="notifications">
-            
-        </div>
-    </div>
-</div>
+
 <div id="container">
     <header>
         <h3>Land of Fitness Gym</h3>
@@ -40,16 +12,16 @@
         <nav>
             <ul>
                 <li>
-                    <a href="fo.html" target="_blank" class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
+                    <a routerLink="/fooldal-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
                 </li>
                 <li>
-                    <a href="regist_kuczi_daniel/regist.html" target="_blank" class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
+                    <a routerLink="/regisztracio-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
                 </li>
                 <li>
                     <a href="" target="_blank" class="btn btn-secondary btn-lg btn-block">ÁRTÁBLÁZAT</a>
                 </li>
                 <li>
-                    <a class="btn btn-secondary btn-lg btn-block" href="login.html" target="_blank">BELÉPÉS</a>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active">BELÉPÉS</a>
                 </li>
             </ul>
         </nav>
@@ -62,62 +34,29 @@
                 <tr class="tr1">
                    <th>Megnevezés</th>
                    <th>Ár</th>
-                   <th>Kiszerelés</th>
                    <th>készlet</th>
                 </tr>
-                <tr class="tr2">
+                <tr class="tr2" *ngFor="let termek of termekek">
                 
-                    <td>Multivitamin kapszula</td>
-                    <td>3200 Ft</td>
-                    <td>90 db</td>
-                    <td>30 cs</td>
-                
-                </tr>
-                <tr class="tr2">
-                
-                    <td>Kreatin pezsgőtabletta</td>
-                    <td>1200 Ft</td>
-                    <td>18 db</td>
-                    <td>70 cs</td>
-                
-                </tr>
-                <tr class="tr2">
-                
-                    <td>Kollagén italpor</td>
-                    <td>7000 Ft</td>
-                    <td>500 g</td>
-                    <td>25 cs</td>
-                
-                </tr>
-                <tr class="tr2">
-                
-                    <td>Fehérjepor (csokis/vaníliás/epres/mogyorós)</td>
-                    <td>4000 Ft</td>
-                    <td>300 g</td>
-                    <td>25 cs</td>
-                
-                </tr>
-                <tr class="tr2">
-                
-                    <td>L-karnitin + Króm tabletta</td>
-                    <td>3200 Ft</td>
-                    <td>60 db</td>
-                    <td>50 cs</td>
-                
-                </tr>
-                <tr class="tr2">
-                
-                    <td>Cink tabletta</td>
-                    <td>3000 Ft</td>
-                    <td>60 db</td>
-                    <td>50 cs</td>
+                    <td class="btn btn-rendel" onclick="document.getElementById('myModal').style.display='block'" id="rendel">{{termek.termek_nev}}</td>
+                    <td>{{termek.ar}} Ft</td>
+                    <td>{{termek.keszlet}} cs</td>
                 
                 </tr>
                 
+                <div class="modal" id="myModal">
+                    <div class="modal-content">
+                        <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Mennyiség</label>
+                            <input type="number" class="form-control" id="mennyiseg">
+                        </div>
+                        <div class="btn btn-secondary btn-block" onclick="document.getElementById('myModal').style.display='none'">Megrendelem</div>
+                    </div>
+                    
+                </div>
             </table>
             
-            <button class="btn btn-secondary" id="rendeles">RENDELEK</button>
-
         </div>
         
     </div>
