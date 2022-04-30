@@ -185,6 +185,12 @@ public class GymController {
         gymService.TermekModosit(termek);
         return new ResponseEntity<>("A termék módosításra került!", HttpStatus.OK);
     }
+    @PutMapping("termek/keszletCsokken")
+    public ResponseEntity<?> KeszletCsokken(@RequestBody Termek termek) {
+        gymService.KeszletCsokken(termek);
+        return new ResponseEntity<>("Az adott termék készlet száma csökkent!", HttpStatus.OK);
+    }
+
 
     //**********************************************************************************
 

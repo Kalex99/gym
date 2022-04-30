@@ -214,6 +214,15 @@ public class GymService {
         }
     }
 
+    public void KeszletCsokken(Termek termek){
+        if (isNull(termek.getTermekID())
+            && isNull(termek.getKeszlet())){
+            termekRep.KeszletCsokken(
+                    termek.getTermekID(),
+                    termek.getKeszlet());
+        }
+    }
+
     @Autowired
     private Szemelyi_edzoRep szemelyi_edzoRep;
 
