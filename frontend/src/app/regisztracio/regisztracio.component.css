@@ -97,6 +97,10 @@ nav ul li {
     color: rgb(255, 255, 255);
     font-size: 1.5rem;
 }
+.btn-regisztracio{
+    place-self: center;
+    margin-bottom: 20px;
+}
 footer {
     height: 50px;
     background-color: #777;
@@ -106,4 +110,34 @@ footer {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     grid-area: footer;
+}
+@media (max-width: 1000px){
+    #container{
+        width: 600px;
+    }
+}
+@media (max-width: 650px){
+    #container{
+        width: 300px;
+        align-self: center;
+    }
+    nav{
+        width: 110px;
+        font-weight: 200;
+    }
+    .btn.btn-secondary{
+        font-size: 15px;
+        font-weight: 200;
+    }
+    .form-group{
+        width: 150px;
+        align-self: left;
+        align-items: left;
+        left: 5px;
+    }
+}
+@media (max-width:500){
+    #container{
+        width: 200;
+    }
 }

@@ -88,6 +88,8 @@ p{
     text-align: left;
     margin-right: 10px;
     margin-bottom: 20px;
+    height: 200px;
+    overflow: scroll;
 }
 .tr2:hover {
     background-color: rgba(255, 0, 0, 0.645);
