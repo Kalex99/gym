@@ -124,6 +124,35 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "KeszletCsokken",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"termekID\":2,\r\n    \"keszlet\":10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/termek/keszletCsokken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"termek",
+						"keszletCsokken"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

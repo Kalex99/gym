@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Ápr 30. 04:18
+-- Létrehozás ideje: 2022. Ápr 30. 16:56
 -- Kiszolgáló verziója: 10.4.18-MariaDB
 -- PHP verzió: 8.0.3
 
@@ -27,101 +27,73 @@ DELIMITER $$
 --
 -- Eljárások
 --
-DROP PROCEDURE IF EXISTS `BejelentkezesAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesAccount` (IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `felh_email` VARCHAR(200), OUT `szuletesi_datum` DATE, OUT `felh_telefon` VARCHAR(11))  SELECT felhasznalo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon from felhasznalo WHERE felhasznalo.Felhasznalonev=felhasznalonev AND felhasznalo.Jelszo=jelszo$$
 
-DROP PROCEDURE IF EXISTS `BejelentkezesRendeles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesRendeles` (IN `felhasznaloID` INT, OUT `rendelesID` INT, OUT `rendeles_idopont` DATETIME, OUT `megjegyzes` TEXT, OUT `termekID` INT, OUT `berlet_vasarlasID` INT)  SELECT rendeles.RendelesID, rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.TermekID, rendeles.Berlet_vasarlasID FROM rendeles WHERE rendeles.FelhasznaloID=felhasznaloID$$
 
-DROP PROCEDURE IF EXISTS `Berlet_vasarlasLetrehoz`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasLetrehoz` (IN `berlet_tipus` VARCHAR(100), IN `berlet_ar` INT)  INSERT INTO berlet_vasarlas (berlet_vasarlas.Berlet_tipus, berlet_vasarlas.Berlet_ar) VALUES (berlet_tipus,berlet_ar)$$
 
-DROP PROCEDURE IF EXISTS `Berlet_vasarlasModosit`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasModosit` (IN `berlet_vasarlasID` INT, IN `berlet_tipus` VARCHAR(100), IN `berlet_ar` INT)  UPDATE berlet_vasarlas SET berlet_vasarlas.Berlet_tipus=berlet_tipus, berlet_vasarlas.Berlet_ar=berlet_ar WHERE berlet_vasarlas.Berlet_vasarlasID=berlet_vasarlasID$$
 
-DROP PROCEDURE IF EXISTS `Berlet_vasarlasOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasOlvas` ()  SELECT * FROM berlet_vasarlas$$
 
-DROP PROCEDURE IF EXISTS `Berlet_vasarlasOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasOlvasByID` (IN `berlet_vasarlasID` INT, OUT `berlet_tipus` VARCHAR(100), OUT `berlet_ar` INT)  SELECT berlet_vasarlas.Berlet_tipus, berlet_vasarlas.Berlet_ar FROM berlet_vasarlas WHERE berlet_vasarlas.Berlet_vasarlasID=berlet_vasarlasID$$
 
-DROP PROCEDURE IF EXISTS `Berlet_vasarlasTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasTorles` (IN `berlet_vasarlasID` INT)  BEGIN
 DELETE FROM berlet_vasarlas WHERE berlet_vasarlas.Berlet_vasarlasID=berlet_vasarlasID;
 DELETE FROM rendeles WHERE rendeles.Berlet_vasarlasID=berlet_vasarlasID;
 END$$
 
-DROP PROCEDURE IF EXISTS `FelhasznaloLetrehoz`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloLetrehoz` (IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64), IN `felh_vezeteknev` VARCHAR(50), IN `felh_keresztnev` VARCHAR(50), IN `felh_email` VARCHAR(200), IN `szuletesi_datum` DATE, IN `felh_telefon` VARCHAR(11))  MODIFIES SQL DATA
 INSERT INTO felhasznalo (felhasznalo.Felhasznalonev, felhasznalo.Jelszo, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon) VALUES (felhasznalonev,jelszo,felh_vezeteknev,felh_keresztnev, felh_email, szuletesi_datum, felh_telefon)$$
 
-DROP PROCEDURE IF EXISTS `FelhasznaloModosit`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloModosit` (IN `felhasznaloID` INT, IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64), IN `felh_vezeteknev` VARCHAR(50), IN `felh_keresztnev` VARCHAR(50), IN `felh_email` VARCHAR(200), IN `felh_telefon` VARCHAR(11))  UPDATE felhasznalo SET felhasznalo.Felhasznalonev=felhasznalonev, felhasznalo.Jelszo=jelszo, felhasznalo.Felh_vezeteknev=felh_vezeteknev, felhasznalo.Felh_keresztnev= felh_keresztnev, felhasznalo.Felh_email=felh_email, felhasznalo.Felh_telefon=felh_telefon WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
 
-DROP PROCEDURE IF EXISTS `FelhasznaloOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvas` ()  SELECT * FROM felhasznalo$$
 
-DROP PROCEDURE IF EXISTS `FelhasznaloOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvasByID` (IN `felhasznaloID` INT, OUT `felhasznalonev` VARCHAR(20), OUT `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `szuletesi_datum` DATE, OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11))  SELECT felhasznalo.Felhasznalonev, felhasznalo.Jelszo, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon FROM felhasznalo WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
 
-DROP PROCEDURE IF EXISTS `FelhasznaloTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloTorles` (IN `felhasznaloID` INT)  BEGIN
 DELETE FROM rendeles WHERE rendeles.FelhasznaloID=felhasznaloID;
 DELETE FROM felhasznalo WHERE felhasznalo.FelhasznaloID=felhasznaloID;
 END$$
 
-DROP PROCEDURE IF EXISTS `RendelesLetrehozBerlet`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `KeszletCsokken` (IN `termekID` INT, IN `keszlet` INT)  UPDATE termek SET termek.Keszlet = termek.Keszlet-keszlet WHERE termek.TermekID = termekID$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesLetrehozBerlet` (IN `berlet_vasarlasID` INT, IN `megjegyzes` TEXT, IN `felhasznaloID` INT)  INSERT INTO rendeles (rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.Berlet_vasarlasID, rendeles.TermekID, rendeles.FelhasznaloID) VALUES (now(), megjegyzes, berlet_vasarlasID, null, felhasznaloID)$$
 
-DROP PROCEDURE IF EXISTS `RendelesLetrehozTermek`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesLetrehozTermek` (IN `termekID` INT, IN `megjegyzes` TEXT, IN `felhasznaloID` INT)  INSERT INTO rendeles (rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.Berlet_vasarlasID, rendeles.TermekID, rendeles.FelhasznaloID) VALUES (now(), megjegyzes, null, termekID, felhasznaloID)$$
 
-DROP PROCEDURE IF EXISTS `RendelesOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvas` ()  SELECT * FROM rendeles$$
 
-DROP PROCEDURE IF EXISTS `RendelesOlvasBerletByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasBerletByID` (IN `rendelesID` INT, OUT `berlet_vasarlasID` INT, OUT `berlet_tipus` VARCHAR(100), OUT `berlet_ar` INT)  SELECT berlet_vasarlas.Berlet_vasarlasID, berlet_vasarlas.Berlet_tipus, berlet_vasarlas.Berlet_ar FROM berlet_vasarlas INNER JOIN rendeles on berlet_vasarlas.Berlet_vasarlasID=rendeles.Berlet_vasarlasID WHERE rendeles.RendelesID=rendelesID$$
 
-DROP PROCEDURE IF EXISTS `RendelesOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasByID` (IN `rendelesID` INT, OUT `rendeles_idopont` DATETIME, OUT `megjegyzes` TEXT, OUT `termekID` INT, OUT `berlet_vasarlasID` INT, OUT `felhasznaloID` INT)  SELECT rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.TermekID, rendeles.Berlet_vasarlasID, rendeles.FelhasznaloID FROM rendeles WHERE rendeles.RendelesID=rendelesID$$
 
-DROP PROCEDURE IF EXISTS `RendelesOlvasFelhasznaloByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasFelhasznaloByID` (IN `rendelesID` INT, OUT `felhasznaloID` INT, OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11), OUT `tartozkodasihelyID` INT)  SELECT felhasznalo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Felh_telefon, felhasznalo.TartozkodasihelyID FROM felhasznalo INNER JOIN rendeles on felhasznalo.FelhasznaloID=rendeles.FelhasznaloID WHERE rendeles.RendelesID=rendelesID$$
 
-DROP PROCEDURE IF EXISTS `RendelesOlvasTermekByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasTermekByID` (IN `rendelesID` INT, OUT `termekID` INT, OUT `termek_nev` VARCHAR(100), OUT `kategoria` VARCHAR(50), OUT `ar` INT, OUT `kep` BLOB, OUT `leiras` TEXT, OUT `cegID` INT)  SELECT termek.TermekID, termek.Termek_nev, termek.Kategoria, termek.Ar, termek.Kep, termek.Leiras, termek.CegID FROM termek INNER JOIN rendeles ON termek.TermekID= rendeles.TermekID WHERE rendeles.RendelesID=rendelesID$$
 
-DROP PROCEDURE IF EXISTS `RendelesTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesTorles` (IN `rendelesID` INT)  DELETE FROM rendeles WHERE rendeles.RendelesID=rendelesID$$
 
-DROP PROCEDURE IF EXISTS `Szemelyi_edzoLetrehoz`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoLetrehoz` (IN `szemedz_vezeteknev` VARCHAR(50), IN `szemedz_keresztnev` VARCHAR(50), IN `portre` BLOB, IN `szemedz_email` VARCHAR(200), IN `szemedz_telefon` VARCHAR(11))  INSERT INTO szemelyi_edzo (szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Portre, szemelyi_edzo.Szemedz_email, szemelyi_edzo.Szemedz_telefon) VALUES (szemedz_vezeteknev, szemedz_keresztnev, portre, szemedz_email, szemedz_telefon)$$
 
-DROP PROCEDURE IF EXISTS `Szemelyi_edzoModosit`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoModosit` (IN `szemelyi_edzoID` INT, IN `szemedz_vezeteknev` VARCHAR(50), IN `szemedz_keresztnev` VARCHAR(50), IN `portre` BLOB, IN `szemedz_email` VARCHAR(200), IN `szemedz_telefon` VARCHAR(11))  UPDATE szemelyi_edzo SET szemelyi_edzo.Szemedz_vezeteknev=szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev=szemedz_keresztnev, szemelyi_edzo.Portre=portre, szemelyi_edzo.Szemedz_email=szemedz_email, szemelyi_edzo.Szemedz_telefon=szemedz_telefon WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
-DROP PROCEDURE IF EXISTS `Szemelyi_edzoOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvas` ()  SELECT * FROM szemelyi_edzo$$
 
-DROP PROCEDURE IF EXISTS `Szemelyi_edzoOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvasByID` (IN `szemelyi_edzoID` INT, OUT `szemedz_vezeteknev` VARCHAR(50), OUT `szemedz_keresztnev` VARCHAR(50), OUT `portre` BLOB, OUT `szemedz_email` VARCHAR(200), OUT `szemedz_telefon` VARCHAR(11))  SELECT szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Portre, szemelyi_edzo.Szemedz_email, szemelyi_edzo.Szemedz_telefon FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
-DROP PROCEDURE IF EXISTS `Szemelyi_edzoTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoTorles` (IN `szemelyi_edzoID` INT)  DELETE FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
-DROP PROCEDURE IF EXISTS `TermekLetrehoz`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekLetrehoz` (IN `termek_nev` VARCHAR(100), IN `ar` INT, IN `keszlet` INT, IN `leiras` TEXT)  INSERT INTO termek (termek.Termek_nev, termek.Ar, termek.Keszlet, termek.Kaphato, termek.Leiras) VALUES (termek_nev,ar,keszlet,1,leiras)$$
 
-DROP PROCEDURE IF EXISTS `TermekModosit`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekModosit` (IN `termekID` INT, IN `termek_nev` VARCHAR(100), IN `ar` INT, IN `keszlet` INT, IN `kaphato` BOOLEAN, IN `leiras` TEXT)  UPDATE termek SET termek.Termek_nev=termek_nev, termek.Ar=ar, termek.Keszlet=keszlet, termek.Kaphato=kaphato, termek.Leiras=leiras WHERE termek.TermekID=termekID$$
 
-DROP PROCEDURE IF EXISTS `TermekOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekOlvas` ()  SELECT * FROM termek$$
 
-DROP PROCEDURE IF EXISTS `TermekOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekOlvasByID` (IN `termekID` INT, OUT `termek_nev` VARCHAR(100), OUT `ar` INT, OUT `keszlet` INT, OUT `kaphato` BOOLEAN, OUT `leiras` TEXT)  SELECT termek.Termek_nev, termek.Ar, termek.Keszlet, termek.Kaphato, termek.Leiras FROM termek WHERE termek.TermekID=termekID$$
 
-DROP PROCEDURE IF EXISTS `TermekTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekTorles` (IN `termekID` INT)  BEGIN
 DELETE FROM termek WHERE termek.TermekID=termekID;
 DELETE FROM rendeles WHERE rendeles.TermekID=termekID;
@@ -135,7 +107,6 @@ DELIMITER ;
 -- Tábla szerkezet ehhez a táblához `berlet_vasarlas`
 --
 
-DROP TABLE IF EXISTS `berlet_vasarlas`;
 CREATE TABLE `berlet_vasarlas` (
   `Berlet_vasarlasID` int(11) NOT NULL,
   `Berlet_tipus` varchar(100) NOT NULL,
@@ -158,7 +129,6 @@ INSERT INTO `berlet_vasarlas` (`Berlet_vasarlasID`, `Berlet_tipus`, `Berlet_ar`)
 -- Tábla szerkezet ehhez a táblához `felhasznalo`
 --
 
-DROP TABLE IF EXISTS `felhasznalo`;
 CREATE TABLE `felhasznalo` (
   `FelhasznaloID` int(11) NOT NULL,
   `Felhasznalonev` varchar(20) NOT NULL,
@@ -211,7 +181,8 @@ INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_ve
 (46, 'animi', 'est', 'Batz', 'Daphne', 'bergnaum.zackery@example.org', '2017-08-02', '556-211-250'),
 (47, 'sapiente', 'exercitationem', 'Heidenreich', 'Oscar', 'gabe.gorczany@example.net', '1979-06-19', '136.889.507'),
 (48, 'unde', 'et', 'Murphy', 'Kaci', 'zkirlin@example.org', '2009-09-02', '920.441.568'),
-(49, 'accusantium', 'provident', 'Jenkins', 'Jeremy', 'johnston.howard@example.com', '1989-12-05', '989-593-316');
+(49, 'accusantium', 'provident', 'Jenkins', 'Jeremy', 'johnston.howard@example.com', '1989-12-05', '989-593-316'),
+(102, 'alma', 'quia', 'Sanya', 'Macska', 'anr@anoth.com', '1999-07-12', '06205879168');
 
 -- --------------------------------------------------------
 
@@ -219,7 +190,6 @@ INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_ve
 -- Tábla szerkezet ehhez a táblához `rendeles`
 --
 
-DROP TABLE IF EXISTS `rendeles`;
 CREATE TABLE `rendeles` (
   `RendelesID` int(11) NOT NULL,
   `Rendeles_idopont` datetime NOT NULL,
@@ -266,7 +236,6 @@ INSERT INTO `rendeles` (`RendelesID`, `Rendeles_idopont`, `Megjegyzes`, `TermekI
 -- Tábla szerkezet ehhez a táblához `szemelyi_edzo`
 --
 
-DROP TABLE IF EXISTS `szemelyi_edzo`;
 CREATE TABLE `szemelyi_edzo` (
   `Szemelyi_edzoID` int(11) NOT NULL,
   `Szemedz_vezeteknev` varchar(50) NOT NULL,
@@ -292,7 +261,6 @@ INSERT INTO `szemelyi_edzo` (`Szemelyi_edzoID`, `Szemedz_vezeteknev`, `Szemedz_k
 -- Tábla szerkezet ehhez a táblához `termek`
 --
 
-DROP TABLE IF EXISTS `termek`;
 CREATE TABLE `termek` (
   `TermekID` int(11) NOT NULL,
   `Termek_nev` varchar(100) NOT NULL,
@@ -307,7 +275,7 @@ CREATE TABLE `termek` (
 --
 
 INSERT INTO `termek` (`TermekID`, `Termek_nev`, `Ar`, `Keszlet`, `Kaphato`, `Leiras`) VALUES
-(2, 'necessitatibus', 6527, 40, 1, 'Corporis sit voluptatem quasi ab non.'),
+(2, 'necessitatibus', 6527, 30, 1, 'Corporis sit voluptatem quasi ab non.'),
 (3, 'mollitia', 9777, 37, 1, 'Earum quia non consequuntur ullam aspernatur.'),
 (4, 'molestias', 6613, 21, 1, 'Neque laudantium fugit porro accusamus.'),
 (6, 'est', 7178, 0, 0, 'Delectus voluptatem nobis possimus enim.'),
@@ -393,7 +361,7 @@ ALTER TABLE `berlet_vasarlas`
 -- AUTO_INCREMENT a táblához `felhasznalo`
 --
 ALTER TABLE `felhasznalo`
-  MODIFY `FelhasznaloID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `FelhasznaloID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT a táblához `rendeles`
