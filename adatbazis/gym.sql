@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2022. Ápr 27. 23:25
+-- Létrehozás ideje: 2022. Ápr 30. 04:18
 -- Kiszolgáló verziója: 10.4.18-MariaDB
 -- PHP verzió: 8.0.3
 
@@ -20,76 +20,108 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `gym`
 --
+CREATE DATABASE IF NOT EXISTS `gym` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `gym`;
 
 DELIMITER $$
 --
 -- Eljárások
 --
+DROP PROCEDURE IF EXISTS `BejelentkezesAccount`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesAccount` (IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `felh_email` VARCHAR(200), OUT `szuletesi_datum` DATE, OUT `felh_telefon` VARCHAR(11))  SELECT felhasznalo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon from felhasznalo WHERE felhasznalo.Felhasznalonev=felhasznalonev AND felhasznalo.Jelszo=jelszo$$
 
+DROP PROCEDURE IF EXISTS `BejelentkezesRendeles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesRendeles` (IN `felhasznaloID` INT, OUT `rendelesID` INT, OUT `rendeles_idopont` DATETIME, OUT `megjegyzes` TEXT, OUT `termekID` INT, OUT `berlet_vasarlasID` INT)  SELECT rendeles.RendelesID, rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.TermekID, rendeles.Berlet_vasarlasID FROM rendeles WHERE rendeles.FelhasznaloID=felhasznaloID$$
 
+DROP PROCEDURE IF EXISTS `Berlet_vasarlasLetrehoz`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasLetrehoz` (IN `berlet_tipus` VARCHAR(100), IN `berlet_ar` INT)  INSERT INTO berlet_vasarlas (berlet_vasarlas.Berlet_tipus, berlet_vasarlas.Berlet_ar) VALUES (berlet_tipus,berlet_ar)$$
 
+DROP PROCEDURE IF EXISTS `Berlet_vasarlasModosit`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasModosit` (IN `berlet_vasarlasID` INT, IN `berlet_tipus` VARCHAR(100), IN `berlet_ar` INT)  UPDATE berlet_vasarlas SET berlet_vasarlas.Berlet_tipus=berlet_tipus, berlet_vasarlas.Berlet_ar=berlet_ar WHERE berlet_vasarlas.Berlet_vasarlasID=berlet_vasarlasID$$
 
+DROP PROCEDURE IF EXISTS `Berlet_vasarlasOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasOlvas` ()  SELECT * FROM berlet_vasarlas$$
 
+DROP PROCEDURE IF EXISTS `Berlet_vasarlasOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasOlvasByID` (IN `berlet_vasarlasID` INT, OUT `berlet_tipus` VARCHAR(100), OUT `berlet_ar` INT)  SELECT berlet_vasarlas.Berlet_tipus, berlet_vasarlas.Berlet_ar FROM berlet_vasarlas WHERE berlet_vasarlas.Berlet_vasarlasID=berlet_vasarlasID$$
 
+DROP PROCEDURE IF EXISTS `Berlet_vasarlasTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Berlet_vasarlasTorles` (IN `berlet_vasarlasID` INT)  BEGIN
 DELETE FROM berlet_vasarlas WHERE berlet_vasarlas.Berlet_vasarlasID=berlet_vasarlasID;
 DELETE FROM rendeles WHERE rendeles.Berlet_vasarlasID=berlet_vasarlasID;
 END$$
 
+DROP PROCEDURE IF EXISTS `FelhasznaloLetrehoz`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloLetrehoz` (IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64), IN `felh_vezeteknev` VARCHAR(50), IN `felh_keresztnev` VARCHAR(50), IN `felh_email` VARCHAR(200), IN `szuletesi_datum` DATE, IN `felh_telefon` VARCHAR(11))  MODIFIES SQL DATA
 INSERT INTO felhasznalo (felhasznalo.Felhasznalonev, felhasznalo.Jelszo, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon) VALUES (felhasznalonev,jelszo,felh_vezeteknev,felh_keresztnev, felh_email, szuletesi_datum, felh_telefon)$$
 
+DROP PROCEDURE IF EXISTS `FelhasznaloModosit`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloModosit` (IN `felhasznaloID` INT, IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64), IN `felh_vezeteknev` VARCHAR(50), IN `felh_keresztnev` VARCHAR(50), IN `felh_email` VARCHAR(200), IN `felh_telefon` VARCHAR(11))  UPDATE felhasznalo SET felhasznalo.Felhasznalonev=felhasznalonev, felhasznalo.Jelszo=jelszo, felhasznalo.Felh_vezeteknev=felh_vezeteknev, felhasznalo.Felh_keresztnev= felh_keresztnev, felhasznalo.Felh_email=felh_email, felhasznalo.Felh_telefon=felh_telefon WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
 
+DROP PROCEDURE IF EXISTS `FelhasznaloOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvas` ()  SELECT * FROM felhasznalo$$
 
+DROP PROCEDURE IF EXISTS `FelhasznaloOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloOlvasByID` (IN `felhasznaloID` INT, OUT `felhasznalonev` VARCHAR(20), OUT `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `szuletesi_datum` DATE, OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11))  SELECT felhasznalo.Felhasznalonev, felhasznalo.Jelszo, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon FROM felhasznalo WHERE felhasznalo.FelhasznaloID=felhasznaloID$$
 
+DROP PROCEDURE IF EXISTS `FelhasznaloTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `FelhasznaloTorles` (IN `felhasznaloID` INT)  BEGIN
 DELETE FROM rendeles WHERE rendeles.FelhasznaloID=felhasznaloID;
 DELETE FROM felhasznalo WHERE felhasznalo.FelhasznaloID=felhasznaloID;
 END$$
 
+DROP PROCEDURE IF EXISTS `RendelesLetrehozBerlet`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesLetrehozBerlet` (IN `berlet_vasarlasID` INT, IN `megjegyzes` TEXT, IN `felhasznaloID` INT)  INSERT INTO rendeles (rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.Berlet_vasarlasID, rendeles.TermekID, rendeles.FelhasznaloID) VALUES (now(), megjegyzes, berlet_vasarlasID, null, felhasznaloID)$$
 
+DROP PROCEDURE IF EXISTS `RendelesLetrehozTermek`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesLetrehozTermek` (IN `termekID` INT, IN `megjegyzes` TEXT, IN `felhasznaloID` INT)  INSERT INTO rendeles (rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.Berlet_vasarlasID, rendeles.TermekID, rendeles.FelhasznaloID) VALUES (now(), megjegyzes, null, termekID, felhasznaloID)$$
 
+DROP PROCEDURE IF EXISTS `RendelesOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvas` ()  SELECT * FROM rendeles$$
 
+DROP PROCEDURE IF EXISTS `RendelesOlvasBerletByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasBerletByID` (IN `rendelesID` INT, OUT `berlet_vasarlasID` INT, OUT `berlet_tipus` VARCHAR(100), OUT `berlet_ar` INT)  SELECT berlet_vasarlas.Berlet_vasarlasID, berlet_vasarlas.Berlet_tipus, berlet_vasarlas.Berlet_ar FROM berlet_vasarlas INNER JOIN rendeles on berlet_vasarlas.Berlet_vasarlasID=rendeles.Berlet_vasarlasID WHERE rendeles.RendelesID=rendelesID$$
 
+DROP PROCEDURE IF EXISTS `RendelesOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasByID` (IN `rendelesID` INT, OUT `rendeles_idopont` DATETIME, OUT `megjegyzes` TEXT, OUT `termekID` INT, OUT `berlet_vasarlasID` INT, OUT `felhasznaloID` INT)  SELECT rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.TermekID, rendeles.Berlet_vasarlasID, rendeles.FelhasznaloID FROM rendeles WHERE rendeles.RendelesID=rendelesID$$
 
+DROP PROCEDURE IF EXISTS `RendelesOlvasFelhasznaloByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasFelhasznaloByID` (IN `rendelesID` INT, OUT `felhasznaloID` INT, OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `felh_email` VARCHAR(200), OUT `felh_telefon` VARCHAR(11), OUT `tartozkodasihelyID` INT)  SELECT felhasznalo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Felh_telefon, felhasznalo.TartozkodasihelyID FROM felhasznalo INNER JOIN rendeles on felhasznalo.FelhasznaloID=rendeles.FelhasznaloID WHERE rendeles.RendelesID=rendelesID$$
 
+DROP PROCEDURE IF EXISTS `RendelesOlvasTermekByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasTermekByID` (IN `rendelesID` INT, OUT `termekID` INT, OUT `termek_nev` VARCHAR(100), OUT `kategoria` VARCHAR(50), OUT `ar` INT, OUT `kep` BLOB, OUT `leiras` TEXT, OUT `cegID` INT)  SELECT termek.TermekID, termek.Termek_nev, termek.Kategoria, termek.Ar, termek.Kep, termek.Leiras, termek.CegID FROM termek INNER JOIN rendeles ON termek.TermekID= rendeles.TermekID WHERE rendeles.RendelesID=rendelesID$$
 
+DROP PROCEDURE IF EXISTS `RendelesTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesTorles` (IN `rendelesID` INT)  DELETE FROM rendeles WHERE rendeles.RendelesID=rendelesID$$
 
+DROP PROCEDURE IF EXISTS `Szemelyi_edzoLetrehoz`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoLetrehoz` (IN `szemedz_vezeteknev` VARCHAR(50), IN `szemedz_keresztnev` VARCHAR(50), IN `portre` BLOB, IN `szemedz_email` VARCHAR(200), IN `szemedz_telefon` VARCHAR(11))  INSERT INTO szemelyi_edzo (szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Portre, szemelyi_edzo.Szemedz_email, szemelyi_edzo.Szemedz_telefon) VALUES (szemedz_vezeteknev, szemedz_keresztnev, portre, szemedz_email, szemedz_telefon)$$
 
+DROP PROCEDURE IF EXISTS `Szemelyi_edzoModosit`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoModosit` (IN `szemelyi_edzoID` INT, IN `szemedz_vezeteknev` VARCHAR(50), IN `szemedz_keresztnev` VARCHAR(50), IN `portre` BLOB, IN `szemedz_email` VARCHAR(200), IN `szemedz_telefon` VARCHAR(11))  UPDATE szemelyi_edzo SET szemelyi_edzo.Szemedz_vezeteknev=szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev=szemedz_keresztnev, szemelyi_edzo.Portre=portre, szemelyi_edzo.Szemedz_email=szemedz_email, szemelyi_edzo.Szemedz_telefon=szemedz_telefon WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
+DROP PROCEDURE IF EXISTS `Szemelyi_edzoOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvas` ()  SELECT * FROM szemelyi_edzo$$
 
+DROP PROCEDURE IF EXISTS `Szemelyi_edzoOlvasByID`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvasByID` (IN `szemelyi_edzoID` INT, OUT `szemedz_vezeteknev` VARCHAR(50), OUT `szemedz_keresztnev` VARCHAR(50), OUT `portre` BLOB, OUT `szemedz_email` VARCHAR(200), OUT `szemedz_telefon` VARCHAR(11))  SELECT szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Portre, szemelyi_edzo.Szemedz_email, szemelyi_edzo.Szemedz_telefon FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
+DROP PROCEDURE IF EXISTS `Szemelyi_edzoTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoTorles` (IN `szemelyi_edzoID` INT)  DELETE FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekLetrehoz` (IN `termek_nev` VARCHAR(100), IN `kategoria` VARCHAR(50), IN `ar` INT, IN `kep` BLOB, IN `keszlet` INT, IN `leiras` TEXT)  INSERT INTO termek (termek.Termek_nev, termek.Kategoria, termek.Ar, termek.Kep, termek.Keszlet, termek.Kaphato, termek.Leiras) VALUES (termek_nev,kategoria,ar,kep,keszlet,1,leiras)$$
+DROP PROCEDURE IF EXISTS `TermekLetrehoz`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekLetrehoz` (IN `termek_nev` VARCHAR(100), IN `ar` INT, IN `keszlet` INT, IN `leiras` TEXT)  INSERT INTO termek (termek.Termek_nev, termek.Ar, termek.Keszlet, termek.Kaphato, termek.Leiras) VALUES (termek_nev,ar,keszlet,1,leiras)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekModosit` (IN `termekID` INT, IN `termek_nev` VARCHAR(100), IN `kategoria` VARCHAR(50), IN `ar` INT, IN `kep` BLOB, IN `keszlet` INT, IN `kaphato` BOOLEAN, IN `leiras` TEXT)  UPDATE termek SET termek.Termek_nev=termek_nev, termek.Kategoria=kategoria, termek.Ar=ar, termek.Kep=kep, termek.Keszlet=keszlet, termek.Kaphato=kaphato, termek.Leiras=leiras WHERE termek.TermekID=termekID$$
+DROP PROCEDURE IF EXISTS `TermekModosit`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekModosit` (IN `termekID` INT, IN `termek_nev` VARCHAR(100), IN `ar` INT, IN `keszlet` INT, IN `kaphato` BOOLEAN, IN `leiras` TEXT)  UPDATE termek SET termek.Termek_nev=termek_nev, termek.Ar=ar, termek.Keszlet=keszlet, termek.Kaphato=kaphato, termek.Leiras=leiras WHERE termek.TermekID=termekID$$
 
+DROP PROCEDURE IF EXISTS `TermekOlvas`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekOlvas` ()  SELECT * FROM termek$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekOlvasByID` (IN `termekID` INT, OUT `termek_nev` VARCHAR(100), OUT `kategoria` VARCHAR(50), OUT `ar` INT, OUT `kep` BLOB, OUT `keszlet` INT, OUT `kaphato` BOOLEAN, OUT `leiras` TEXT)  SELECT termek.Termek_nev, termek.Kategoria, termek.Ar, termek.Kep, termek.Keszlet, termek.Kaphato, termek.Leiras FROM termek WHERE termek.TermekID=termekID$$
+DROP PROCEDURE IF EXISTS `TermekOlvasByID`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekOlvasByID` (IN `termekID` INT, OUT `termek_nev` VARCHAR(100), OUT `ar` INT, OUT `keszlet` INT, OUT `kaphato` BOOLEAN, OUT `leiras` TEXT)  SELECT termek.Termek_nev, termek.Ar, termek.Keszlet, termek.Kaphato, termek.Leiras FROM termek WHERE termek.TermekID=termekID$$
 
+DROP PROCEDURE IF EXISTS `TermekTorles`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TermekTorles` (IN `termekID` INT)  BEGIN
 DELETE FROM termek WHERE termek.TermekID=termekID;
 DELETE FROM rendeles WHERE rendeles.TermekID=termekID;
@@ -103,6 +135,7 @@ DELIMITER ;
 -- Tábla szerkezet ehhez a táblához `berlet_vasarlas`
 --
 
+DROP TABLE IF EXISTS `berlet_vasarlas`;
 CREATE TABLE `berlet_vasarlas` (
   `Berlet_vasarlasID` int(11) NOT NULL,
   `Berlet_tipus` varchar(100) NOT NULL,
@@ -125,6 +158,7 @@ INSERT INTO `berlet_vasarlas` (`Berlet_vasarlasID`, `Berlet_tipus`, `Berlet_ar`)
 -- Tábla szerkezet ehhez a táblához `felhasznalo`
 --
 
+DROP TABLE IF EXISTS `felhasznalo`;
 CREATE TABLE `felhasznalo` (
   `FelhasznaloID` int(11) NOT NULL,
   `Felhasznalonev` varchar(20) NOT NULL,
@@ -133,7 +167,7 @@ CREATE TABLE `felhasznalo` (
   `Felh_keresztnev` varchar(50) NOT NULL,
   `Felh_email` varchar(200) NOT NULL,
   `Szuletesi_datum` date NOT NULL,
-  `Felh_telefon` varchar(11) NOT NULL
+  `Felh_telefon` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -185,6 +219,7 @@ INSERT INTO `felhasznalo` (`FelhasznaloID`, `Felhasznalonev`, `Jelszo`, `Felh_ve
 -- Tábla szerkezet ehhez a táblához `rendeles`
 --
 
+DROP TABLE IF EXISTS `rendeles`;
 CREATE TABLE `rendeles` (
   `RendelesID` int(11) NOT NULL,
   `Rendeles_idopont` datetime NOT NULL,
@@ -231,13 +266,14 @@ INSERT INTO `rendeles` (`RendelesID`, `Rendeles_idopont`, `Megjegyzes`, `TermekI
 -- Tábla szerkezet ehhez a táblához `szemelyi_edzo`
 --
 
+DROP TABLE IF EXISTS `szemelyi_edzo`;
 CREATE TABLE `szemelyi_edzo` (
   `Szemelyi_edzoID` int(11) NOT NULL,
   `Szemedz_vezeteknev` varchar(50) NOT NULL,
   `Szemedz_keresztnev` varchar(50) NOT NULL,
   `Portre` blob NOT NULL,
   `Szemedz_email` varchar(200) NOT NULL,
-  `Szemedz_telefon` varchar(11) NOT NULL
+  `Szemedz_telefon` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -256,12 +292,11 @@ INSERT INTO `szemelyi_edzo` (`Szemelyi_edzoID`, `Szemedz_vezeteknev`, `Szemedz_k
 -- Tábla szerkezet ehhez a táblához `termek`
 --
 
+DROP TABLE IF EXISTS `termek`;
 CREATE TABLE `termek` (
   `TermekID` int(11) NOT NULL,
   `Termek_nev` varchar(100) NOT NULL,
-  `Kategoria` varchar(50) NOT NULL,
   `Ar` int(11) UNSIGNED NOT NULL,
-  `Kep` blob NOT NULL,
   `Keszlet` int(11) UNSIGNED NOT NULL,
   `Kaphato` tinyint(1) NOT NULL,
   `Leiras` text NOT NULL
@@ -271,37 +306,38 @@ CREATE TABLE `termek` (
 -- A tábla adatainak kiíratása `termek`
 --
 
-INSERT INTO `termek` (`TermekID`, `Termek_nev`, `Kategoria`, `Ar`, `Kep`, `Keszlet`, `Kaphato`, `Leiras`) VALUES
-(2, 'necessitatibus', 'sint', 6527, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 40, 1, 'Corporis sit voluptatem quasi ab non.'),
-(3, 'mollitia', 'aliquid', 9777, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 37, 1, 'Earum quia non consequuntur ullam aspernatur.'),
-(4, 'molestias', 'ex', 6613, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 21, 1, 'Neque laudantium fugit porro accusamus.'),
-(6, 'est', 'doloremque', 7178, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 0, 0, 'Delectus voluptatem nobis possimus enim.'),
-(7, 'non', 'distinctio', 3570, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 41, 1, 'Omnis sint sint nobis quia.'),
-(8, 'placeat', 'quia', 3240, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 17, 1, 'Dolores libero eum sit aut sed earum nulla.'),
-(12, 'animi', 'omnis', 3963, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 46, 1, 'Aliquam quae voluptatem quia autem ea.'),
-(13, 'nam', 'sit', 6655, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 0, 1, 'Praesentium beatae voluptas ut ducimus explicabo.'),
-(14, 'quae', 'non', 5132, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 18, 1, 'Ipsam ad omnis sunt nam.'),
-(16, 'autem', 'maxime', 8914, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 3, 0, 'Dolorum qui eum aut non exercitationem iste iste.'),
-(17, 'dolor', 'quasi', 9051, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 14, 1, 'Ea eum unde et aperiam architecto.'),
-(18, 'eos', 'adipisci', 9172, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 36, 0, 'Sunt architecto neque architecto.'),
-(22, 'similique', 'recusandae', 3350, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 7, 1, 'Sequi sit neque rem pariatur rerum consequatur.'),
-(23, 'officiis', 'quisquam', 8860, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 18, 1, 'At sint tenetur ex itaque earum odit.'),
-(24, 'maxime', 'perferendis', 5642, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 0, 1, 'Numquam aut corporis tenetur possimus voluptates.'),
-(26, 'expedita', 'unde', 3036, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 16, 0, 'Nisi et voluptatum aut.'),
-(27, 'quasi', 'impedit', 4786, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 15, 1, 'Accusamus aut repellendus alias nostrum.'),
-(28, 'consequuntur', 'aut', 3631, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 8, 0, 'Facere eum nobis qui dolorem enim quod sed.'),
-(32, 'quibusdam', 'deserunt', 3381, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 38, 0, 'Necessitatibus nihil cumque ipsa quos.'),
-(33, 'pariatur', 'aut', 3991, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 48, 1, 'Optio tempore sed in et.'),
-(34, 'neque', 'nostrum', 4483, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 7, 0, 'Et odit et sed consequatur et.'),
-(36, 'provident', 'autem', 7980, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 14, 1, 'Aut et deserunt cum vel quod.'),
-(37, 'sunt', 'expedita', 4523, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 9, 1, 'Occaecati nisi odit doloribus corporis.'),
-(38, 'dolor', 'consequatur', 3049, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 25, 0, 'Et ea repudiandae est et enim voluptatem odit.'),
-(42, 'architecto', 'recusandae', 2678, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 44, 1, 'Labore omnis sequi dolorem.'),
-(43, 'voluptatem', 'exercitationem', 6047, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 19, 0, 'Veritatis beatae sapiente aut voluptatum.'),
-(44, 'culpa', 'harum', 8142, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 33, 1, 'Itaque ratione laudantium incidunt aliquid.'),
-(46, 'qui', 'eaque', 6478, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 46, 1, 'Non nulla occaecati optio provident et.'),
-(47, 'consequatur', 'ratione', 6937, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 32, 0, 'Sit et minima maxime neque ut qui et.'),
-(48, 'id', 'totam', 7816, 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 18, 0, 'Est tempore nobis aut ea sunt.');
+INSERT INTO `termek` (`TermekID`, `Termek_nev`, `Ar`, `Keszlet`, `Kaphato`, `Leiras`) VALUES
+(2, 'necessitatibus', 6527, 40, 1, 'Corporis sit voluptatem quasi ab non.'),
+(3, 'mollitia', 9777, 37, 1, 'Earum quia non consequuntur ullam aspernatur.'),
+(4, 'molestias', 6613, 21, 1, 'Neque laudantium fugit porro accusamus.'),
+(6, 'est', 7178, 0, 0, 'Delectus voluptatem nobis possimus enim.'),
+(7, 'non', 3570, 41, 1, 'Omnis sint sint nobis quia.'),
+(8, 'placeat', 3240, 17, 1, 'Dolores libero eum sit aut sed earum nulla.'),
+(12, 'animi', 3963, 46, 1, 'Aliquam quae voluptatem quia autem ea.'),
+(13, 'nam', 6655, 0, 1, 'Praesentium beatae voluptas ut ducimus explicabo.'),
+(14, 'quae', 5132, 18, 1, 'Ipsam ad omnis sunt nam.'),
+(16, 'autem', 8914, 3, 0, 'Dolorum qui eum aut non exercitationem iste iste.'),
+(17, 'dolor', 9051, 14, 1, 'Ea eum unde et aperiam architecto.'),
+(18, 'eos', 9172, 36, 0, 'Sunt architecto neque architecto.'),
+(22, 'similique', 3350, 7, 1, 'Sequi sit neque rem pariatur rerum consequatur.'),
+(23, 'officiis', 8860, 18, 1, 'At sint tenetur ex itaque earum odit.'),
+(24, 'maxime', 5642, 0, 1, 'Numquam aut corporis tenetur possimus voluptates.'),
+(26, 'expedita', 3036, 16, 0, 'Nisi et voluptatum aut.'),
+(27, 'quasi', 4786, 15, 1, 'Accusamus aut repellendus alias nostrum.'),
+(28, 'consequuntur', 3631, 8, 0, 'Facere eum nobis qui dolorem enim quod sed.'),
+(32, 'quibusdam', 3381, 38, 0, 'Necessitatibus nihil cumque ipsa quos.'),
+(33, 'pariatur', 3991, 48, 1, 'Optio tempore sed in et.'),
+(34, 'neque', 4483, 7, 0, 'Et odit et sed consequatur et.'),
+(36, 'provident', 7980, 14, 1, 'Aut et deserunt cum vel quod.'),
+(37, 'sunt', 4523, 9, 1, 'Occaecati nisi odit doloribus corporis.'),
+(38, 'dolor', 3049, 25, 0, 'Et ea repudiandae est et enim voluptatem odit.'),
+(42, 'architecto', 2678, 44, 1, 'Labore omnis sequi dolorem.'),
+(43, 'voluptatem', 6047, 19, 0, 'Veritatis beatae sapiente aut voluptatum.'),
+(44, 'culpa', 8142, 33, 1, 'Itaque ratione laudantium incidunt aliquid.'),
+(46, 'qui', 6478, 46, 1, 'Non nulla occaecati optio provident et.'),
+(47, 'consequatur', 6937, 32, 0, 'Sit et minima maxime neque ut qui et.'),
+(48, 'id', 7816, 18, 0, 'Est tempore nobis aut ea sunt.'),
+(52, 'dc', 1, 23, 1, 'fg');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -375,7 +411,7 @@ ALTER TABLE `szemelyi_edzo`
 -- AUTO_INCREMENT a táblához `termek`
 --
 ALTER TABLE `termek`
-  MODIFY `TermekID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `TermekID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Megkötések a kiírt táblákhoz
