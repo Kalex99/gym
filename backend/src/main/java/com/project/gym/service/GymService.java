@@ -178,16 +178,12 @@ public class GymService {
 
     public void TermekLetrehoz(Termek termek) {
         if (isNull(termek.getTermek_nev())
-                && isNull(termek.getKategoria())
                 && isNull(termek.getAr())
-                && isNull(termek.getKep())
                 && isNull(termek.getKeszlet())
                 && isNull(termek.getLeiras())) {
             termekRep.TermekLetrehoz(
                     termek.getTermek_nev(),
-                    termek.getKategoria(),
                     termek.getAr(),
-                    termek.getKep(),
                     termek.getKeszlet(),
                     termek.getLeiras());
         } else {
@@ -202,18 +198,14 @@ public class GymService {
     public void TermekModosit(Termek termek) {
         if (isNull(termek.getTermekID())
                 && isNull(termek.getTermek_nev())
-                && isNull(termek.getKategoria())
                 && isNull(termek.getAr())
-                && isNull(termek.getKep())
                 && isNull(termek.getKeszlet())
                 && isNull(termek.getKaphato())
                 && isNull(termek.getLeiras())) {
             termekRep.TermekModosit(
                     termek.getTermekID(),
                     termek.getTermek_nev(),
-                    termek.getKategoria(),
                     termek.getAr(),
-                    termek.getKep(),
                     termek.getKeszlet(),
                     termek.getKaphato(),
                     termek.getLeiras());

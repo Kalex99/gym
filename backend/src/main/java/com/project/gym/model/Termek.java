@@ -11,9 +11,7 @@ import java.io.Serializable;
                 parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "termekID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "termek_nev", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kategoria", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "ar", type = Integer.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kep", type = byte[].class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "keszlet", type = Integer.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "kaphato", type = Boolean.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "leiras", type = String.class)
@@ -29,13 +27,7 @@ public class Termek implements Serializable {
     private String termek_nev;
 
     @Column
-    private String kategoria;
-
-    @Column
     private Integer ar;
-
-    @Column
-    private byte[] kep;
 
     @Column
     private Integer keszlet;
@@ -49,12 +41,10 @@ public class Termek implements Serializable {
     public Termek() {
     }
 
-    public Termek(Long termekID, String termek_nev, String kategoria, Integer ar, byte[] kep, Integer keszlet, Boolean kaphato, String leiras) {
+    public Termek(Long termekID, String termek_nev,Integer ar, Integer keszlet, Boolean kaphato, String leiras) {
         this.termekID = termekID;
         this.termek_nev = termek_nev;
-        this.kategoria = kategoria;
         this.ar = ar;
-        this.kep = kep;
         this.keszlet = keszlet;
         this.kaphato = kaphato;
         this.leiras = leiras;
@@ -76,28 +66,12 @@ public class Termek implements Serializable {
         this.termek_nev = termek_nev;
     }
 
-    public String getKategoria() {
-        return kategoria;
-    }
-
-    public void setKategoria(String kategoria) {
-        this.kategoria = kategoria;
-    }
-
     public Integer getAr() {
         return ar;
     }
 
     public void setAr(Integer ar) {
         this.ar = ar;
-    }
-
-    public byte[] getKep() {
-        return kep;
-    }
-
-    public void setKep(byte[] kep) {
-        this.kep = kep;
     }
 
     public Integer getKeszlet() {
