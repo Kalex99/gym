@@ -92,6 +92,7 @@ p{
 }
 .tr2{
     background-color: #777;
+    border-bottom: 1px solid #000;
 }
 .tr2:hover {
     background-color: rgba(255, 0, 0, 0.645);
@@ -229,6 +230,9 @@ footer {
         width: 110px;
         font-weight: 200;
     }
+    #searchName{
+        width: 200px;
+    }
     img{
         margin-right: 15px;
         width: 300px;
@@ -255,7 +259,9 @@ footer {
     .tr1{
         font-size: 16px;
     }
-    
+    #searchName{
+        width: 150px;
+    }
     p{
         width: 150px;
         text-align: center;
