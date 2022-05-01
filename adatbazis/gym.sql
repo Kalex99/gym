@@ -60,9 +60,11 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `KeszletCsokken` (IN `termekID` INT, IN `keszlet` INT)  UPDATE termek SET termek.Keszlet = termek.Keszlet-keszlet WHERE termek.TermekID = termekID$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesLetrehozBerlet` (IN `berlet_vasarlasID` INT, IN `megjegyzes` TEXT, IN `felhasznaloID` INT)  INSERT INTO rendeles (rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.Berlet_vasarlasID, rendeles.TermekID, rendeles.FelhasznaloID) VALUES (now(), megjegyzes, berlet_vasarlasID, null, felhasznaloID)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesLetrehozBerlet`(IN `berlet_vasarlasID` INT, IN `megjegyzes` TEXT, IN `felhasznaloID` INT)
+INSERT INTO rendeles (rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.Berlet_lejar,rendeles.Berlet_vasarlasID, rendeles.TermekID, rendeles.FelhasznaloID) VALUES (now(), megjegyzes, date_add(now(),interval 30 day), berlet_vasarlasID, null, felhasznaloID)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesLetrehozTermek` (IN `termekID` INT, IN `megjegyzes` TEXT, IN `felhasznaloID` INT)  INSERT INTO rendeles (rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.Berlet_vasarlasID, rendeles.TermekID, rendeles.FelhasznaloID) VALUES (now(), megjegyzes, null, termekID, felhasznaloID)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesLetrehozTermek`(IN `termekID` INT, IN `megjegyzes` TEXT, IN `mennyiseg` SMALLINT(10), IN `felhasznaloID` INT)
+INSERT INTO rendeles (rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.Berlet_vasarlasID, rendeles.TermekID, rendeles.Mennyiseg, rendeles.FelhasznaloID) VALUES (now(), megjegyzes, null, termekID, mennyiseg, felhasznaloID) ON DUPLICATE KEY UPDATE termek.Keszlet= termek.Keszlet-mennyiség$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvas` ()  SELECT * FROM rendeles$$
 
@@ -194,6 +196,8 @@ CREATE TABLE `rendeles` (
   `RendelesID` int(11) NOT NULL,
   `Rendeles_idopont` datetime NOT NULL,
   `Megjegyzes` text DEFAULT NULL,
+  `Mennyiseg` SMALLINT(10) DEFAULT NULL,
+  `Berlet_lejar` DATE DEFAULT NULL,
   `TermekID` int(11) DEFAULT NULL,
   `Berlet_vasarlasID` int(11) DEFAULT NULL,
   `FelhasznaloID` int(11) NOT NULL
@@ -203,32 +207,32 @@ CREATE TABLE `rendeles` (
 -- A tábla adatainak kiíratása `rendeles`
 --
 
-INSERT INTO `rendeles` (`RendelesID`, `Rendeles_idopont`, `Megjegyzes`, `TermekID`, `Berlet_vasarlasID`, `FelhasznaloID`) VALUES
-(7, '1977-01-03 15:18:40', 'Ut natus molestiae.', 7, 2, 7),
-(8, '1976-07-19 08:46:19', 'Repellat possimus.', 8, 3, 8),
-(12, '1995-05-27 21:50:17', 'Eos voluptate.', 12, 2, 12),
-(13, '1986-09-09 18:33:42', 'Ex suscipit quia.', 13, 3, 13),
-(14, '1991-01-29 19:23:58', 'Commodi architecto.', 14, 4, 14),
-(16, '1980-04-20 14:01:34', 'Nulla non pariatur.', 16, 1, 16),
-(17, '1986-12-15 22:49:23', 'Amet occaecati ipsa.', 17, 2, 17),
-(18, '2010-05-13 18:15:32', 'Et quod architecto.', 18, 3, 18),
-(22, '1984-05-24 04:38:03', 'Nobis et porro.', 22, 2, 22),
-(23, '2007-04-18 05:00:29', 'Aut aliquid non.', 23, 3, 23),
-(24, '1982-05-01 12:27:35', 'Neque perferendis.', 24, 4, 24),
-(26, '1999-08-11 06:42:09', 'Corporis omnis.', 26, 1, 26),
-(27, '1994-10-15 10:17:31', 'Consequatur quis.', 27, 2, 27),
-(32, '2004-07-25 09:45:45', 'Ea soluta ex quo.', 32, 2, 32),
-(33, '2007-03-29 01:17:37', 'Aut hic asperiores.', 33, 3, 33),
-(34, '1986-09-16 04:57:21', 'Neque iusto sequi.', 34, 4, 34),
-(36, '2010-02-11 04:24:32', 'Quasi voluptas.', 36, 1, 36),
-(37, '1991-01-29 13:44:41', 'Iure eligendi.', 37, 2, 37),
-(38, '1970-12-19 08:03:26', 'Ea veniam.', 38, 3, 38),
-(42, '2015-01-22 23:26:09', 'Eligendi cumque sit.', 42, 2, 42),
-(43, '2016-02-07 00:53:52', 'Exercitationem.', 43, 3, 43),
-(44, '1992-12-28 14:15:35', 'Nam repellendus.', 44, 4, 44),
-(46, '1987-06-21 05:59:19', 'Ut sint officia qui.', 46, 1, 46),
-(47, '1997-09-17 05:47:24', 'Maiores saepe et.', 47, 2, 47),
-(48, '1984-06-08 21:51:24', 'Tempora sed dolorem.', 48, 3, 48);
+INSERT INTO `rendeles` (`RendelesID`, `Rendeles_idopont`, `Megjegyzes`, `Mennyiseg`, `Berlet_lejar` , `TermekID`, `Berlet_vasarlasID`, `FelhasznaloID`) VALUES
+(7, '1977-01-03 15:18:40', 'Ut natus molestiae.', 7, '1977-01-03', 7, 2, 7),
+(8, '1976-07-19 08:46:19', 'Repellat possimus.', 7, '1977-01-03', 8, 3, 8),
+(12, '1995-05-27 21:50:17', 'Eos voluptate.', 7, '1977-01-03', 12, 2, 12),
+(13, '1986-09-09 18:33:42', 'Ex suscipit quia.', 7, '1977-01-03', 13, 3, 13),
+(14, '1991-01-29 19:23:58', 'Commodi architecto.', 7, '1977-01-03', 14, 4, 14),
+(16, '1980-04-20 14:01:34', 'Nulla non pariatur.', 7, '1977-01-03',16, 1, 16),
+(17, '1986-12-15 22:49:23', 'Amet occaecati ipsa.', 7, '1977-01-03',17, 2, 17),
+(18, '2010-05-13 18:15:32', 'Et quod architecto.', 7, '1977-01-03', 18, 3, 18),
+(22, '1984-05-24 04:38:03', 'Nobis et porro.', 7, '1977-01-03', 22, 2, 22),
+(23, '2007-04-18 05:00:29', 'Aut aliquid non.', 7, '1977-01-03',23, 3, 23),
+(24, '1982-05-01 12:27:35', 'Neque perferendis.', 7, '1977-01-03', 24, 4, 24),
+(26, '1999-08-11 06:42:09', 'Corporis omnis.', 7, '1977-01-03', 26, 1, 26),
+(27, '1994-10-15 10:17:31', 'Consequatur quis.', 7, '1977-01-03', 27, 2, 27),
+(32, '2004-07-25 09:45:45', 'Ea soluta ex quo.', 7, '1977-01-03', 32, 2, 32),
+(33, '2007-03-29 01:17:37', 'Aut hic asperiores.', 7, '1977-01-03', 33, 3, 33),
+(34, '1986-09-16 04:57:21', 'Neque iusto sequi.', 7, '1977-01-03', 34, 4, 34),
+(36, '2010-02-11 04:24:32', 'Quasi voluptas.', 7, '1977-01-03', 36, 1, 36),
+(37, '1991-01-29 13:44:41', 'Iure eligendi.', 7, '1977-01-03', 37, 2, 37),
+(38, '1970-12-19 08:03:26', 'Ea veniam.', 7, '1977-01-03', 38, 3, 38),
+(42, '2015-01-22 23:26:09', 'Eligendi cumque sit.', 7, '1977-01-03', 42, 2, 42),
+(43, '2016-02-07 00:53:52', 'Exercitationem.', 7, '1977-01-03', 43, 3, 43),
+(44, '1992-12-28 14:15:35', 'Nam repellendus.', 7, '1977-01-03', 44, 4, 44),
+(46, '1987-06-21 05:59:19', 'Ut sint officia qui.', 7, '1977-01-03', 46, 1, 46),
+(47, '1997-09-17 05:47:24', 'Maiores saepe et.', 7, '1977-01-03', 47, 2, 47),
+(48, '1984-06-08 21:51:24', 'Tempora sed dolorem.', 7, '1977-01-03', 48, 3, 48);
 
 -- --------------------------------------------------------
 
