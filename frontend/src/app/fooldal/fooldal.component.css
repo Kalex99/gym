@@ -210,22 +210,8 @@ footer {
     grid-area: footer;
 }
 @media(max-width:1000px){
-    #container{
+    article{
         width: 600px;
-    }
-    article{
-        padding: 5px;
-        gap: 10px;
-    }
-    .thumbnail{
-        width: 200px;
-        margin-left: 1px;      
-        margin-right: 1px;  
-        grid-area: thumbnail;    
-    }
-}
-@media (max-width:650px){
-    article{
         grid-template-columns: auto auto;
         grid-template-rows: auto auto auto auto auto;
         grid-template-areas: 
@@ -236,22 +222,89 @@ footer {
         "click click";
         gap: 20px;
     }
-    .middle{
-        font-size: 28px;
-        width: 150px;
-    }
+    
     #container{
+        margin: auto;
         width: 300px;
         margin: 75px;
     }
     nav{
-        width: 110px;
-        font-weight: 200;
+        height: auto;
     }
     .thumbnail{
-        width: 170px;
+        width: 200px;
         margin-left: 1px;      
         margin-right: 1px;  
         grid-area: thumbnail;    
+    }
+    .picflow{
+        margin-left: 5px;
+    }
+}
+@media (max-width:850px){
+    article{
+        width: 400px;
+        
+        grid-template-columns: auto ;
+        grid-template-rows: auto auto auto auto auto auto auto auto;
+        grid-template-areas: 
+        "middle"
+        "picflow_1"
+        "picflow_2"
+        "picflow_3"
+        "picflow_4"
+        "picflow_5"
+        "picflow_6"
+        "click";
+        gap: 20px;
+        place-content: center;
+    }
+    
+    #container{
+        width: 300px;
+        margin: 100px 10px;
+    }
+    nav{
+        width: 150px;
+        font-weight: 200;
+    }
+    .btn.btn-secondary{
+        font-size: 15px;
+    }
+    .thumbnail{
+        width: 200px;
+        margin-left: 1px;      
+        margin-right: 1px;  
+        grid-area: thumbnail;    
+    }
+}
+@media (max-width:650px){
+    article{
+        width: 200px;
+        
+    }
+    
+    #container{
+        width: 300px;
+        margin: auto;
+    }
+    nav{
+        width: 100px;
+        font-weight: 200;
+    }
+    .btn.btn-secondary{
+        font-size: 12px;
+    }
+    .thumbnail{
+        width: 150px;
+        margin-left: 1px;      
+        margin-right: 1px;  
+        grid-area: thumbnail;    
+    }
+    .caption{
+        width: 125px;
+    }
+    .middle{
+        font-size: larger;
     }
 }

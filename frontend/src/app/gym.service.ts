@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { Edzo } from './edzo';
 import { Termek } from "./termek";
 import { Berlet } from "./berlet";
+import { Rendeles } from "./rendeles";
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,7 @@ export class GymService{
     public getBerletek(): Observable<Berlet[]>{
       return this.http.get<Berlet[]>(`${this.apiServerUrl}/berletVasarlas/berletOlvas`);
     }
+
     public getFelhasznalok(): Observable<Felhasznalo[]>{
         return this.http.get<Felhasznalo[]>(`${this.apiServerUrl}/felhasznalo/felhOlvas`);
     }
@@ -35,5 +37,11 @@ export class GymService{
     }
     public deleteFelhasznalo(felhasznaloID: number): Observable<void>{
       return this.http.delete<void>(`${this.apiServerUrl}/felhasznalo/felhTorles/${felhasznaloID}`);
+    }
+    public addRendelesTermek(rendeles:Rendeles):Observable<Rendeles>{
+      return this.http.post<Rendeles>(`${this.apiServerUrl}/rendeles/rendelesLetrehozTermek`,rendeles);
+    }
+    public addRendelesBerlet(rendeles:Rendeles):Observable<Rendeles>{
+      return this.http.post<Rendeles>(`${this.apiServerUrl}/rendeles/rendelesLetrehozBerlet`,rendeles);
     }
 }

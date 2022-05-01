@@ -42,6 +42,12 @@
             <p>Étrendkiegészítőink hatalmas választéka csak rád vár! Fogyáshoz, tömegnöveléshez, vagy akár csak a kiegyensúlyozott mindennapokhoz.
                 Nálunk mindent megtalálsz. Ne habozz! Csapj le rájuk azonnal!
             </p>
+            <div>
+                <form class="form-inline my-2 my-lg-0">
+                    <input type="search" (ngModelChange)="searchTermek(key.value)" #key="ngModel" ngModel 
+                    name="key" id="searchName" class="form-control mr-sm-2" placeholder="Termék keresés..." required>
+                </form>
+            </div>
             <div class="tableContainer">
                 <table id="table">
                     <tr class="tr1">

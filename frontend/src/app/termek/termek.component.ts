@@ -21,5 +21,18 @@ export class TermekComponent implements OnInit {
       }
     );
   }
+
+  public searchTermek(key: string): void{
+    const results: Termek[] = [];
+    for(const termek of this.termekek){
+      if(termek.termek_nev.toLowerCase().indexOf(key.toLowerCase()) !== -1){
+        results.push(termek);
+      }
+    }
+    this.termekek = results;
+    if(results.length === 0 || !key){
+      this.getTermekek();
+    }
+  }
   
 }

@@ -173,6 +173,9 @@ footer {
     "rank"
     "notifications";
 }
+#searchName{
+    margin-bottom: 10px;
+}
 .tableContainer{
     height: 200px;
     overflow-y: scroll;
