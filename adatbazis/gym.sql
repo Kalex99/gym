@@ -78,13 +78,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesOlvasTermekByID` (IN `rende
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `RendelesTorles` (IN `rendelesID` INT)  DELETE FROM rendeles WHERE rendeles.RendelesID=rendelesID$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoLetrehoz` (IN `szemedz_vezeteknev` VARCHAR(50), IN `szemedz_keresztnev` VARCHAR(50), IN `portre` BLOB, IN `szemedz_email` VARCHAR(200), IN `szemedz_telefon` VARCHAR(11))  INSERT INTO szemelyi_edzo (szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Portre, szemelyi_edzo.Szemedz_email, szemelyi_edzo.Szemedz_telefon) VALUES (szemedz_vezeteknev, szemedz_keresztnev, portre, szemedz_email, szemedz_telefon)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoLetrehoz` (IN `szemedz_vezeteknev` VARCHAR(50), IN `szemedz_keresztnev` VARCHAR(50), IN `szemedz_email` VARCHAR(200), IN `szemedz_telefon` VARCHAR(11))  INSERT INTO szemelyi_edzo (szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Szemedz_email, szemelyi_edzo.Szemedz_telefon) VALUES (szemedz_vezeteknev, szemedz_keresztnev, szemedz_email, szemedz_telefon)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoModosit` (IN `szemelyi_edzoID` INT, IN `szemedz_vezeteknev` VARCHAR(50), IN `szemedz_keresztnev` VARCHAR(50), IN `portre` BLOB, IN `szemedz_email` VARCHAR(200), IN `szemedz_telefon` VARCHAR(11))  UPDATE szemelyi_edzo SET szemelyi_edzo.Szemedz_vezeteknev=szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev=szemedz_keresztnev, szemelyi_edzo.Portre=portre, szemelyi_edzo.Szemedz_email=szemedz_email, szemelyi_edzo.Szemedz_telefon=szemedz_telefon WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoModosit` (IN `szemelyi_edzoID` INT, IN `szemedz_vezeteknev` VARCHAR(50), IN `szemedz_keresztnev` VARCHAR(50),IN `szemedz_email` VARCHAR(200), IN `szemedz_telefon` VARCHAR(11))  UPDATE szemelyi_edzo SET szemelyi_edzo.Szemedz_vezeteknev=szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev=szemedz_keresztnev, szemelyi_edzo.Szemedz_email=szemedz_email, szemelyi_edzo.Szemedz_telefon=szemedz_telefon WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvas` ()  SELECT * FROM szemelyi_edzo$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvasByID` (IN `szemelyi_edzoID` INT, OUT `szemedz_vezeteknev` VARCHAR(50), OUT `szemedz_keresztnev` VARCHAR(50), OUT `portre` BLOB, OUT `szemedz_email` VARCHAR(200), OUT `szemedz_telefon` VARCHAR(11))  SELECT szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Portre, szemelyi_edzo.Szemedz_email, szemelyi_edzo.Szemedz_telefon FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoOlvasByID` (IN `szemelyi_edzoID` INT, OUT `szemedz_vezeteknev` VARCHAR(50), OUT `szemedz_keresztnev` VARCHAR(50), OUT `szemedz_email` VARCHAR(200), OUT `szemedz_telefon` VARCHAR(11))  SELECT szemelyi_edzo.Szemedz_vezeteknev, szemelyi_edzo.Szemedz_keresztnev, szemelyi_edzo.Szemedz_email, szemelyi_edzo.Szemedz_telefon FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Szemelyi_edzoTorles` (IN `szemelyi_edzoID` INT)  DELETE FROM szemelyi_edzo WHERE szemelyi_edzo.Szemelyi_edzoID=szemelyi_edzoID$$
 
@@ -244,7 +244,6 @@ CREATE TABLE `szemelyi_edzo` (
   `Szemelyi_edzoID` int(11) NOT NULL,
   `Szemedz_vezeteknev` varchar(50) NOT NULL,
   `Szemedz_keresztnev` varchar(50) NOT NULL,
-  `Portre` blob NOT NULL,
   `Szemedz_email` varchar(200) NOT NULL,
   `Szemedz_telefon` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -253,11 +252,11 @@ CREATE TABLE `szemelyi_edzo` (
 -- A tábla adatainak kiíratása `szemelyi_edzo`
 --
 
-INSERT INTO `szemelyi_edzo` (`Szemelyi_edzoID`, `Szemedz_vezeteknev`, `Szemedz_keresztnev`, `Portre`, `Szemedz_email`, `Szemedz_telefon`) VALUES
-(2, 'Master', 'Chief', 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 'matilda62@example.org', '028-844-782'),
-(3, 'Doom', 'Slayer', 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 'solon.blick@example.org', '(976)124-39'),
-(4, 'Kratos', 'God', 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 'ceasar.erdman@example.net', '837.326.349'),
-(6, 'Badlands', 'Chugs', 0x2f34383665306634656165663237346636663831313738643931656636616338642e6a7067, 'kellen77@example.com', '1-112-735-1');
+INSERT INTO `szemelyi_edzo` (`Szemelyi_edzoID`, `Szemedz_vezeteknev`, `Szemedz_keresztnev`, `Szemedz_email`, `Szemedz_telefon`) VALUES
+(2, 'Master', 'Chief', 'matilda62@example.org', '028-844-782'),
+(3, 'Doom', 'Slayer', 'solon.blick@example.org', '(976)124-39'),
+(4, 'Kratos', 'God', 'ceasar.erdman@example.net', '837.326.349'),
+(6, 'Badlands', 'Chugs', 'kellen77@example.com', '1-112-735-1');
 
 -- --------------------------------------------------------
 
