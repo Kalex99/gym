@@ -4,4 +4,5 @@ export interface Termek{
     ar: number,
     keszlet: number,
     kaphato:number,
+    leiras:string,
 }

@@ -19,6 +19,9 @@ export class GymService{
     public getBerletek(): Observable<Berlet[]>{
       return this.http.get<Berlet[]>(`${this.apiServerUrl}/berletVasarlas/berletOlvas`);
     }
+    public bejelentkezesAccount(felhasznalonev: string, jelszo:string): Observable<Felhasznalo[]>{
+      return this.http.get<Felhasznalo[]>(`${this.apiServerUrl}/felhasznalo/bejelentkezesAccount${felhasznalonev}/${jelszo}`);
+    }
 
     public getFelhasznalok(): Observable<Felhasznalo[]>{
         return this.http.get<Felhasznalo[]>(`${this.apiServerUrl}/felhasznalo/felhOlvas`);
@@ -47,6 +50,6 @@ export class GymService{
     public keszletCsokken(termek:Termek):Observable<Termek>{
       return this.http.post<Termek>(`${this.apiServerUrl}/termek/keszletCsokken`,termek);
     }
-
+    
     
 }

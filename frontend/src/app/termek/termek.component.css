@@ -104,6 +104,7 @@ p{
     color: #fefefe;
     font-size: large;
     letter-spacing: 0.5px;
+    height: 30px;
 }
 nav {
     width: 150px;
@@ -146,40 +147,37 @@ footer {
     border-bottom-right-radius: 15px;
     grid-area: footer;
 }
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-    
-}
-.modal-content {
-    display: grid;
-    border-radius: 0;
-    border-width: 0;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    width: fit-content; /* Could be more or less, depending on screen size */
-    grid-template-columns: repeat(1 , 200px);
-    grid-template-rows: repeat(5, auto);
-    
-    grid-template-areas: 
-    "profile-cross"
-    "profile-picture"
-    "profile-username"
-    "email-adress"
-    "rank"
-    "notifications";
-}
 
+.collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  .active, .collapsible:hover {
+    background-color: #555;
+  }
+  #closeCollapsible{
+      background-color: red;
+      width: 12px;
+      height: 15px;
+      color: #fefefe;
+      text-align: center;
+  }
+  .collapsibleContent {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+  }
 .tableContainer{
-    height: 200px;
+    max-height: 200px;
     width: 800px;
     overflow-y: scroll;
 }
@@ -276,7 +274,12 @@ footer {
     }
 }
 @media (max-width:400px){
+    p{ text-align: center;}
     #container{
         margin: 5px;
+    }
+    #searchName{
+        display: grid;
+        place-self: center;
     }
 }
