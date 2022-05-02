@@ -58,6 +58,9 @@ public class Rendeles implements Serializable {
     @Column
     private String megjegyzes;
 
+    @Column
+    private Integer mennyiseg;
+
     @Column(name = "termekID", insertable = false, updatable = false)
     private Long termekID;
 
@@ -71,10 +74,11 @@ public class Rendeles implements Serializable {
     public Rendeles() {
     }
 
-    public Rendeles(Long rendelesID, Date rendeles_idopont, String megjegyzes, Long termekID, Long berlet_vasarlasID, Long felhasznaloID) {
+    public Rendeles(Long rendelesID, Date rendeles_idopont, String megjegyzes, Integer mennyiseg, Long termekID, Long berlet_vasarlasID, Long felhasznaloID) {
         this.rendelesID = rendelesID;
         this.rendeles_idopont = rendeles_idopont;
         this.megjegyzes = megjegyzes;
+        this.mennyiseg = mennyiseg;
         this.termekID = termekID;
         this.berlet_vasarlasID = berlet_vasarlasID;
         this.felhasznaloID = felhasznaloID;
@@ -102,6 +106,13 @@ public class Rendeles implements Serializable {
 
     public void setMegjegyzes(String megjegyzes) {
         this.megjegyzes = megjegyzes;
+    }
+
+    public Integer getMennyiseg(){
+        return mennyiseg;
+    }
+    public void setMennyiseg(Integer mennyiseg){
+        this.mennyiseg = mennyiseg;
     }
 
     public Long getTermekID() {

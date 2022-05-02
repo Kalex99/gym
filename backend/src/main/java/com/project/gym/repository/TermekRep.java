@@ -46,12 +46,4 @@ public interface TermekRep extends JpaRepository<Termek, Long> {
             @Param("kaphato") Boolean kaphato,
             @Param("leiras") String leiras
     );
-
-    @Transactional
-    @Modifying
-    @Query(value = "{call KeszletCsokken(:termekID,:keszlet)}", nativeQuery = true)
-    void KeszletCsokken(
-            @Param("termekID") Long termekID,
-            @Param("keszlet") Integer keszlet
-    );
 }

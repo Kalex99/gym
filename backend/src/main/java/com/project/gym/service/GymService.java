@@ -150,10 +150,12 @@ public class GymService {
 
     public void RendelesLetrehozTermek(Rendeles rendeles) {
         if (isNull(rendeles.getTermekID())
+                && isNull(rendeles.getMennyiseg())
                 && isNull(rendeles.getFelhasznaloID())) {
             rendelesRep.RendelesLetrehozTermek(
                     rendeles.getTermekID(),
                     rendeles.getMegjegyzes(),
+                    rendeles.getMennyiseg(),
                     rendeles.getFelhasznaloID());
         } else {
             throw new ApiBadRequestException("Nem lehet null érték semmelyik érték megadásnál!");
@@ -211,15 +213,6 @@ public class GymService {
                     termek.getLeiras());
         } else {
             throw new ApiBadRequestException("Néhány érték null értéket kapott!");
-        }
-    }
-
-    public void KeszletCsokken(Termek termek){
-        if (isNull(termek.getTermekID())
-            && isNull(termek.getKeszlet())){
-            termekRep.KeszletCsokken(
-                    termek.getTermekID(),
-                    termek.getKeszlet());
         }
     }
 

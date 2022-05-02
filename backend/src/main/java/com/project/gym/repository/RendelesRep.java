@@ -41,10 +41,11 @@ public interface RendelesRep extends JpaRepository<Rendeles, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "{call RendelesLetrehozTermek(:termekID, :megjegyzes, :felhasznaloID)}", nativeQuery = true)
+    @Query(value = "{call RendelesLetrehozTermek(:termekID, :megjegyzes, :mennyiseg, :felhasznaloID)}", nativeQuery = true)
     void RendelesLetrehozTermek(
             @Param("termekID") Long termekID,
             @Param("megjegyzes") String megjegyzes,
+            @Param("mennyiseg") Integer mennyiseg,
             @Param("felhasznaloID") Long felhasznaloID
     );
 

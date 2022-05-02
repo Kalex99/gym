@@ -44,4 +44,9 @@ export class GymService{
     public addRendelesBerlet(rendeles:Rendeles):Observable<Rendeles>{
       return this.http.post<Rendeles>(`${this.apiServerUrl}/rendeles/rendelesLetrehozBerlet`,rendeles);
     }
+    public keszletCsokken(termek:Termek):Observable<Termek>{
+      return this.http.post<Termek>(`${this.apiServerUrl}/termek/keszletCsokken`,termek);
+    }
+
+    
 }
