@@ -1,85 +1,145 @@
-    <div class="bg"></div>
-    <div class="bg bg2"></div>
-    <div class="bg bg3"></div>
-    <div id="container">
-        <header>
-            <h3>Land of Fitness Gym</h3>
-            <img class="logo" src="../../assets/images/final_logo.svg" alt="logo">
-            
-        </header>
-        <div id="article">
-            <nav>
-                <ul>
-                    <li>
-                        <a routerLink="/fooldal-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
-                    </li>
-                    <li>
-                        <a routerLink="/regisztracio-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active">BELÉPÉS</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/edzo-component" routerLinkActive="active">EDZŐK</a>
-                    </li>
-                    <li>
-                        <a routerLink="/felszereles-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">FELSZERELÉS</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/bufe-component" routerLinkActive="active">BÜFÉ</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/termek-component" routerLinkActive="active">TERMÉKEK</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/karrier-component" routerLinkActive="active">KARRIER</a>
-                    </li>
-                </ul>
-            </nav>
-        
-        
-            <div class="middle">
-                <a><img class="kep" src="../../assets/images/1.jpg" alt="5. kép"></a>
-                <p>Ideje az életmódváltásnak! Az első alkalom ingyenes utána 1500 ft/nap. Havi bérletünk 5000 ft. Vágj bele!
-                </p>
-                <table id="table">
-                    <tr class="tr tr1">
-                        <th>Bérlettípus</th>
-                        <th>Ár</th>
-                    </tr>
-                    <tr class="tr tr2" *ngFor="let berlet of berletek" >
-                        <td class="btn btn-rendel"  onclick="document.getElementById('myModal').style.display='block'" id="rendel">{{berlet.berlet_tipus}}</td>
-                        <td>{{berlet.berlet_ar}} Ft</td>
-                    </tr>
-                    <div class="modal" id="myModal">
-                        <div class="modal-content">
-                            <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-                            <h5>Bérlet vásárlás</h5>
-                            <div class="form-group">
-                                <label>Bérlettípus</label>
-                                <input type="number" ngModel name="berlet_vasarlasID" class="form-control" id="berlettipus" min="1"
-                                    max="4">
-                                <small class="form-row form-text text-muted">#1-Diák, #2-Felnőtt, #3-Nyugdíjas,
-                                    #4-Csecsemő</small>
-                                <label>Megjegyzes</label>
-                                <textarea maxlength="50" ngModel name="berlet_vasarlasID" id="megjegyzes"
-                                    placeholder="Opcionális max(50)" style="width:absolute;"></textarea>
-                                <label>FelhasznaloID</label>
-                                <input type="number" ngModel name="felhasznaloID" class="form-control" id="felhID" min="1">
-                
-                            </div>
-                            <div class="btn btn-secondary btn-block"
-                                onclick="document.getElementById('myModal').style.display='none';let input = document.getElementById('mennyiseg').value;alert(input) ">
-                                Megrendelem</div>
-                        </div>
-                
-                    </div>
-                </table>
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<div id="container">
+
+
+
+
+    <div class="modal fade" id="addRendelesBerletModal" tabindex="-1" role="dialog"
+    aria-labelledby="addRendelesBerletModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addRendelesBerletModalLabel">Rendelés</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <div class="modal-body">
+                <form #addForm="ngForm" (ngSubmit)="addRendelesBerlet(addForm)">
+                    <div class="form-group">
+                        <label>Bérlettípus</label>
+                        <input type="number" ngModel name="berlet_vasarlasID" class="form-control"
+                            id="berlet_vasarlasID" min="1" max="4">
+                        <small class="form-row form-text text-muted">#1-Diák, #2-Felnőtt, #3-Nyugdíjas,
+                            #4-Csecsemő</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Megjegyzés</label>
+                        <textarea maxlength="50" ngModel name="megjegyzes" id="megjegyzes"
+                            placeholder="Opcionális max(50)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>FelhasználóID</label>
+                        <input type="number" ngModel name="felhasznaloID" class="form-control"
+                            id="felhasznaloID" min="1">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="add-employee-form" class="btn btn-secondary"
+                            data-dismiss="modal">Mégse</button>
+                        <button [disabled]="addForm.invalid" type="submit" class="btn btn-secondary">Vásárlás</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <header>
+        <h3>Land of Fitness Gym</h3>
+        <img class="logo" src="../../assets/images/final_logo.svg" alt="logo">
+
+    </header>
+    <div id="article">
+        <nav>
+            <ul>
+                <li>
+                    <a routerLink="/fooldal-component" routerLinkActive="active"
+                        class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
+                </li>
+                <li>
+                    <a routerLink="/regisztracio-component" routerLinkActive="active"
+                        class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component"
+                        routerLinkActive="active">BELÉPÉS</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/edzo-component"
+                        routerLinkActive="active">EDZŐK</a>
+                </li>
+                <li>
+                    <a routerLink="/felszereles-component" routerLinkActive="active"
+                        class="btn btn-secondary btn-lg btn-block">FELSZERELÉS</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bufe-component"
+                        routerLinkActive="active">BÜFÉ</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/termek-component"
+                        routerLinkActive="active">TERMÉKEK</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/karrier-component"
+                        routerLinkActive="active">KARRIER</a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <div class="middle">
+            <a><img class="kep" src="../../assets/images/1.jpg" alt="5. kép"></a>
+            <p>Ideje az életmódváltásnak! Az első alkalom ingyenes utána 1500 ft/nap. Havi bérletünk 5000 ft. Vágj bele!
+            </p>
+
+            <a class="nav-link btn btn-secondary btn-rendel" (click)="onOpenModal(null!, 'add')">Rendelek! <span
+                class="sr-only">(current)</span></a>
+            <table id="table">
+                <tr class="tr tr1">
+                    <th>Bérlettípus</th>
+                    <th>Ár</th>
+                </tr>
+                <tr class="tr tr2" *ngFor="let berlet of berletek">
+                    <td class="btn btn-rendel" 
+                        id="rendel">{{berlet.berlet_tipus}}</td>
+                    <td>{{berlet.berlet_ar}} Ft</td>
+                </tr>
+                <!-- <div class="modal" id="myModal">
+                    <div class="modal-content" #addForm="ngForm" (ngSubmit)="addRendelesBerlet(addForm)">
+                        <span class="close"
+                            onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                        <h5>Bérlet vásárlás</h5>
+                        <div class="form-group">
+                            <label>Bérlettípus</label>
+                            <input type="number" ngModel name="berlet_vasarlasID" class="form-control" id="berlet_vasarlasID" min="1" max="4">
+                            <small class="form-row form-text text-muted">#1-Diák, #2-Felnőtt, #3-Nyugdíjas,
+                                #4-Csecsemő</small>
+                            <label>Megjegyzes</label>
+                            <textarea maxlength="50" ngModel name="megjegyzes" id="megjegyzes" placeholder="Opcionális max(50)"
+                                style="width:absolute;"></textarea>
+                            <label>FelhasznaloID</label>
+                            <input type="number" ngModel name="felhasznaloID" class="form-control" id="felhasznaloID" min="1">
+
+                        </div>
+                        <div class="btn btn-secondary btn-block"
+                            onclick="document.getElementById('myModal').style.display='none';let input = document.getElementById('mennyiseg').value;alert(input)">
+                            Megrendelem</div>
+                    </div>
+
+                </div> -->   
+
+            </table>
             
         </div>
-        <footer>
-            <p>© Kovácsfi Alex / Kovács Richárd / Kuczi Dániel</p>
-        </footer>
-    </div>
 
+    </div>
+    <footer>
+        <p>© Kovácsfi Alex / Kovács Richárd / Kuczi Dániel</p>
+    </footer>
+
+</div>

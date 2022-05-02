@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Termek } from '../termek';
 import { GymService } from '../gym.service';
+import { NgForm } from '@angular/forms';
+import { Rendeles } from '../rendeles';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-termek',
@@ -22,6 +25,17 @@ export class TermekComponent implements OnInit {
     );
   }
 
+  public addRendelesTermek(addForm: NgForm): void{
+    this.GymService.addRendelesTermek(addForm.value).subscribe(
+      (response:Rendeles)=>{
+        console.log(response);
+      }
+      ,(error: HttpErrorResponse) =>{
+        alert(error.message);
+      }
+    );
+  }
+
   public searchTermek(key: string): void{
     const results: Termek[] = [];
     for(const termek of this.termekek){
@@ -34,5 +48,16 @@ export class TermekComponent implements OnInit {
       this.getTermekek();
     }
   }
-  
+  public onOpenModal(rendeles: Rendeles, mode: string): void {
+    const container = document.getElementById('container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addRendelesTermektModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
 }
