@@ -27,7 +27,7 @@ DELIMITER $$
 --
 -- Eljárások
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesAccount` (IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64), OUT `felh_vezeteknev` VARCHAR(50), OUT `felh_keresztnev` VARCHAR(50), OUT `felh_email` VARCHAR(200), OUT `szuletesi_datum` DATE, OUT `felh_telefon` VARCHAR(11))  SELECT felhasznalo.FelhasznaloID, felhasznalo.Felh_vezeteknev, felhasznalo.Felh_keresztnev, felhasznalo.Felh_email, felhasznalo.Szuletesi_datum, felhasznalo.Felh_telefon from felhasznalo WHERE felhasznalo.Felhasznalonev=felhasznalonev AND felhasznalo.Jelszo=jelszo$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesAccount` (IN `felhasznalonev` VARCHAR(20), IN `jelszo` VARCHAR(64))  SELECT * FROM felhasznalo WHERE felhasznalo.Felhasznalonev=felhasznalonev AND felhasznalo.Jelszo=jelszo$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BejelentkezesRendeles` (IN `felhasznaloID` INT, OUT `rendelesID` INT, OUT `rendeles_idopont` DATETIME, OUT `megjegyzes` TEXT, OUT `termekID` INT, OUT `berlet_vasarlasID` INT)  SELECT rendeles.RendelesID, rendeles.Rendeles_idopont, rendeles.Megjegyzes, rendeles.TermekID, rendeles.Berlet_vasarlasID FROM rendeles WHERE rendeles.FelhasznaloID=felhasznaloID$$
 
