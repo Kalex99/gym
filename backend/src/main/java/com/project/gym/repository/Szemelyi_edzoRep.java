@@ -22,11 +22,10 @@ public interface Szemelyi_edzoRep extends JpaRepository<Szemelyi_edzo, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "{call Szemelyi_edzoLetrehoz(:szemedz_vezeteknev, :szemedz_keresztnev, :portre, :szemedz_email, :szemedz_telefon)}", nativeQuery = true)
+    @Query(value = "{call Szemelyi_edzoLetrehoz(:szemedz_vezeteknev, :szemedz_keresztnev, :szemedz_email, :szemedz_telefon)}", nativeQuery = true)
     void Szemelyi_edzoLetrehoz(
             @Param("szemedz_vezeteknev") String szemedz_vezeteknev,
             @Param("szemedz_keresztnev") String szemedz_keresztnev,
-            @Param("portre") byte[] portre,
             @Param("szemedz_email") String szemedz_email,
             @Param("szemedz_telefon") String szemedz_telefon
     );
@@ -38,12 +37,11 @@ public interface Szemelyi_edzoRep extends JpaRepository<Szemelyi_edzo, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "{call Szemelyi_edzoModosit(:szemelyi_edzoID,:szemedz_vezeteknev, :szemedz_keresztnev, :portre, :szemedz_email, :szemedz_telefon)}", nativeQuery = true)
+    @Query(value = "{call Szemelyi_edzoModosit(:szemelyi_edzoID,:szemedz_vezeteknev, :szemedz_keresztnev, :szemedz_email, :szemedz_telefon)}", nativeQuery = true)
     void Szemelyi_edzoModosit(
             @Param("szemelyi_edzoID") Long szemelyi_edzoID,
             @Param("szemedz_vezeteknev") String szemedz_vezeteknev,
             @Param("szemedz_keresztnev") String szemedz_keresztnev,
-            @Param("portre") byte[] portre,
             @Param("szemedz_email") String szemedz_email,
             @Param("szemedz_telefon") String szemedz_telefon
     );

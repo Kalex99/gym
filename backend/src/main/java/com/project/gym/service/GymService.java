@@ -242,13 +242,11 @@ public class GymService {
     public void Szemelyi_edzoLetrehoz(Szemelyi_edzo szemelyiEdzo) {
         if (isNull(szemelyiEdzo.getSzemedz_vezeteknev())
                 && isNull(szemelyiEdzo.getSzemedz_keresztnev())
-                && isNull(szemelyiEdzo.getPortre())
                 && isNull(szemelyiEdzo.getSzemedz_email())
                 && isNull(szemelyiEdzo.getSzemedz_telefon())) {
             szemelyi_edzoRep.Szemelyi_edzoLetrehoz(
                     szemelyiEdzo.getSzemedz_vezeteknev(),
                     szemelyiEdzo.getSzemedz_keresztnev(),
-                    szemelyiEdzo.getPortre(),
                     szemelyiEdzo.getSzemedz_email(),
                     szemelyiEdzo.getSzemedz_telefon()
             );
@@ -265,14 +263,12 @@ public class GymService {
         if (isNull(szemelyiEdzo.getSzemelyi_edzoID())
                 && isNull(szemelyiEdzo.getSzemedz_vezeteknev())
                 && isNull(szemelyiEdzo.getSzemedz_keresztnev())
-                && isNull(szemelyiEdzo.getPortre())
                 && isNull(szemelyiEdzo.getSzemedz_email())
                 && isNull(szemelyiEdzo.getSzemedz_telefon())) {
             szemelyi_edzoRep.Szemelyi_edzoModosit(
                     szemelyiEdzo.getSzemelyi_edzoID(),
                     szemelyiEdzo.getSzemedz_vezeteknev(),
                     szemelyiEdzo.getSzemedz_keresztnev(),
-                    szemelyiEdzo.getPortre(),
                     szemelyiEdzo.getSzemedz_email(),
                     szemelyiEdzo.getSzemedz_telefon());
         } else {

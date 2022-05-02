@@ -32,11 +32,11 @@ public class GymController {
         isEmpty(felhasznalo);
         return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
     }
-    @GetMapping("felhasznalo/BejelentkezesAccount2/{felhasznalonev}/{jelszo}")
+    @GetMapping("felhasznalo/BejelentkezesAccount/{felhasznalonev}/{jelszo}")
     @Transactional
     public ResponseEntity<List<Felhasznalo>> BejelentkezesAccount(@PathVariable("felhasznalonev") String felhasznalonev, @PathVariable("jelszo") String jelszo) {
         List<Felhasznalo> felhasznalo = gymService.BejelentkezesAccount(felhasznalonev,jelszo);
-        isEmpty(felhasznalo);
+        if (felhasznalo.isEmpty()) throw new ApiNotFoundException("A felhasználó nem található meg!");
         return new ResponseEntity<>(felhasznalo, HttpStatus.OK);
     }
 

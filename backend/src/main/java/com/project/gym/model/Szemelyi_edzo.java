@@ -12,7 +12,6 @@ import java.util.Arrays;
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = "szemelyi_edzoID", type = Long.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_vezeteknev", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_keresztnev", type = String.class),
-                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "portre", type = byte[].class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_email", type = String.class),
                         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "szemedz_telefon", type = String.class)
                 })
@@ -31,9 +30,6 @@ public class Szemelyi_edzo implements Serializable {
     private String szemedz_keresztnev;
 
     @Column
-    private byte[] portre;
-
-    @Column
     private String szemedz_email;
 
     @Column
@@ -42,11 +38,10 @@ public class Szemelyi_edzo implements Serializable {
     public Szemelyi_edzo() {
     }
 
-    public Szemelyi_edzo(Long szemelyi_edzoID, String szemedz_vezeteknev, String szemedz_keresztnev, byte[] portre, String szemedz_email, String szemedz_telefon, Long tartozkodasihelyID) {
+    public Szemelyi_edzo(Long szemelyi_edzoID, String szemedz_vezeteknev, String szemedz_keresztnev, String szemedz_email, String szemedz_telefon, Long tartozkodasihelyID) {
         this.szemelyi_edzoID = szemelyi_edzoID;
         this.szemedz_vezeteknev = szemedz_vezeteknev;
         this.szemedz_keresztnev = szemedz_keresztnev;
-        this.portre = portre;
         this.szemedz_email = szemedz_email;
         this.szemedz_telefon = szemedz_telefon;
     }
@@ -73,14 +68,6 @@ public class Szemelyi_edzo implements Serializable {
 
     public void setSzemedz_keresztnev(String szemedz_keresztnev) {
         this.szemedz_keresztnev = szemedz_keresztnev;
-    }
-
-    public byte[] getPortre() {
-        return portre;
-    }
-
-    public void setPortre(byte[] portre) {
-        this.portre = portre;
     }
 
     public String getSzemedz_email() {
