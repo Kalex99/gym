@@ -204,6 +204,9 @@ footer {
     .tr2{
         border-bottom: 1px solid #000;
     }
+    .tableContainer{
+        width: 450px;
+    }
 }
 @media (max-width: 650px){
     #container{
@@ -231,6 +234,9 @@ footer {
         width: 280px;
         font-size: 15px;
     }
+    .tableContainer{
+        width: 310px;
+    }
 }
 @media (max-width:500px){
     #container{
@@ -257,7 +263,6 @@ footer {
     }
     .btn-rendel{
         font-size: 12px;
-        width: 50px;
     }
     footer{
         font-size: 12px;
@@ -266,9 +271,12 @@ footer {
     .keszlet{
         width: 50px;
     }
+    .tableContainer{
+        width: 235px;
+    }
 }
 @media (max-width:400px){
     #container{
-        margin: 25px;
+        margin: 5px;
     }
 }
