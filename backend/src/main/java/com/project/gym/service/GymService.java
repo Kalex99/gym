@@ -6,6 +6,10 @@ import com.project.gym.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.naming.event.ObjectChangeListener;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -13,6 +17,10 @@ public class GymService {
 
     @Autowired
     private FelhasznaloRep felhasznaloRep;
+
+    @Autowired
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public List<Felhasznalo> FelhasznaloOlvas() {
         return felhasznaloRep.FelhasznaloOlvas();
@@ -25,6 +33,10 @@ public class GymService {
     public Iterable<String> FelhasznaloOlvasByID(Long felhasznaloID) {
         return felhasznaloRep.FelhasznaloOlvasByID(felhasznaloID);
     }
+    public List<Felhasznalo> BejelentkezesAccount(String felhasznalonev, String jelszo) {
+        return felhasznaloRep.BejelentkezesAccount(felhasznalonev, jelszo);
+    }
+
 
     public void FelhasznaloLetrehoz(Felhasznalo felhasznalo) {
         if (isNull(felhasznalo.getFelhasznalonev())

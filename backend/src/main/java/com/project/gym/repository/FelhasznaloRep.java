@@ -22,6 +22,14 @@ public interface FelhasznaloRep extends JpaRepository<Felhasznalo, Long> {
     @Procedure(name = "BejelentkezesRendeles")
     Iterable<String> BejelentkezesRendeles(@Param("felhasznaloID") Long felhasznaloID);
 
+
+    @Query(value = "{call BejelentkezesAccount(:felhasznalonev, :jelszo)}", nativeQuery = true)
+    List<Felhasznalo> BejelentkezesAccount(
+            @Param("felhasznalonev") String felhasznalonev,
+            @Param("jelszo") String jelszo
+    );
+
+
     @Procedure(name = "FelhasznaloOlvasByID")
     Iterable<String> FelhasznaloOlvasByID(@Param("felhasznaloID") Long felhasznaloID);
 
