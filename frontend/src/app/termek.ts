@@ -1,6 +1,7 @@
 export interface Termek{
-    termekid: number,
+    termekID: number,
     termek_nev: string,
     ar: number,
     keszlet: number,
+    kaphato:number,
 }

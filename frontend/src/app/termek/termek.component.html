@@ -1,13 +1,51 @@
-
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
 <div id="container">
-    <header>
-        <h3>Land of Fitness Gym</h3>
-        <img class="logo" src="../../assets/images/final_logo.svg" alt="logo">
-        <div class="bg"></div>
-        <div class="bg bg2"></div>
-        <div class="bg bg3"></div>
-    </header>
     
+    <div class="modal fade" id="addRendelesTermekModal" tabindex="-1" role="dialog"
+    aria-labelledby="addRendelesTermekModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addRendelesTermekModalLabel">Add Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #addForm="ngForm" (ngSubmit)="addRendelesTermek(addForm)">
+                    <div class="form-group">
+                        <label for="termekID">Termék kíválasztás</label>
+                        <select  class="form-control" ngModel name ="termekID" id="termekID" multiple >
+                            <option *ngFor="let termek of termekek">{{termek.termekID}}, {{termek.termek_nev}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Megjegyzes</label>
+                        <textarea maxlength="50" ngModel name="megjegyzes" id="megjegyzes"
+                            placeholder="Opcionális max(50)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>FelhasznaloID</label>
+                        <input type="number" ngModel name="felhasznaloID" class="form-control"
+                            id="felhasznaloID" min="1">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="add-employee-form" class="btn btn-secondary"
+                            data-dismiss="modal">Mégse</button>
+                        <button [disabled]="addForm.invalid" type="submit" class="btn btn-secondary">Vásárlás</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<header>
+    <h3>Land of Fitness Gym</h3>
+    <img class="logo" src="../../assets/images/final_logo.svg" alt="logo">
+    
+</header>
     <div id="article">
         <nav>
             <ul>
@@ -38,16 +76,21 @@
             </ul>
         </nav>
         <div class="middle">
+
             <a  ><img  src="../../assets/images/5.jpg" alt="5. kép"></a>
             <p>Étrendkiegészítőink hatalmas választéka csak rád vár! Fogyáshoz, tömegnöveléshez, vagy akár csak a kiegyensúlyozott mindennapokhoz.
-                Nálunk mindent megtalálsz. Ne habozz! Csapj le rájuk azonnal!
+                Nálunk mindent megtalálsz. Ne habozz! Csapj le rájuk azonnal! 
             </p>
+            <p>Az árak bruttó értékben értendőek!</p>
+            <a class="nav-link btn btn-secondary btn-rendel" (click)="onOpenModal(null!, 'add')">Rendelek! <span
+                class="sr-only">(current)</span></a>
             <div>
                 <form class="form-inline my-2 my-lg-0">
-                    <input type="search" (ngModelChange)="searchTermek(key.value)" #key="ngModel" ngModel 
-                    name="key" id="searchName" class="form-control mr-sm-2" placeholder="Termék keresés..." required>
+                    <input type="search" (ngModelChange)="searchTermek(key.value)" #key="ngModel" ngModel name="key" id="searchName"
+                        class="form-control mr-sm-2" placeholder="Termék keresés..." required>
                 </form>
             </div>
+            
             <div class="tableContainer">
                 <table id="table">
                     <tr class="tr1">
@@ -55,37 +98,54 @@
                        <th>Ár</th>
                        <th>készlet</th>
                        <th style="display: none;">id</th>
+                       <th style="display: none;">Kapható</th>
                     </tr>
                     <tr class="tr2" *ngFor="let termek of termekek">
-                        <td class="btn btn-rendel" onclick="document.getElementById('myModal').style.display='block'" id="rendel">{{termek.termek_nev}}</td>
+                    
+                        <td >{{termek.termek_nev}}</td>
                         <td id="ar">{{termek.ar}} Ft</td>
-                        <td class="keszlet">{{termek.keszlet}} cs</td>
-                        <td id="termekid" style="display: none;">{{termek.termekid}}</td>
+                        <td>{{termek.keszlet}} cs</td>
+                        <td id="termekid" style="display: none;">{{termek.termekID}}</td>
+                        <td id="kaphato" style="display: none;" *ngIf="false">{{termek.kaphato}}</td>
+                    
                     </tr>
+                    
+                    <!-- <div class="modal" id="myModal">
+                        <div class="modal-content">
+                            <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                            <h5>Termék vásárlás</h5>
+                            <div class="form-group">
+                                <label for="termekID">Termék kíválasztás</label>
+                                <select  class="form-control" ngModel name ="termekID" id="termekID" multiple >
+                                    <option *ngFor="let termek of termekek">{{termek.termekID}}, {{termek.termek_nev}}</option>
+                                </select>
+                                <label>Megjegyzes</label>
+                                <textarea maxlength="50" ngModel name="megjegyzes" id="megjegyzes" placeholder="Opcionális max(50)"
+                                    style="width:absolute;"></textarea>
+                                <label>FelhasznaloID</label>
+                                <input type="number" ngModel name="felhasznaloID" class="form-control" id="felhID" min="1">
+                                <label for="exampleInputPassword1">Mennyiség</label>
+                                <input type="number" class="form-control" id="mennyiseg">
+                            </div>
+                            <div class="btn btn-secondary btn-block" onclick="document.getElementById('myModal').style.display='none';
+                            let ar = document.getElementById('ar');
+                            let termekid = document.getElementById('termekid');
+                            let input = document.getElementById('mennyiseg').value;
+                            alert(termekid);">Megrendelem</div>
+                        </div>
+                        
+                    </div> -->
+                    
                 </table>
             </div>
-            <div class="modal" id="myModal">
-                <div class="modal-content">
-                    <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Mennyiség</label>
-                        <input type="number" class="form-control" id="mennyiseg">
-                    </div>
-                    <div class="btn btn-secondary btn-block" onclick="document.getElementById('myModal').style.display='none';
-                    let ar = document.getElementById('ar');
-                    let termekid = document.getElementById('termekid');
-                    let input = document.getElementById('mennyiseg').value;
-                    alert(termekid);">Megrendelem</div>
-                </div>
-                
-            </div>
+            
         </div>
         
     </div>
     <footer>
         <p>© Kovácsfi Alex/Kovács Richárd/Kuczi Dániel</p>
     </footer>
-</div>
+
 <script >
     function vasarlas(){
         

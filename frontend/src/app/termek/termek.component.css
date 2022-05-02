@@ -84,15 +84,16 @@ p{
     margin: 20px, 20px;
 }
 #table{
-    width: 800px;
     grid-area: table;
     text-align: left;
     margin-right: 10px;
     margin-bottom: 20px;
+    height: 200px;
+    width: 750px;
+    overflow: scroll;
 }
-.tr2{
-    background-color: #777;
-    border-bottom: 1px solid #000;
+.tr2 {
+    background-color: #8d8d8d;
 }
 .tr2:hover {
     background-color: rgba(255, 0, 0, 0.645);
@@ -125,7 +126,9 @@ nav ul li {
     font-size: 1.5rem;
 }
 .btn-rendel{
-    text-align: left;
+    display: grid;
+    place-self: center;
+    text-align: center;
     font-size: 1rem;
     width: 150px;
 }
@@ -146,7 +149,7 @@ footer {
 .modal {
     display: none;
     position: fixed;
-    z-index: 3;
+    z-index: 2;
     left: 0;
     top: 0;
     width: 100%;
@@ -174,29 +177,11 @@ footer {
     "rank"
     "notifications";
 }
-#searchName{
-    margin-bottom: 10px;
-}
+
 .tableContainer{
     height: 200px;
+    width: 800px;
     overflow-y: scroll;
-}
-
-.close {
-    color: red;
-    text-align: right;
-    font-size: 28px;
-    font-weight: bold;
-    grid-area: profile-cross;
-}
-
-
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 @media (max-width: 1000px){
@@ -276,6 +261,7 @@ footer {
     }
     footer{
         font-size: 12px;
+        padding-left: 10px;
     }
     .keszlet{
         width: 50px;

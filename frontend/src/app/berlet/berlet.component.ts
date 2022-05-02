@@ -24,10 +24,26 @@ export class BerletComponent implements OnInit {
     );
   }
   public addRendelesBerlet(addForm: NgForm): void{
-    this.GymService.addRendelesTermek(addForm.value).subscribe(
+    document.getElementById('add-employee-form')?.click();
+    this.GymService.addRendelesBerlet(addForm.value).subscribe(
       (response:Rendeles)=>{
-        console.log(response);
+        alert(response);
       }
     );
   }
+
+  public onOpenModal(rendeles: Rendeles, mode: string): void {
+    const container = document.getElementById('container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addRendelesBerletModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
+
+
 }
