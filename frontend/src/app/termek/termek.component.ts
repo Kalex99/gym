@@ -26,12 +26,14 @@ export class TermekComponent implements OnInit {
   }
 
   public addRendelesTermek(addForm: NgForm): void{
+    document.getElementById('add-employee-form')?.click();
     this.GymService.addRendelesTermek(addForm.value).subscribe(
       (response:Rendeles)=>{
-        console.log(response);
+        addForm.reset();
       }
       ,(error: HttpErrorResponse) =>{
         alert(error.message);
+        addForm.reset();
       }
     );
   }
@@ -55,7 +57,7 @@ export class TermekComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
-      button.setAttribute('data-target', '#addRendelesTermektModal');
+      button.setAttribute('data-target', '#addRendelesTermekModal');
     }
     container?.appendChild(button);
     button.click();

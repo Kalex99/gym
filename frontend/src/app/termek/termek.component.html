@@ -1,3 +1,19 @@
+<script >
+    var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+</script>
 <div class="bg"></div>
 <div class="bg bg2"></div>
 <div class="bg bg3"></div>
@@ -17,14 +33,24 @@
                 <form #addForm="ngForm" (ngSubmit)="addRendelesTermek(addForm)">
                     <div class="form-group">
                         <label for="termekID">Termék kíválasztás</label>
-                        <select  class="form-control" ngModel name ="termekID" id="termekID" multiple >
-                            <option *ngFor="let termek of termekek">{{termek.termekID}}, {{termek.termek_nev}}</option>
+                        <input type="number" ngModel name="termekID" class="form-control"
+                        id="termekID" min="1" placeholder="Adja meg a termék számát!">
+                    </div>
+                    <div class="form-group">
+                        <label for="termekID">Termék lista</label>
+                        <select  class="form-control" name ="termek_nev" id="termek_nev" multiple >
+                            <option *ngFor="let termek of termekek" disabled>{{termek.termekID}}, {{termek.termek_nev}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Megjegyzes</label>
                         <textarea maxlength="50" ngModel name="megjegyzes" id="megjegyzes"
                             placeholder="Opcionális max(50)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Mennyiség</label>
+                        <input type="number" ngModel name="mennyiseg" class="form-control"
+                            id="mennyiseg" min="1" max="5">
                     </div>
                     <div class="form-group">
                         <label>FelhasznaloID</label>
@@ -102,12 +128,14 @@
                     </tr>
                     <tr class="tr2" *ngFor="let termek of termekek">
                     
-                        <td >{{termek.termek_nev}}</td>
+                        <td class="btn collapsible" onclick="document.getElementById('collapsibleContent').style.display='block'">{{termek.termek_nev}}</td>
+                        
                         <td id="ar">{{termek.ar}} Ft</td>
                         <td>{{termek.keszlet}} cs</td>
+                        <div class="collapsibleContent" id="collapsibleContent"><i class="fa fa-caret-left" id="closeCollapsible" onclick="document.getElementById('collapsibleContent').style.display='none'"></i>  {{termek.leiras}}</div>
                         <td id="termekid" style="display: none;">{{termek.termekID}}</td>
                         <td id="kaphato" style="display: none;" *ngIf="false">{{termek.kaphato}}</td>
-                    
+                        
                     </tr>
                     
                     <!-- <div class="modal" id="myModal">
@@ -146,8 +174,3 @@
         <p>© Kovácsfi Alex/Kovács Richárd/Kuczi Dániel</p>
     </footer>
 
-<script >
-    function vasarlas(){
-        
-    }
-</script>

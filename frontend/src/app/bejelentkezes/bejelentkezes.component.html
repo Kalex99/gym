@@ -39,16 +39,17 @@
         
         
             <div class="middle">
-                <div class="regisztracio-form">
+                <form (ngSubmit)="onBejelentkezesAccount(Felhasznalonev, Jelszo)">
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Felhasználónév</label>
-                        <input type="text" class="form-control" id="exampleInputText">
+                       <label for="name">Felhasznalonev</label>
+                       <input type="text" ngModel name="felhasznalonev" class="form-control" id="felhasznalonev" placeholder="Name" required>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Jelszó</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                </div>
+                        <label for="password">Jelszó</label>
+                        <input type="password" ngModel name="jelszo" class="form-control" id="jelszo" placeholder="Jelszó" required>
+                     </div>
+                     <button type="submit" class="btn btn-secondary btn-regisztracio">Regisztrálok</button>
+                </form>
             </div>
             
         </div>
