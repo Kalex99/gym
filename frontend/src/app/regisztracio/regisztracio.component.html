@@ -14,10 +14,7 @@
                         <a routerLink="/fooldal-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
                     </li>
                     <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active">BELÉPÉS</a>
-                    </li>
-                    <li>
-                        <a routerLink="/berlet-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">BÉRLET</a>
+                        <a routerLink="/kapcsolat-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">KAPCSOLAT</a>
                     </li>
                     <li>
                         <a class="btn btn-secondary btn-lg btn-block" routerLink="/edzo-component" routerLinkActive="active">EDZŐK</a>
@@ -29,7 +26,7 @@
                         <a class="btn btn-secondary btn-lg btn-block" routerLink="/bufe-component" routerLinkActive="active">BÜFÉ</a>
                     </li>
                     <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/termek-component" routerLinkActive="active">TERMÉKEK</a>
+                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active" (click)="TermekBelepesHiba()">TERMÉKEK</a>
                     </li>
                     <li>
                         <a class="btn btn-secondary btn-lg btn-block" routerLink="/karrier-component" routerLinkActive="active">KARRIER</a>
@@ -39,10 +36,7 @@
         
         
             <div class="middle">
-                
                 <form #addForm="ngForm" (ngSubmit)="onAddFelhasznalo(addForm)">
-
-
                     <div class="form-group">
                        <label for="name">Felhasznalonev</label>
                        <input type="text" ngModel name="felhasznalonev" class="form-control" id="felhasznalonev" placeholder="Name" required>
@@ -73,8 +67,13 @@
                     </div>
                     <button [disabled]="addForm.invalid" type="submit" class="btn btn-secondary btn-regisztracio">Regisztrálok</button>
                 </form>
+                <div class="redirectContainer">            
+                    <p>Ha már van regisztrált fiókja, jelentkezzen be!</p>
+                    <button type="submit" class="btn btn-secondary btn-regisztracio" routerLink="/bejelentkezes-component"
+                    routerLinkActive="active" >Bejelentkezés</button>
+                </div>
             </div>
-            
+
         </div>
         <footer>
             <p>© Kovácsfi Alex / Kovács Richárd / Kuczi Dániel</p>

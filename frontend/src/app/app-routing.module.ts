@@ -9,6 +9,7 @@ import { BufeComponent } from './bufe/bufe.component';
 import { KarrierComponent } from './karrier/karrier.component';
 import { RegisztracioComponent } from './regisztracio/regisztracio.component';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
+import { KapcsolatComponent } from './kapcsolat/kapcsolat.component';
 
 const routes: Routes = [
   { path: 'fooldal-component', component: FooldalComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'karrier-component', component: KarrierComponent},
   { path: 'regisztracio-component', component: RegisztracioComponent},
   { path: 'bejelentkezes-component', component: BejelentkezesComponent},
+  { path: 'kapcsolat-component', component: KapcsolatComponent},
   { path: '**', redirectTo: 'fooldal-component' }
 ];
 

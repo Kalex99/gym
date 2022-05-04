@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Edzo } from './../edzo';
 import { Felhasznalo } from './../felhasznalo'
 import { GymService } from '../gym.service';
-
+import { FormBuilder, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -21,7 +21,6 @@ export class RegisztracioComponent implements OnInit {
     this.onAddFelhasznalo;
   }
   public onAddFelhasznalo(addForm: NgForm):void {
-    document.getElementById('add-felhasznalo-form')?.click();
     this.GymService.addFelhasznalok(addForm.value).subscribe(
       (response: Felhasznalo) =>{
         console.log(response);
@@ -32,6 +31,10 @@ export class RegisztracioComponent implements OnInit {
         addForm.reset();
       }
     );
+  }
+  public TermekBelepesHiba(){
+    alert("Először lépjen be, hogy tudjon vásárolni!")
+    console.log(Error("Először lépjen be, hogy tudjon vásárolni!"))
   }
   
 }

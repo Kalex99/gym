@@ -4,6 +4,7 @@ import { GymService } from '../gym.service';
 import { NgForm } from '@angular/forms';
 import { Rendeles } from '../rendeles';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Berlet } from '../berlet';
 
 @Component({
   selector: 'app-termek',
@@ -12,9 +13,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class TermekComponent implements OnInit {
   public termekek!: Termek[];
+  berletek!:Berlet[];
   constructor(private GymService: GymService) { }
 
   ngOnInit(): void {
+    this.getBerletek();
     this.getTermekek();
   }
   public getTermekek(): void{
@@ -25,15 +28,16 @@ export class TermekComponent implements OnInit {
     );
   }
 
-  public addRendelesTermek(addForm: NgForm): void{
-    document.getElementById('add-employee-form')?.click();
-    this.GymService.addRendelesTermek(addForm.value).subscribe(
+  public addRendelesTermek(addTermekForm: NgForm): void{
+    document.getElementById('add-termek-form')?.click();
+    this.GymService.addRendelesTermek(addTermekForm.value).subscribe(
       (response:Rendeles)=>{
-        addForm.reset();
+        addTermekForm.reset();
       }
       ,(error: HttpErrorResponse) =>{
+        alert("Sikeres Rendelés!");
+        addTermekForm.reset();
         alert(error.message);
-        addForm.reset();
       }
     );
   }
@@ -50,7 +54,7 @@ export class TermekComponent implements OnInit {
       this.getTermekek();
     }
   }
-  public onOpenModal(rendeles: Rendeles, mode: string): void {
+  public onOpenModalTermek(rendeles: Rendeles, mode: string): void {
     const container = document.getElementById('container');
     const button = document.createElement('button');
     button.type = 'button';
@@ -58,6 +62,35 @@ export class TermekComponent implements OnInit {
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
       button.setAttribute('data-target', '#addRendelesTermekModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
+  public getBerletek(): void{
+    this.GymService.getBerletek().subscribe(
+      (response: Berlet[]) => {
+        this.berletek = response;
+      }
+    );
+  }
+  public addRendelesBerlet(addBerletForm: NgForm): void{
+    document.getElementById('add-berlet-form')?.click();
+    this.GymService.addRendelesBerlet(addBerletForm.value).subscribe(
+      (response:Rendeles)=>{
+        alert(response);
+        addBerletForm.reset();
+      }
+    );
+  } 
+
+  public onOpenModalBerlet(rendeles: Rendeles, mode: string): void {
+    const container = document.getElementById('container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addRendelesBerletModal');
     }
     container?.appendChild(button);
     button.click();

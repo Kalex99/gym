@@ -88,6 +88,12 @@ nav ul {
     
     
 }
+
+.redirectContainer{
+    display: grid;
+    place-items: center;
+    place-content: center;
+}
 nav ul li {    
     padding-top: 20px;
     padding-bottom: 20px;

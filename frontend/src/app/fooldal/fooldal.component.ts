@@ -11,5 +11,8 @@ export class FooldalComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  public TermekBelepesHiba(){
+    alert("Először lépjen be, hogy tudjon vásárolni!")
+    console.log(Error("Először lépjen be, hogy tudjon vásárolni!"))
+  }
 }

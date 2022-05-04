@@ -63,4 +63,12 @@ public interface FelhasznaloRep extends JpaRepository<Felhasznalo, Long> {
             @Param("felh_email") String felh_email,
             @Param("felh_telefon") String felh_telefon
     );
+
+    @Transactional
+    @Modifying
+    @Query(value = "{call LoggedIn(:felhasznalonev, :jelszo)}", nativeQuery = true)
+    void LoggedIn(
+            @Param("felhasznalonev") String felhasznalonev,
+            @Param("jelszo") String jelszo
+    );
 }

@@ -65,6 +65,13 @@ public class GymController {
         gymService.FelhasznaloModosit(felhasznalo);
         return new ResponseEntity<>("A felhasználó módosításra került!", HttpStatus.OK);
     }
+    @PutMapping("felhasznalo/LoggedIn")
+    public ResponseEntity<?> LoggedIn(@RequestBody Felhasznalo felhasznalo) {
+        gymService.LoggedIn(felhasznalo);
+        return new ResponseEntity<>("A felhasználó módosításra került!", HttpStatus.OK);
+    }
+
+
 
     //**********************************************************************************
     @GetMapping("berletVasarlas/berletOlvas")

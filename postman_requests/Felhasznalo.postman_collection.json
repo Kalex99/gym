@@ -105,27 +105,6 @@
 			"response": []
 		},
 		{
-			"name": "BejelentkezesRendeles",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/felhasznalo/bejelentkezesRendeles/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"felhasznalo",
-						"bejelentkezesRendeles",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "FelhasznaloGetByID",
 			"request": {
 				"auth": {

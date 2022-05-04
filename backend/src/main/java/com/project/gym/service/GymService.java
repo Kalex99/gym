@@ -36,6 +36,16 @@ public class GymService {
     public List<Felhasznalo> BejelentkezesAccount(String felhasznalonev, String jelszo) {
         return felhasznaloRep.BejelentkezesAccount(felhasznalonev, jelszo);
     }
+    public void LoggedIn(Felhasznalo felhasznalo) {
+        if (isNull(felhasznalo.getFelhasznalonev())
+                && isNull(felhasznalo.getJelszo())) {
+            felhasznaloRep.LoggedIn(
+                    felhasznalo.getFelhasznalonev(),
+                    felhasznalo.getJelszo());
+        } else {
+            throw new ApiBadRequestException("Felhasználó adatok megadásánál nem lehet null érték megadva!");
+        }
+    }
 
 
     public void FelhasznaloLetrehoz(Felhasznalo felhasznalo) {

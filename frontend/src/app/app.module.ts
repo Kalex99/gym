@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,10 @@ import { KarrierComponent } from './karrier/karrier.component';
 import { EdzoComponent } from './edzo/edzo.component';
 import { BejelentkezesComponent } from './bejelentkezes/bejelentkezes.component';
 import { RegisztracioComponent } from './regisztracio/regisztracio.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { KapcsolatComponent } from './kapcsolat/kapcsolat.component';
+
+
 
 @NgModule({
   declarations: [
@@ -26,13 +30,16 @@ import { RegisztracioComponent } from './regisztracio/regisztracio.component';
     KarrierComponent,
     EdzoComponent,
     BejelentkezesComponent,
-    RegisztracioComponent
+    RegisztracioComponent,
+    KapcsolatComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [GymService],
   bootstrap: [AppComponent]

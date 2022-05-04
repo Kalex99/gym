@@ -2,6 +2,7 @@
     <div class="bg bg2"></div>
     <div class="bg bg3"></div>
     <div id="container">
+        <!-- Fejléc -->
         <header>
             <img class="logo" src="../../assets/images/final_logo.svg" alt="logo">
             <h3>Land of Fitness Gym</h3>
@@ -12,17 +13,17 @@
                     <a routerLink="/regisztracio-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
                 </li>
                 <li>
-                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active" >BELÉPÉS</a>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active">Belépés</a>
                 </li>
             </ul>
         </nav>
-        
+        <!-- Tartalmi rész -->
         <article class="content">
             <h1 class="middle">Szolgáltatásaink</h1>
                 <div class="picflow picflow_1">
-                    <a routerLink="/berlet-component" title="Kattints a képre a további tudnivalókért!" routerLinkActive="active"><img class="thumbnail"
+                    <a routerLink="/kapcsolat-component" title="Kattints a képre a további tudnivalókért!" routerLinkActive="active"><img class="thumbnail"
                     src="../../assets/images/1.jpg" alt="kép1"></a>
-                    <p class="caption">Havi bérlet</p>
+                    <p class="caption">Kapcsolat</p>
                 </div>
                 <div class="picflow picflow_2">
                     <a routerLink="/edzo-component" title="Kattints a képre a további tudnivalókért!" routerLinkActive="active"><img class="thumbnail"
@@ -40,9 +41,9 @@
                     <p class="caption">Büfé</p>
                 </div>
                 <div class="picflow picflow_5">
-                    <a routerLink="/termek-component" title="Kattints a képre a további tudnivalókért!" routerLinkActive="active"><img class="thumbnail"
-                    src="../../assets/images/5.jpg" alt="kép5"></a>
-                    <p class="caption">Étrendkiegészítőink</p>
+                    <a routerLink="/bejelentkezes-component" title="Kattints a képre a további tudnivalókért!" routerLinkActive="active"><img class="thumbnail"
+                    src="../../assets/images/5.jpg" alt="kép5" (click)="TermekBelepesHiba()"></a>
+                    <p class="caption">Termék vásárlás</p>
                 </div>
                 <div class="picflow picflow_6">
                     <a routerLink="/karrier-component" title="Kattints a képre a további tudnivalókért!" routerLinkActive="active"><img class="thumbnail"
@@ -51,6 +52,7 @@
                 </div>
             <p class="click">Katt a képre a további infokért!</p>
         </article>
+        <!-- Lábléc -->
         <footer>
             <p>© Kovácsfi Alex / Kovács Richárd / Kuczi Dániel </p>
         </footer>

@@ -7,6 +7,7 @@
         <div class="bg bg3"></div>
     </header>
     <div id="article">
+<!-- Oldalsó navigációs sáv -->
         <nav>
             <ul>
                 <li>
@@ -16,46 +17,52 @@
                     <a routerLink="/regisztracio-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
                 </li>
                 <li>
-                    <a routerLink="/kapcsolat-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">KAPCSOLAT</a>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active">Belépés</a>
                 </li>
                 <li>
                     <a routerLink="/felszereles-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">FELSZERELÉS</a>
                 </li>
                 <li>
+                    <a routerLink="/edzo-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">EDZŐK</a>
+                </li>
+                <li>
                     <a class="btn btn-secondary btn-lg btn-block" routerLink="/bufe-component" routerLinkActive="active">BÜFÉ</a>
                 </li>
                 <li>
-                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active">TERMÉKEK</a>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bejelentkezes-component" routerLinkActive="active" (click)="TermekBelepesHiba()">TERMÉKEK</a>
                 </li>
                 <li>
                     <a class="btn btn-secondary btn-lg btn-block" routerLink="/karrier-component" routerLinkActive="active">KARRIER</a>
                 </li>
             </ul>
         </nav>
+        <!-- Tartalmi rész -->
         <div class="middle">
-            <a><img src="../../assets/images/2.jpg" alt="1. kép"></a>
-            <p>Személyi edzőink tapasztaltak és segítőkészek. Ha nálunk jársz, ne habozz kikérni véleményüket tanácsaikat!
+            <a><img src="../../assets/images/1.jpg" alt="1. kép"></a>
+            <h4>Nyitvatartás:</h4>
+            <p>9796 Felsóaljvár, Akadémia u. 32.
             </p>
             <table id="table">
                 <thead>
                     <tr class="tr1">
-                        <th>Vezetéknév</th>
-                        <th>Keresztnév</th>
-                        <th>Tel.:</th>
-                        <th>E-mail</th>
+                        <th>Hétköznap</th>
+                        <th>Ünnepnap</th>
+                        <th>Munkaszüneti-nap</th>
+                        <th>Hétvége</th>
                      </tr>
                 </thead>
                 <tbody>
-                <tr class="tr2" *ngFor="let edzo of edzok">
-                    <td>{{edzo.szemedz_vezeteknev}}</td>
-                    <td>{{edzo.szemedz_keresztnev}}</td>
-                    <td>{{edzo.szemedz_telefon}}</td>
-                    <td>{{edzo.szemedz_email}}</td>
+                <tr class="tr2">
+                    <td>07:00-20:00</td>
+                    <td>09:00-17:00</td>
+                    <td>08:00-17:00</td>
+                    <td>08:00-17:00</td>
                  </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <!-- footer -->
     <footer>
         <p>© Kuczi Dániel / Kovácsfi Alex / Kovács Richárd</p>
     </footer>

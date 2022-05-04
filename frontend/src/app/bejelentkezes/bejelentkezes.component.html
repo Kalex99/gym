@@ -1,60 +1,68 @@
+<div id="container">
+    <header>
+        <h3>Land of Fitness Gym</h3>
+        <img class="logo" src="../../assets/images/final_logo.svg" alt="logo">
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+    </header>
+    <div id="article">
+        <nav>
+            <ul>
+                <li>
+                    <a routerLink="/fooldal-component" routerLinkActive="active"
+                        class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
+                </li>
+                <li>
+                    <a routerLink="/kapcsolat-component" routerLinkActive="active"
+                        class="btn btn-secondary btn-lg btn-block">KAPCSOLAT</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/edzo-component"
+                        routerLinkActive="active">EDZŐK</a>
+                </li>
+                <li>
+                    <a routerLink="/felszereles-component" routerLinkActive="active"
+                        class="btn btn-secondary btn-lg btn-block">FELSZERELÉS</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/bufe-component"
+                        routerLinkActive="active">BÜFÉ</a>
+                </li>
+                <li>
+                    <a class="btn btn-secondary btn-lg btn-block" routerLink="/karrier-component"
+                        routerLinkActive="active">KARRIER</a>
+                </li>
+            </ul>
+        </nav>
 
-    <div id="container">
-        <header>
-            <h3>Land of Fitness Gym</h3>
-            <img class="logo" src="../../assets/images/final_logo.svg" alt="logo">
-            <div class="bg"></div>
-            <div class="bg bg2"></div>
-            <div class="bg bg3"></div>
-        </header>
-        <div id="article">
-            <nav>
-                <ul>
-                    <li>
-                        <a routerLink="/fooldal-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">FŐMENÜ</a>
-                    </li>
-                    <li>
-                        <a routerLink="/regisztracio-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">REGISZTRÁCIÓ</a>
-                    </li>
-                    <li>
-                        <a routerLink="/berlet-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">BÉRLET</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/edzo-component" routerLinkActive="active">EDZŐK</a>
-                    </li>
-                    <li>
-                        <a routerLink="/felszereles-component" routerLinkActive="active" class="btn btn-secondary btn-lg btn-block">FELSZERELÉS</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/bufe-component" routerLinkActive="active">BÜFÉ</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/termek-component" routerLinkActive="active">TERMÉKEK</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-secondary btn-lg btn-block" routerLink="/karrier-component" routerLinkActive="active">KARRIER</a>
-                    </li>
-                </ul>
-            </nav>
-        
-        
-            <div class="middle">
-                <form (ngSubmit)="onBejelentkezesAccount(Felhasznalonev, Jelszo)">
-                    <div class="form-group">
-                       <label for="name">Felhasznalonev</label>
-                       <input type="text" ngModel name="felhasznalonev" class="form-control" id="felhasznalonev" placeholder="Name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Jelszó</label>
-                        <input type="password" ngModel name="jelszo" class="form-control" id="jelszo" placeholder="Jelszó" required>
-                     </div>
-                     <button type="submit" class="btn btn-secondary btn-regisztracio">Regisztrálok</button>
-                </form>
+
+        <div class="middle">
+            <form [formGroup]="loginForm">
+                <div class="form-group">
+                    <label for="name">Felhasznalonev</label>
+                    <input matInput type="text" formControlName="felhasznalonev" class="form-control"
+                        id="felhasznalonev" placeholder="Felhasználonév" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Jelszó</label>
+                    <input type="password" formControlName="jelszo" class="form-control" id="jelszo"
+                        placeholder="Jelszó" required>
+                </div>
+                <p class="hiba"*ngIf="isLoggedIn===false">Helytelen felhasználónév vagy jelszó!</p>
+                <button type="submit" class="btn btn-secondary btn-regisztracio"
+                    (click)="bejelentkezes()">BELÉPÉS</button>
+            </form>
+            <div class="redirectContainer">            
+                <p>Ha még nem regisztrált kattintson a gombra!</p>
+                <button type="submit" class="btn btn-secondary btn-regisztracio" routerLink="/regisztracio-component"
+                routerLinkActive="active" >Regisztráció</button>
             </div>
-            
-        </div>
-        <footer>
-            <p>© Kovácsfi Alex / Kovács Richárd / Kuczi Dániel</p>
-        </footer>
-    </div>
 
+        </div>
+
+    </div>
+    <footer>
+        <p>© Kovácsfi Alex / Kovács Richárd / Kuczi Dániel</p>
+    </footer>
+</div>

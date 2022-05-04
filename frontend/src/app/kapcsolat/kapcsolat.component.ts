@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-bufe',
-  templateUrl: './bufe.component.html',
-  styleUrls: ['./bufe.component.css']
+  selector: 'app-kapcsolat',
+  templateUrl: './kapcsolat.component.html',
+  styleUrls: ['./kapcsolat.component.css']
 })
-export class BufeComponent implements OnInit {
+export class KapcsolatComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
   public TermekBelepesHiba(){
     alert("Először lépjen be, hogy tudjon vásárolni!")
     console.log(Error("Először lépjen be, hogy tudjon vásárolni!"))
   }
-
 }

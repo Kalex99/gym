@@ -57,12 +57,15 @@ public class Felhasznalo implements Serializable {
     private String felh_email;
     @Column
     private String felh_telefon;
+    @Column
+    private Boolean isloggedin;
 
     public Felhasznalo() {
     }
 
     @Autowired
-    public Felhasznalo(Long felhasznaloID, String felhasznalonev, String jelszo, String felh_vezeteknev, String felh_keresztnev, Date szuletesi_datum, String felh_email, String felh_telefon) {
+    public Felhasznalo(Long felhasznaloID, String felhasznalonev, String jelszo, String felh_vezeteknev,
+                       String felh_keresztnev, Date szuletesi_datum, String felh_email, String felh_telefon, Boolean isloggedin) {
         this.felhasznaloID = felhasznaloID;
         this.felhasznalonev = felhasznalonev;
         this.jelszo = jelszo;
@@ -71,6 +74,7 @@ public class Felhasznalo implements Serializable {
         this.szuletesi_datum = szuletesi_datum;
         this.felh_email = felh_email;
         this.felh_telefon = felh_telefon;
+        this.isloggedin = isloggedin;
     }
 
 
@@ -136,6 +140,13 @@ public class Felhasznalo implements Serializable {
 
     public void setFelh_telefon(String felh_telefon) {
         this.felh_telefon = felh_telefon;
+    }
+    public Boolean getIsloggedin() {
+        return isloggedin;
+    }
+
+    public void setIsLoggedIn(Boolean isloggedin) {
+        this.isloggedin = isloggedin;
     }
 
 }
