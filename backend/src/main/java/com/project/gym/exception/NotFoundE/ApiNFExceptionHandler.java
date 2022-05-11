@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+/**
+ * ApiNfExceptionHandler osztálya.
+ */
 @ControllerAdvice
 public class ApiNFExceptionHandler {
 
+    /**
+     * Kezelje az API kérelem kivétel válasz entitást.
+     *
+     * @param e the e
+     * @return the response entity
+     */
     @ExceptionHandler(value = {ApiNotFoundException.class})
 
     public ResponseEntity<Object> handleApiRequestException(ApiNotFoundException e) {

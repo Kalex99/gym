@@ -10,16 +10,27 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * A Gym applikáció.
+ */
 @SpringBootApplication
 public class GymApplication {
 
-	//TODO: Security & authentication
-
+	/**
+	 * The entry point of application.
+	 *
+	 * @param args the input arguments
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(GymApplication.class, args);
 
 	}
 
+	/**
+	 * Cors filter cors filter. A front-end összekapcsolásához szükséges kód.
+	 *
+	 * @return the cors filter
+	 */
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();

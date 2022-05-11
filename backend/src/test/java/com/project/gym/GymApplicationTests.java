@@ -15,15 +15,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
+/**
+ * A Gym applikáció teszt rétege.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 public class GymApplicationTests {
 
+	/**
+	 * MockMvc objektumfüggöség beillesztése.
+	 */
 	@Autowired
 	MockMvc mockMvc;
 
 
+	/**
+	 * Find termek by id.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void findTermekByID() throws Exception {
 		mockMvc.perform(get("/termek/termekOlvasByID/2"))
@@ -31,12 +42,23 @@ public class GymApplicationTests {
 				.andDo(print())
 				.andExpect(status().isOk());
 	}
+
+	/**
+	 * Find termek by id not found.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void findTermekByIDNotFound() throws Exception {
 		mockMvc.perform(get("/termek/termekOlvasByID/"))
 				.andExpect(status().isNotFound());
 	}
 
+	/**
+	 * Find szemelyi edzo all.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void findSzemelyiEdzoAll() throws Exception {
 		mockMvc.perform(get("/szemelyiEdzo/szemEdzoOlvas"))
@@ -45,6 +67,11 @@ public class GymApplicationTests {
 				.andExpect(status().isOk());
 	}
 
+	/**
+	 * Delete felhasznalo.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void deleteFelhasznalo() throws Exception {
 		mockMvc.perform(delete("/felhasznalo/felhTorles/2"))

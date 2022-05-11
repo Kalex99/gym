@@ -12,6 +12,9 @@ import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Gym projekt Service rétege.
+ */
 @Service
 public class GymService {
 
@@ -22,32 +25,31 @@ public class GymService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Felhasznalo olvas list.
+     *
+     * @return the list
+     */
     public List<Felhasznalo> FelhasznaloOlvas() {
         return felhasznaloRep.FelhasznaloOlvas();
     }
 
-    public Iterable<String> BejelentkezesRendeles(Long felhasznaloID) {
-        return felhasznaloRep.BejelentkezesRendeles(felhasznaloID);
-    }
 
+    /**
+     * Felhasznalo olvas by id iterable.
+     *
+     * @param felhasznaloID the felhasznalo id
+     * @return the iterable
+     */
     public Iterable<String> FelhasznaloOlvasByID(Long felhasznaloID) {
         return felhasznaloRep.FelhasznaloOlvasByID(felhasznaloID);
     }
-    public List<Felhasznalo> BejelentkezesAccount(String felhasznalonev, String jelszo) {
-        return felhasznaloRep.BejelentkezesAccount(felhasznalonev, jelszo);
-    }
-    public void LoggedIn(Felhasznalo felhasznalo) {
-        if (isNull(felhasznalo.getFelhasznalonev())
-                && isNull(felhasznalo.getJelszo())) {
-            felhasznaloRep.LoggedIn(
-                    felhasznalo.getFelhasznalonev(),
-                    felhasznalo.getJelszo());
-        } else {
-            throw new ApiBadRequestException("Felhasználó adatok megadásánál nem lehet null érték megadva!");
-        }
-    }
 
-
+    /**
+     * Felhasznalo letrehoz.
+     *
+     * @param felhasznalo the felhasznalo
+     */
     public void FelhasznaloLetrehoz(Felhasznalo felhasznalo) {
         if (isNull(felhasznalo.getFelhasznalonev())
                 && isNull(felhasznalo.getJelszo())
@@ -69,10 +71,20 @@ public class GymService {
         }
     }
 
+    /**
+     * Felhasznalo torles.
+     *
+     * @param felhasznaloID the felhasznalo id
+     */
     public void FelhasznaloTorles(Long felhasznaloID) {
         felhasznaloRep.FelhasznaloTorles(felhasznaloID);
     }
 
+    /**
+     * Felhasznalo modosit.
+     *
+     * @param felhasznalo the felhasznalo
+     */
     public void FelhasznaloModosit(Felhasznalo felhasznalo) {
         if (isNull(felhasznalo.getFelhasznaloID())
                 && isNull(felhasznalo.getFelhasznalonev())
@@ -99,14 +111,30 @@ public class GymService {
     @Autowired
     private Berlet_vasarlasRep berlet_vasarlasRep;
 
+    /**
+     * Berlet vasarlas olvas list.
+     *
+     * @return the list
+     */
     public List<Berlet_vasarlas> Berlet_vasarlasOlvas() {
         return berlet_vasarlasRep.Berlet_vasarlasOlvas();
     }
 
+    /**
+     * Berlet vasarlas olvas by id iterable.
+     *
+     * @param berlet_vasarlasID the berlet vasarlas id
+     * @return the iterable
+     */
     public Iterable<String> Berlet_vasarlasOlvasByID(Long berlet_vasarlasID) {
         return berlet_vasarlasRep.Berlet_vasarlasOlvasByID(berlet_vasarlasID);
     }
 
+    /**
+     * Berlet vasarlas letrehoz.
+     *
+     * @param berlet_vasarlas the berlet vasarlas
+     */
     public void Berlet_vasarlasLetrehoz(Berlet_vasarlas berlet_vasarlas) {
         if (isNull(berlet_vasarlas.getBerlet_tipus())
                 && isNull(berlet_vasarlas.getBerlet_ar())) {
@@ -118,10 +146,20 @@ public class GymService {
         }
     }
 
+    /**
+     * Berlet vasarlas torles.
+     *
+     * @param berlet_vasarlasID the berlet vasarlas id
+     */
     public void Berlet_vasarlasTorles(Long berlet_vasarlasID) {
         berlet_vasarlasRep.Berlet_vasarlasTorles(berlet_vasarlasID);
     }
 
+    /**
+     * Berlet vasarlas modosit.
+     *
+     * @param berlet_vasarlas the berlet vasarlas
+     */
     public void Berlet_vasarlasModosit(Berlet_vasarlas berlet_vasarlas) {
         if (isNull(berlet_vasarlas.getBerlet_vasarlasID())
                 && isNull(berlet_vasarlas.getBerlet_tipus())
@@ -138,26 +176,60 @@ public class GymService {
     @Autowired
     private RendelesRep rendelesRep;
 
+    /**
+     * Rendeles olvas list.
+     *
+     * @return the list
+     */
     public List<Rendeles> RendelesOlvas() {
         return rendelesRep.RendelesOlvas();
     }
 
+    /**
+     * Rendeles olvas by id iterable.
+     *
+     * @param rendelesID the rendeles id
+     * @return the iterable
+     */
     public Iterable<String> RendelesOlvasByID(Long rendelesID) {
         return rendelesRep.RendelesOlvasByID(rendelesID);
     }
 
+    /**
+     * Rendeles olvas berlet by id iterable.
+     *
+     * @param rendelesID the rendeles id
+     * @return the iterable
+     */
     public Iterable<String> RendelesOlvasBerletByID(Long rendelesID) {
         return rendelesRep.RendelesOlvasBerletByID(rendelesID);
     }
 
+    /**
+     * Rendeles olvas felhasznalo by id iterable.
+     *
+     * @param rendelesID the rendeles id
+     * @return the iterable
+     */
     public Iterable<String> RendelesOlvasFelhasznaloByID(Long rendelesID) {
         return rendelesRep.RendelesOlvasFelhasznaloByID(rendelesID);
     }
 
+    /**
+     * Rendeles olvas termek by id iterable.
+     *
+     * @param rendelesID the rendeles id
+     * @return the iterable
+     */
     public Iterable<String> RendelesOlvasTermekByID(Long rendelesID) {
         return rendelesRep.RendelesOlvasTermekByID(rendelesID);
     }
 
+    /**
+     * Rendeles letrehoz berlet.
+     *
+     * @param rendeles the rendeles
+     */
     public void RendelesLetrehozBerlet(Rendeles rendeles) {
         if (isNull(rendeles.getBerlet_vasarlasID())
                 && isNull(rendeles.getFelhasznaloID())) {
@@ -170,6 +242,11 @@ public class GymService {
         }
     }
 
+    /**
+     * Rendeles letrehoz termek.
+     *
+     * @param rendeles the rendeles
+     */
     public void RendelesLetrehozTermek(Rendeles rendeles) {
         if (isNull(rendeles.getTermekID())
                 && isNull(rendeles.getMennyiseg())
@@ -184,6 +261,11 @@ public class GymService {
         }
     }
 
+    /**
+     * Rendeles torles.
+     *
+     * @param rendelesID the rendeles id
+     */
     public void RendelesTorles(Long rendelesID) {
         rendelesRep.RendelesTorles(rendelesID);
     }
@@ -191,15 +273,31 @@ public class GymService {
     @Autowired
     private TermekRep termekRep;
 
+    /**
+     * Termek olvas list.
+     *
+     * @return the list
+     */
     public List<Termek> TermekOlvas() {
         return termekRep.TermekOlvas();
     }
 
+    /**
+     * Termek olvas by id iterable.
+     *
+     * @param termekID the termek id
+     * @return the iterable
+     */
     public Iterable<String> TermekOlvasByID(Long termekID) {
         return termekRep.TermekOlvasByID(termekID);
     }
 
 
+    /**
+     * Termek letrehoz.
+     *
+     * @param termek the termek
+     */
     public void TermekLetrehoz(Termek termek) {
         if (isNull(termek.getTermek_nev())
                 && isNull(termek.getAr())
@@ -215,10 +313,20 @@ public class GymService {
         }
     }
 
+    /**
+     * Termek torles.
+     *
+     * @param termekID the termek id
+     */
     public void TermekTorles(Long termekID) {
         termekRep.TermekTorles(termekID);
     }
 
+    /**
+     * Termek modosit.
+     *
+     * @param termek the termek
+     */
     public void TermekModosit(Termek termek) {
         if (isNull(termek.getTermekID())
                 && isNull(termek.getTermek_nev())
@@ -241,14 +349,30 @@ public class GymService {
     @Autowired
     private Szemelyi_edzoRep szemelyi_edzoRep;
 
+    /**
+     * Szemelyi edzo olvas list.
+     *
+     * @return the list
+     */
     public List<Szemelyi_edzo> Szemelyi_edzoOlvas() {
         return szemelyi_edzoRep.Szemelyi_edzoOlvas();
     }
 
+    /**
+     * Szemelyi edzo olvas by id iterable.
+     *
+     * @param szemelyi_edzoID the szemelyi edzo id
+     * @return the iterable
+     */
     public Iterable<String> Szemelyi_edzoOlvasByID(Long szemelyi_edzoID) {
         return szemelyi_edzoRep.Szemelyi_edzoOlvasByID(szemelyi_edzoID);
     }
 
+    /**
+     * Szemelyi edzo letrehoz.
+     *
+     * @param szemelyiEdzo the szemelyi edzo
+     */
     public void Szemelyi_edzoLetrehoz(Szemelyi_edzo szemelyiEdzo) {
         if (isNull(szemelyiEdzo.getSzemedz_vezeteknev())
                 && isNull(szemelyiEdzo.getSzemedz_keresztnev())
@@ -265,10 +389,20 @@ public class GymService {
         }
     }
 
+    /**
+     * Szemelyi edzo torles.
+     *
+     * @param szemelyi_edzoID the szemelyi edzo id
+     */
     public void Szemelyi_edzoTorles(Long szemelyi_edzoID) {
         szemelyi_edzoRep.Szemelyi_edzoTorles(szemelyi_edzoID);
     }
 
+    /**
+     * Szemelyi edzo modosit.
+     *
+     * @param szemelyiEdzo the szemelyi edzo
+     */
     public void Szemelyi_edzoModosit(Szemelyi_edzo szemelyiEdzo) {
         if (isNull(szemelyiEdzo.getSzemelyi_edzoID())
                 && isNull(szemelyiEdzo.getSzemedz_vezeteknev())
@@ -286,6 +420,12 @@ public class GymService {
         }
     }
 
+    /**
+     * Is null boolean.
+     *
+     * @param obj the obj
+     * @return the boolean
+     */
     public static boolean isNull(Object obj) {
         return obj != null && !"".equals(obj);
     }

@@ -11,15 +11,37 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * személyi edző repository interface
+ */
 @Repository
 public interface Szemelyi_edzoRep extends JpaRepository<Szemelyi_edzo, Long> {
 
+    /**
+     * Szemelyi edzo olvas list.
+     *
+     * @return a listát amelyben benne van az összes személyi edző adata.
+     */
     @Query(value = "{call Szemelyi_edzoOlvas()}", nativeQuery = true)
     List<Szemelyi_edzo> Szemelyi_edzoOlvas();
 
+    /**
+     * Szemelyi edzo olvas by id iterable.
+     *
+     * @param szemelyi_edzoID the szemelyi edzo id
+     * @return iterable-t a megadott személyiedzőID-hoz tartozó személyi edző adatokkal string formátumban.
+     */
     @Procedure(name = "Szemelyi_edzoOlvasByID")
     Iterable<String> Szemelyi_edzoOlvasByID(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
 
+    /**
+     * Szemelyi edzo letrehoz.
+     *
+     * @param szemedz_vezeteknev the szemedz vezeteknev
+     * @param szemedz_keresztnev the szemedz keresztnev
+     * @param szemedz_email      the szemedz email
+     * @param szemedz_telefon    the szemedz telefon
+     */
     @Transactional
     @Modifying
     @Query(value = "{call Szemelyi_edzoLetrehoz(:szemedz_vezeteknev, :szemedz_keresztnev, :szemedz_email, :szemedz_telefon)}", nativeQuery = true)
@@ -30,11 +52,25 @@ public interface Szemelyi_edzoRep extends JpaRepository<Szemelyi_edzo, Long> {
             @Param("szemedz_telefon") String szemedz_telefon
     );
 
+    /**
+     * Szemelyi edzo torles.
+     *
+     * @param szemelyi_edzoID the szemelyi edzo id
+     */
     @Transactional
     @Modifying
     @Query(value = "{call Szemelyi_edzoTorles(:szemelyi_edzoID)}", nativeQuery = true)
     void Szemelyi_edzoTorles(@Param("szemelyi_edzoID") Long szemelyi_edzoID);
 
+    /**
+     * Szemelyi edzo modosit.
+     *
+     * @param szemelyi_edzoID    the szemelyi edzo id
+     * @param szemedz_vezeteknev the szemedz vezeteknev
+     * @param szemedz_keresztnev the szemedz keresztnev
+     * @param szemedz_email      the szemedz email
+     * @param szemedz_telefon    the szemedz telefon
+     */
     @Transactional
     @Modifying
     @Query(value = "{call Szemelyi_edzoModosit(:szemelyi_edzoID,:szemedz_vezeteknev, :szemedz_keresztnev, :szemedz_email, :szemedz_telefon)}", nativeQuery = true)

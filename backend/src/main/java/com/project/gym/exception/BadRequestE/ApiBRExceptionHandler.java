@@ -8,8 +8,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+/**
+ * ApiBrExceptionHandler osztálya.
+ */
 @ControllerAdvice
 public class ApiBRExceptionHandler {
+    /**
+     * Kezelje az API-kérelem-kivétel-válasz entitást.
+     *
+     * @param e the e
+     * @return the response entity
+     */
     @ExceptionHandler(value = {ApiBadRequestException.class})
 
     public ResponseEntity<Object> handleApiRequestException(ApiBadRequestException e) {
